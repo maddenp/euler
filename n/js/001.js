@@ -4,4 +4,4 @@ for (i = 0; i < 1000; i++) {
     	sum+=i;
     }    
 }
-document.write(sum)
+console.log(sum)
