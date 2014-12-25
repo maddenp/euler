@@ -1,13 +1,13 @@
-top:
-for(i=1; true; i++){
-	j = 1
-	while((i%j)==0){
+function doStuff(i){
+	var j=1;
+	while(i%j==0){
 		j++
-		if(j>=20){
-			console.log("SUCCESS " + i)
-			break top;
-		}
 	}
+	return j>=20
 }
-//oh the horror, the horror.
 
+i=1
+while(doStuff(i)==false){
+	i++
+}
+console.log("SOLVED " + i)
