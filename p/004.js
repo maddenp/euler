@@ -1,7 +1,7 @@
 largest=0;
 
-for ( a=999; a>0; a-- ) {
-  for ( b=a; b>0; b-- ) {
+for ( a=999; a>99; a-- ) {
+  for ( b=a; b>99; b-- ) {
     p = a*b;
     q = p;
     r = 0;
