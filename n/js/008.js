@@ -19,10 +19,10 @@ oneThousandFuckingDigitNumber = "73167176531330624919225119674426574742355349194
 "05886116467109405077541002256983155200055935729725"+
 "71636269561882670428252483600823257530420752963450";
 
-var theGreatest = 0;
+theGreatest = 0;
 for(i=0; i<oneThousandFuckingDigitNumber.length; i++){
-	var lens = oneThousandFuckingDigitNumber.substring(i,i+13).split("")
-	var product = 1;
+	lens = oneThousandFuckingDigitNumber.substring(i,i+13).split("")
+	product = 1;
 	
 	for(j=1; j<=lens.length; j++){
 		product *= parseInt(lens[j-1])
