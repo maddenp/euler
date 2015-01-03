@@ -32,6 +32,6 @@ for(i=0; i<oneThousandFuckingDigitNumber.length; i++){
 
 }
 
-console.log(greatestProductOf13AdjacentDigitsPossible)
+console.log(theGreatest)
 
 
