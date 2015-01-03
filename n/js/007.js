@@ -10,7 +10,7 @@ function isPrime(number){
 
 var prime;
 for(j=2; primeCount<10001; j++){
-	isPrime(j)
+	isPrime(Math.sqrt(j)) //the fuck, wow, such improvement
 	prime = j
 }
 
