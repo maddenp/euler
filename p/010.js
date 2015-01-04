@@ -1,7 +1,7 @@
 x=2000000;
-for (sieve=[],sum=0,i=2;i<x;i++) {
-  if (sieve[i]) continue;
+for (composite=[],sum=0,i=2;i<x;i++) {
+  if (composite[i]) continue;
   sum+=i;
-  for (j=i+i;j<x;j+=i) sieve[j]=1;
+  for (j=i+i;j<x;j+=i) composite[j]=1;
 }
 console.log(sum);
