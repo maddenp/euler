@@ -47,89 +47,38 @@ horizontalProductMax = 0
 diagonalLRMax = 0
 diagonalRLMax = 0
 
-function horizontal(){
-	for(i=0; i<arrays.length; i++){ // looping through list of arrays
 
-		for(j=0; j<arrays[i].length; j++){ // looping through lines
-			horizontalProduct = arrays[i][j] * arrays[i][j+1] * arrays[i][j+2] * arrays[i][j+3] 
+for(i=0; i<arrays.length; i++){ // looping through list of arrays
+	for(j=0; j<arrays[i].length; j++){ // looping through lines
+		horizontalProduct = arrays[i][j] * arrays[i][j+1] * arrays[i][j+2] * arrays[i][j+3] 
 
-			if(horizontalProduct > horizontalProductMax){
-				horizontalProductMax = horizontalProduct
-				
-			}
+		if(horizontalProduct > horizontalProductMax){
+			horizontalProductMax = horizontalProduct
 		}
 	}
-	return horizontalProductMax
 }
 
-function vertical(){
-	for(i=0; i<arrays.length-3; i++){
-		for(j=0; j<arrays[i].length; j++){		
-			verticalProduct = arrays[i][j] * arrays[i+1][j] * arrays[i+2][j] * arrays[i+3][j]
-			if(verticalProduct > verticalProductMax){
-				verticalProductMax = verticalProduct
-			}
+for(i=0; i<arrays.length-3; i++){
+	for(j=0; j<arrays[i].length; j++){			
+		verticalProduct = arrays[i][j] * arrays[i+1][j] * arrays[i+2][j] * arrays[i+3][j]
+		diagonalLR = arrays[i][j+3] * arrays[i+1][j+2] * arrays[i+2][j+1] * arrays[i+3][j]
+		diagonalRL = arrays[i+3][j] * arrays[i+2][j+1] * arrays[i+1][j+2] * arrays[i][j+3]
+		if(diagonalRL > diagonalRLMax){
+			diagonalRLMax = diagonalRL
 		}
+		if(diagonalLR > diagonalLRMax){
+			diagonalLRMax = diagonalLR
+		}
+		if(verticalProduct > verticalProductMax){
+			verticalProductMax = verticalProduct
+		}
+
 	}
-
-	return verticalProductMax
-
 }
-
-function lRDiagonal(){
-	for(i=0; i<arrays.length-3; i++){
-		for(j=0; j<arrays[i].length; j++){			
-			diagonalLR = arrays[i][j+3] * arrays[i+1][j+2] * arrays[i+2][j+1] * arrays[i+3][j]
-			if(diagonalLR > diagonalLRMax){
-				diagonalLRMax = diagonalLR
-			}
-
-		}
 	
-	}
-	return diagonalLRMax
-}
-
-function rLDiagonal(){
-	for(i=0; i<arrays.length-3; i++){
-		for(j=0; j<arrays[i].length; j++){		
-		// diagonalRL = 0	
-			diagonalRL = arrays[i+3][j] * arrays[i+2][j+1] * arrays[i+1][j+2] * arrays[i][j+3]
-			if(diagonalRL > diagonalRLMax){
-				diagonalRLMax = diagonalRL
-			}
-
-		}
-	}
-	return diagonalRLMax
-}
-findTheGreatest = [horizontal(), vertical(), lRDiagonal(), rLDiagonal()]
-
-winner = 0
-for(i=0;i<4;i++){
-	if(findTheGreatest[i] > winner){ winner = findTheGreatest[i]}
-}
-
-console.log(winner)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(verticalProductMax)
+console.log(diagonalLRMax)
+console.log(diagonalRLMax)
+console.log(horizontalProductMax
