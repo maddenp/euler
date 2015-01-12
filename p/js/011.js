@@ -38,7 +38,7 @@ function prod_h(a,x,y,n,limit)
   return prod;
 }
 
-function prod_y(a,x,y,n,limit)
+function prod_v(a,x,y,n,limit)
 {
   var i,prod;
   if (y+n+1>limit) return -1;
@@ -69,7 +69,7 @@ m=-1;
 for (i=0;i<dim;i++) {
   for (j=0;j<dim;j++) {
     m=Math.max(m,prod_h (a,i,j,run,dim));
-    m=Math.max(m,prod_h (a,i,j,run,dim));
+    m=Math.max(m,prod_v (a,i,j,run,dim));
     m=Math.max(m,prod_d1(a,i,j,run,dim));
     m=Math.max(m,prod_d2(a,i,j,run,dim));
   }
