@@ -75,10 +75,16 @@ for(i=0; i<arrays.length-3; i++){
 
 	}
 }
-	
+
+winnerCircle = [verticalProductMax, horizontalProductMax, diagonalLRMax, diagonalRLMax]
+
+winner = 0
+for(i=0; i<winnerCircle.length; i++){
+
+	if(winnerCircle[i]>winner){
+		winner = winnerCircle[i]
+	}
 
 
-console.log(verticalProductMax)
-console.log(diagonalLRMax)
-console.log(diagonalRLMax)
-console.log(horizontalProductMax
+}
+console.log(winner)
