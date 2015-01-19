@@ -1,3 +1,14 @@
+/*
+ * Elegant but slower recursive solution:
+ *
+ *  function chainlen(n) {
+ *    if (n==1) return 1;
+ *    if (k=known[n]) return k;
+ *    return known[n]=1+chainlen((n%2==0)?(n/2):(3*n+1));
+ *  }
+ *
+*/
+
 function chainlen(n) {
   var k,m,s;
   if (k=known[n]) return k;
