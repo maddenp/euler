@@ -1,8 +1,6 @@
 function collatz(n){
-	var result = n
-	
-	for(i=1; result>1; i++){
-		result = result%2==0 ? result/=2 : (result * 3) + 1
+	for(i=1; n>1; i++){
+		n = n%2==0 ? n/=2 : (n * 3) + 1
 	}
 	return i;
 }
