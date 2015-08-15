@@ -19,21 +19,24 @@ var pyramid =
 //  4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23
 ];
 
-var Node = function(pyramid,index,level) {
-  this.n = pyramid[index];
-  this.weight = this.n;
+var Tree = function(pyramid,index,level,parent) {
+  this.weight = pyramid[index];
   var lindex = level + index + 0;
   var rindex = level + index + 1;
   if (pyramid[lindex]) {
-    this.l = new Node(pyramid, lindex, level+1);
-    this.weight += this.l.weight;
+    if (parent && parent.l && parent.l.r) {
+      this.l = parent.l.r;
+    } else {
+      this.l = new Tree(pyramid, lindex, level+1, this);
+      this.weight += this.l.weight;
+    }
   }
   if (pyramid[rindex]) {
-    this.r = new Node(pyramid, rindex, level+1);
+    this.r = new Tree(pyramid, rindex, level+1, this);
     this.weight += this.r.weight;
   }
 };
 
-var tree = new Node(pyramid,0,1);
+var tree = new Tree(pyramid,0,1,null);
 
 console.log(tree.weight);
