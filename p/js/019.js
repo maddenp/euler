@@ -1,4 +1,7 @@
+/* jshint node: true */
+
 "use strict";
+
 var month_days_std = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var sum = 0;
 var weekday = 0;

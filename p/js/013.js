@@ -1,3 +1,7 @@
+/* jshint node: true */
+
+"use strict";
+
 var i,ns,s;
 
 ns=[

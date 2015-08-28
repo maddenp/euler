@@ -1,3 +1,9 @@
+/* jshint node: true */
+
+"use strict";
+
+var a, c, i, j, n, x;
+
 a=[];                        // the sieve array
 c=0;                         // the count of primes found so far
 n=10001;                     // the number of the prime we seek

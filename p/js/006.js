@@ -1,3 +1,9 @@
+/* jshint node: true */
+
+"use strict";
+
+var i, n, sum_of_naturals, sum_of_squares, square_of_sum_of_naturals;
+
 n=100;
 sum_of_naturals=n*(n+1)/2;
 square_of_sum_of_naturals=sum_of_naturals*sum_of_naturals;

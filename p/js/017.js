@@ -1,3 +1,7 @@
+/* jshint node: true */
+
+"use strict";
+
 var units     = 3 + 3 + 5 + 4 + 4 + 3 + 5 + 5 + 4; // 'one', 'two', 'three', etc.
 var teens     = 3 + 6 + 6 + 8 + 8 + 7 + 7 + 9 + 8 + 8; // 'ten', 'eleven', 'twelve', etc.
 var twenties  = (10 * 6) + units; // 'twenty one', 'twenty two', etc. = 10 x 'twenty' + 'one' + 'two' + ...

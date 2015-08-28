@@ -1,3 +1,9 @@
+/* jshint node: true */
+
+"use strict";
+
+var a, b, largest, p, q, r;
+
 largest=0;
 
 for ( a=999; a>99; a-- ) {

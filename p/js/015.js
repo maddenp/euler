@@ -1,3 +1,7 @@
+/* jshint node: true */
+
+"use strict";
+
 var i,j,s=20,paths={};
 
 // Initially, each vertex is aware of zero paths that reach it, so initialize

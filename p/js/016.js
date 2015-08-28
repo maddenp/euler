@@ -1,3 +1,7 @@
+/* jshint node: true */
+
+"use strict";
+
 var double_array = function(a) {
   var carry = false;
   for (var i = a.length-1; i >= 0; i--) {
@@ -8,7 +12,7 @@ var double_array = function(a) {
     }
     if (a[i] > 9) {
       a[i] -= 10;
-      if (i == 0) {
+      if (i === 0) {
         a.unshift(1);
       } else {
         carry = true;
@@ -17,7 +21,7 @@ var double_array = function(a) {
   }
 };
 
-a = [1];
+var a = [1];
 for (var i = 0; i < 1000; i++) double_array(a);
 
 console.log(a.reduce(function(m,e) { return m + e; }));

@@ -1,3 +1,8 @@
+/* jshint node: true */
+/* jshint boss: true */
+
+"use strict";
+
 /*
  * Elegant but slower recursive solution:
  *
@@ -13,7 +18,7 @@ function chainlen(n) {
   var k,m,s;
   if (k=known[n]) return k;
   for (m=n,s=1;m>1;s++) {
-    m=(m%2==0)?(m/2):(3*m+1);
+    m=(m%2===0)?(m/2):(3*m+1);
     if (k=known[m]) { s+=k; break; }
   }
   known[n]=s;
