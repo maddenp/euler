@@ -18,9 +18,12 @@ function array_sum(a) {
 
 function proper_divisors(n) {
   var pds = [1];
-  for (var d = 2; d < n; d++) {
+  for (var d = 2; d <= Math.sqrt(n); d++) {
     if (n % d === 0) {
       pds.push(d);
+      if (n/d !== d) {
+        pds.push(n/d);
+      }
     }
   }
   return pds;
@@ -37,6 +40,7 @@ var sieve = [];
 for (var i = 0; i < ans.length; i++) {
   for (var j = i; j < ans.length; j++) {
     var sum_of_ans = ans[i] + ans[j];
+    if (sum_of_ans > limit) break;
     sieve[sum_of_ans] = true;
   }
 }

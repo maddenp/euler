@@ -13,19 +13,20 @@ function maybe_add(a, x, limit) {
 }
 
 function proper_divisors(n) {
-  var factors = [1];
-  for (var d = 2; d < n; d++) {
+  var pds = [1];
+  for (var d = 2; d <= Math.sqrt(n); d++) {
     if (n % d === 0) {
-      factors.push(d);
+      pds.push(d);
+      if (n/d !== d) {
+        pds.push(n/d);
+      }
     }
   }
-  return factors;
+  return pds;
 }
 
 function sum_of_proper_divisors(n) {
-  var pd = proper_divisors(n);
-  var as = array_sum(pd);
-  return as;
+  return array_sum(proper_divisors(n));
 }
 
 var limit = 10000;
