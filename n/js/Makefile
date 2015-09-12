@@ -14,7 +14,6 @@ X=$(basename $(wildcard *.js))
 .PHONY: test $(X)
 
 test: $(X)
-	@echo
 
 $(X):
-	@test -n "$($@)" && (test "$$(node $@.js)" = "$($@)" && echo -n '.' || echo "\nIn $@.js: expected=$($@), actual=$$(node $@.js)") || true
+	@test -n "$($@)" && (test "$$(node $@.js)" = "$($@)" && echo '$@ ok' || echo "$@ !! expected $($@), got $$(node $@.js)") || true

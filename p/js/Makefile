@@ -22,6 +22,7 @@
 022=871198282
 023=4179871
 024=2783915460
+026=983
 067=7273
 
 X=$(basename $(wildcard *.js))
@@ -29,7 +30,6 @@ X=$(basename $(wildcard *.js))
 .PHONY: test $(X)
 
 test: $(X)
-	@echo
 
 $(X):
-	@test -n "$($@)" && (test "$$(node $@.js)" = "$($@)" && echo -n '.' || echo "\nIn $@.js: expected=$($@), actual=$$(node $@.js)") || true
+	@test -n "$($@)" && (test "$$(node $@.js)" = "$($@)" && echo '$@ ok' || echo "$@ !! expected $($@), got $$(node $@.js)") || true
