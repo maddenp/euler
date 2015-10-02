@@ -16,4 +16,4 @@ X=$(basename $(wildcard *.js))
 test: $(X)
 
 $(X):
-	@test -n "$($@)" && (test "$$(node $@.js)" = "$($@)" && echo '$@ ok' || echo "$@ !! expected $($@), got $$(node $@.js)") || true
+	@test -n "$($@)" && echo -n "$@ " && (test "$$(node $@.js)" = "$($@)" && echo 'ok' || echo "!! expected $($@), got $$(node $@.js)") || true

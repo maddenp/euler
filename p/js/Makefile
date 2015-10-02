@@ -25,6 +25,7 @@
 026=983
 027=-59231
 028=669171001
+029=9183
 067=7273
 
 X=$(basename $(wildcard *.js))
@@ -34,4 +35,4 @@ X=$(basename $(wildcard *.js))
 test: $(X)
 
 $(X):
-	@test -n "$($@)" && (test "$$(node $@.js)" = "$($@)" && echo '$@ ok' || echo "$@ !! expected $($@), got $$(node $@.js)") || true
+	@test -n "$($@)" && echo -n "$@ " && (test "$$(node $@.js)" = "$($@)" && echo 'ok' || echo "!! expected $($@), got $$(node $@.js)") || true
