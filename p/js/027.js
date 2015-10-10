@@ -16,7 +16,7 @@ var product = 0;
 for (var a = -999; a < 1000; a++) {
   for (var b = -999; b < 1000; b++) {
     for (var n = 0, count = 0;; n++, count++) {
-      if (is_composite(n*n + a*n + b)) break;
+      if (is_composite(n * n + a * n + b)) break;
     }
     if (count > max) {
       max = count;

@@ -24,4 +24,4 @@ var double_array = function(a) {
 var a = [1];
 for (var i = 0; i < 1000; i++) double_array(a);
 
-console.log(a.reduce(function(m,e) { return m + e; }));
+console.log(a.reduce(function(m, e) { return m + e; }));

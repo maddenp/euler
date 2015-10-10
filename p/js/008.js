@@ -27,9 +27,9 @@ s='73167176531330624919225119674426574742355349194934'+
   '05886116467109405077541002256983155200055935729725'+
   '71636269561882670428252483600823257530420752963450';
 
-for (max=1,i=0;i<s.length-len;i++) {
-  for (product=1,j=0;j<len;j++) product*=parseInt(s[i+j]);
-  max=Math.max(max,product);
+for (max = 1, i = 0; i < s.length - len; i++) {
+  for (product = 1, j = 0; j < len; j++) product *= parseInt(s[i + j]);
+  max = Math.max(max, product);
 }
 
 console.log(max);

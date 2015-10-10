@@ -38,7 +38,7 @@ var x = 999999;
 
 for (var n = source_digits.length - 1; x > 0; n--) {
   var f = factorial(n);
-  var m = Math.floor(x/f);
+  var m = Math.floor(x / f);
   x -= f * m;
   answer_digits.push(source_digits[m]);
   source_digits.splice(m,1);

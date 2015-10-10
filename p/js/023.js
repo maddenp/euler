@@ -21,8 +21,8 @@ function proper_divisors(n) {
   for (var d = 2; d <= Math.sqrt(n); d++) {
     if (n % d === 0) {
       pds.push(d);
-      if (n/d !== d) {
-        pds.push(n/d);
+      if (n / d !== d) {
+        pds.push(n / d);
       }
     }
   }

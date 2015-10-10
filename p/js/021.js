@@ -7,7 +7,7 @@ function sum_of_proper_divisors(n) {
   for (var d = 2; d <= Math.sqrt(n); d++) {
     if (n % d === 0) {
       sopd += d;
-      if (n/d !== d) sopd += n/d;
+      if (n / d !== d) sopd += n / d;
     }
   }
   return sopd;

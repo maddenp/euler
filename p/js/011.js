@@ -24,60 +24,60 @@ var s='08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 '+
       '01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48';
 
 function make_grid(s) {
-  var a,b,i,j,k;
-  a=[];
-  b=s.split(' ');
-  for (k=0,i=0;i<20;i++) {
-    a[i]=[];
-    for (j=0;j<20;j++,k++) a[i][j]=parseInt(b[k]);
+  var a, b, i, j, k;
+  a = [];
+  b = s.split(' ');
+  for (k = 0, i = 0; i < 20; i++) {
+    a[i] = [];
+    for (j = 0; j < 20; j++, k++) a[i][j] = parseInt(b[k]);
   }
   return a;
 }
 
-function prod_h(a,x,y,n,limit)
+function prod_h(a, x, y, n, limit)
 {
-  var i,prod;
-  if (x+n+1>limit) return -1;
-  for (prod=1,i=0;i<n;i++) prod*=a[y][x+i];
+  var i, prod;
+  if (x + n + 1 > limit) return -1;
+  for (prod = 1, i = 0; i < n; i++) prod *= a[y][x + i];
   return prod;
 }
 
-function prod_v(a,x,y,n,limit)
+function prod_v(a, x, y, n, limit)
 {
-  var i,prod;
-  if (y+n+1>limit) return -1;
-  for (prod=1,i=0;i<n;i++) prod*=a[y+i][x];
+  var i, prod;
+  if (y + n + 1 > limit) return -1;
+  for (prod = 1, i = 0; i < n; i++) prod *= a[y + i][x];
   return prod;
 }
 
-function prod_d1(a,x,y,n,limit)
+function prod_d1(a, x, y, n, limit)
 {
-  var i,prod;
-  if (x+n+1>limit||y+n+1>limit) return -1;
-  for (prod=1,i=0;i<n;i++) prod*=a[y+i][x+i];
+  var i, prod;
+  if (x + n + 1 > limit || y + n + 1 > limit) return -1;
+  for (prod = 1, i = 0; i < n; i++) prod *= a[y + i][x + i];
   return prod;
 }
 
-function prod_d2(a,x,y,n,limit)
+function prod_d2(a, x, y, n, limit)
 {
-  var i,prod;
-  if (x+n+1>limit||y+n+1>limit) return -1;
-  for (prod=1,i=0;i<n;i++) prod*=a[y+(n-i-1)][x+i];
+  var i, prod;
+  if (x + n + 1 > limit || y + n + 1 > limit) return -1;
+  for (prod = 1, i = 0; i < n; i++) prod *= a[y + (n - i - 1)][x + i];
   return prod;
 }
 
 var a, dim, run, m, i, j;
 
-a=make_grid(s);
-dim=20;
-run=4;
-m=-1;
-for (i=0;i<dim;i++) {
-  for (j=0;j<dim;j++) {
-    m=Math.max(m,prod_h (a,i,j,run,dim));
-    m=Math.max(m,prod_v (a,i,j,run,dim));
-    m=Math.max(m,prod_d1(a,i,j,run,dim));
-    m=Math.max(m,prod_d2(a,i,j,run,dim));
+a = make_grid(s);
+dim = 20;
+run = 4;
+m = -1;
+for (i = 0; i < dim; i++) {
+  for (j = 0; j < dim; j++) {
+    m=Math.max(m, prod_h (a, i, j, run, dim));
+    m=Math.max(m, prod_v (a, i, j, run, dim));
+    m=Math.max(m, prod_d1(a, i, j, run, dim));
+    m=Math.max(m, prod_d2(a, i, j, run, dim));
   }
 }
 console.log(m);

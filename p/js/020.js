@@ -28,4 +28,4 @@ for (var i=2, a=[1], n=100; i < n+1; i++) {
   mult_array(a, i);
 }
 
-console.log(a.reduce(function(m,e) { return m + e; }, 0));
+console.log(a.reduce(function(m, e) { return m + e; }, 0));
