@@ -13,18 +13,18 @@ var mult_array = function(a, n) {
     if (a[i] > 9) {
       if (i === 0) {
         while (a[0] > 10) {
-          a.unshift(Math.floor(a[0]/10));
+          a.unshift(Math.floor(a[0] / 10));
           a[1] %= 10;
         }
       } else {
-        carry = Math.floor(a[i]/10);
+        carry = Math.floor(a[i] / 10);
         a[i] %= 10;
       }
     }
   }
 };
 
-for (var i=2, a=[1], n=100; i < n+1; i++) {
+for (var i = 2, a = [1], n = 100; i < n + 1; i++) {
   mult_array(a, i);
 }
 
