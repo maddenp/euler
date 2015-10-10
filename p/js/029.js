@@ -32,7 +32,7 @@ function mult_array(a, n) {
       }
     }
   }
-};
+}
 
 var limit = 100;
 var ns = [];
