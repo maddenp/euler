@@ -1,4 +1,6 @@
 /* jshint node: true */
+/*jslint indent: 2 */
+/*jslint white: true */
 
 "use strict";
 

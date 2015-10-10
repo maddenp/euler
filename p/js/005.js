@@ -1,4 +1,6 @@
 /* jshint node: true */
+/*jslint indent: 2 */
+/*jslint white: true */
 
 "use strict";
 
@@ -21,6 +23,8 @@ var d, m, n;
 
 // Short version:
 
-for (n = m = 2520, d = 11; d < 21; d++, m = n) for (; n % d !== 0; n += m);
+for (n = m = 2520, d = 11; d < 21; d++, m = n) {
+  for (; n % d !== 0; n += m) {}
+}
 
 console.log(n);

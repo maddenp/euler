@@ -1,4 +1,6 @@
 /* jshint node: true */
+/*jslint indent: 2 */
+/*jslint white: true */
 
 "use strict";
 
@@ -15,7 +17,9 @@ for (a = 999; a > 99; a--) {
       r = r * 10 + q % 10;
       q = Math.floor(q / 10);
     }
-    if ( r === p && p > largest ) largest = p;
+    if (r === p && p > largest) {
+      largest = p;
+    }
   }
 }
 
