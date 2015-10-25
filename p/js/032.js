@@ -15,12 +15,15 @@ function n2a(n) {
   return a;
 }
 
+function ndigits(n) {
+  return Math.floor(Math.log(n) / Math.log(10)) + 1;
+}
 
 function pandigital(f1, f2, p) {
-  var digits = (n2a(f1).concat(n2a(f2)).concat(n2a(p))).sort();
-  if (digits.length !== 9) return false;
-  for (var i = 0; i < digits.length; i++) {
-    if (digits[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
+  if (ndigits(f1) + ndigits(f2) + ndigits(p) !== 9) return false;
+  var narray = (n2a(f1).concat(n2a(f2)).concat(n2a(p))).sort();
+  for (var i = 0; i < narray.length; i++) {
+    if (narray[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
   }
   return true;
 }
