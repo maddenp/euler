@@ -2,26 +2,11 @@
 
 "use strict";
 
-function array_sum(a) {
-  return (a.reduce(function(m, e) { return m + e; }, 0));
-}
-
-function n2a(n) {
-  var a = [];
-  while (n > 0) {
-    a.unshift(n % 10);
-    n = Math.floor(n / 10);
-  }
-  return a;
-}
-
-function ndigits(n) {
-  return Math.floor(Math.log(n) / Math.log(10)) + 1;
-}
+var pm = require('./pm.js');
 
 function pandigital(n, m, p) {
-  if (ndigits(n) + ndigits(m) + ndigits(p) !== 9) return false;
-  var narray = (n2a(n).concat(n2a(m)).concat(n2a(p))).sort();
+  if (pm.ndigits(n) + pm.ndigits(m) + pm.ndigits(p) !== 9) return false;
+  var narray = (pm.n2a(n).concat(pm.n2a(m)).concat(pm.n2a(p))).sort();
   for (var i = 0; i < narray.length; i++) {
     if (narray[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
   }
@@ -54,4 +39,4 @@ var pp = [];
 pp_find(1, 10, 1000, 10000, pp);
 pp_find(10, 100, 100, 1000, pp);
 
-console.log(array_sum(pp));
+console.log(pm.array_sum(pp));

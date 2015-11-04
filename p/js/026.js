@@ -2,10 +2,6 @@
 
 "use strict";
 
-function log(n) {
-  return Math.log(n) / Math.log(10);
-}
-
 var cycle_start, decimals, d, i, n, n_seen, q, shift;
 
 var longest = { d: 2, length: 0 };

@@ -2,14 +2,7 @@
 
 "use strict";
 
-function array_sum(a, init) {
-  return (a.reduce(function(m, e) { return m + e; }, init));
-}
-
-function factorial(n) {
-  for (var i = n, f = 1; i > 1; i--) f *= i;
-  return f;
-}
+var pm = require('./pm.js');
 
 var answer_digits = [];
 
@@ -37,7 +30,7 @@ var x = 999999;
 // on.
 
 for (var n = source_digits.length - 1; x > 0; n--) {
-  var f = factorial(n);
+  var f = pm.factorial(n);
   var m = Math.floor(x / f);
   x -= f * m;
   answer_digits.push(source_digits[m]);
@@ -46,4 +39,4 @@ for (var n = source_digits.length - 1; x > 0; n--) {
 
 answer_digits = answer_digits.concat(source_digits);
 
-console.log(array_sum(answer_digits, ''));
+console.log(pm.a2s(answer_digits, ''));
