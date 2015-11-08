@@ -2,9 +2,9 @@
 
 var halfsies = 0
 var abundantNumbers = []
-var matched = []
 var max = 28123
 var theOnesWeAreLookingFor = []
+
 findAllTheAbundantNumbers()
 
 function findAllTheAbundantNumbers(){
@@ -21,11 +21,14 @@ function findAllTheAbundantNumbers(){
 }
 
 function findDivisors(num){
-	halfsies = num/2
-	var divisors = []
-	for(b=0; b<=halfsies; b++){
+	halfsies = Math.sqrt(num)
+	var divisors = [1]
+	for(b=2; b<=halfsies; b++){
 		if(num % b == 0 ){
 			divisors.push(b)
+			if (num / b !== b) {
+		        divisors.push(num / b);
+		     }
 		}
 	}
 	return divisors
