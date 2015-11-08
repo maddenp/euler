@@ -1,5 +1,36 @@
 var max = 28123
 
+addEmUp()
+
+function addEmUp(){
+	var theOnesWeAreLookingFor = findTheOnesWeAreLookingFor()
+	var sum = 0
+	for(var k=0; k<theOnesWeAreLookingFor.length; k++){
+		if(!theOnesWeAreLookingFor[k]){
+			sum += k
+		}
+	}
+	console.log(sum)
+}
+
+function findTheOnesWeAreLookingFor(){
+	var abundantNumbers = findAllTheAbundantNumbers(max)
+
+	var theOnesWeAreLookingFor = []
+	for(var p=0; p<abundantNumbers.length; p++){
+		for(var f=0; f<abundantNumbers.length; f++){
+			var sum = abundantNumbers[p] + abundantNumbers[f]
+			if(sum <= max){
+				theOnesWeAreLookingFor[sum] = true
+			}
+			else{
+				break;
+			}
+		}
+	}
+	return theOnesWeAreLookingFor
+}
+
 function findAllTheAbundantNumbers(){
 	var abundantNumbers = []
 	for(var x=1; x<=max; x++){
@@ -28,36 +59,11 @@ function findDivisors(num){
 	return divisors
 }
 
-function findTheOnesWeAreLookingFor(){
-	var abundantNumbers = findAllTheAbundantNumbers(max)
 
-	var theOnesWeAreLookingFor = []
-	for(var p=0; p<abundantNumbers.length; p++){
-		for(var f=0; f<abundantNumbers.length; f++){
-			var sum = abundantNumbers[p] + abundantNumbers[f]
-			if(sum <= max){
-				theOnesWeAreLookingFor[sum] = true
-			}
-			else{
-				break;
-			}
-		}
-	}
-	return theOnesWeAreLookingFor
-}
 
-function addEmUp(){
-	var theOnesWeAreLookingFor = findTheOnesWeAreLookingFor()
-	var sum = 0
-	for(var k=0; k<theOnesWeAreLookingFor.length; k++){
-		if(!theOnesWeAreLookingFor[k]){
-			sum += k
-		}
-	}
-	console.log(sum)
-}
 
-addEmUp()
+
+
 
 
 
