@@ -83,6 +83,20 @@ module.exports.ndigits = function(n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
 };
 
+module.exports.primes_up_to = function(limit) {
+  var composites = [], primes = [];
+  for (var i = 2; i < limit; i++) {
+    if (composites[i] === undefined) {
+      primes.push(i);
+      for (var j = i; j < limit; j += i) {
+        composites[j] = true;
+      }
+    }
+  }
+  return primes;
+}
+
+
 module.exports.proper_divisors = function(n) {
   var pds = [1];
   for (var d = 2; d <= Math.sqrt(n); d++) {
