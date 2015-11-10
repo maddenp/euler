@@ -21,14 +21,14 @@ function bisection_search(a, x) {
   var ubound = a.length - 1;
   while (lbound <= ubound) {
     if (lbound === ubound) {
-      if (a[lbound] === x) return x;
+      if (a[lbound] === x) return lbound;
       break;
     }
     var length = ubound - lbound + 1;
     var even = length % 2 === 0;
     var mp = Math.round(lbound + length / 2);
-    if (a[mp] === x) return x;
-    if (even && a[mp - 1] === x) return x;
+    if (a[mp] === x) return mp;
+    if (even && a[mp - 1] === x) return mp - 1;
     if (a[mp] < x) {
       lbound = mp + 1;
     } else {
@@ -43,10 +43,12 @@ var prime_limit = solution_limit * 10;
 var primes = pm.primes_up_to(prime_limit);
 var nsolutions = 0;
 
+function is_prime(n) {
+  return bisection_search(primes, n) !== undefined;
+}
+
 for (var i = 2; i < solution_limit; i++) {
-  if (rotations(i).every(function(n) { return bisection_search(primes, n); })) {
-    ++nsolutions;
-  }
+  if (rotations(i).every(is_prime)) ++nsolutions;
 }
 
 console.log(nsolutions);
