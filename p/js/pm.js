@@ -61,6 +61,17 @@ module.exports.array_sum = function(a) {
   return (a.reduce(function(m, e) { return m + e; }, 0));
 };
 
+module.exports.bisearch = function(a, n) {
+  var lo = 0, hi = a.length - 1;
+  while (true) {
+    if (a[lo] === n) return lo;
+    if (a[hi] === n) return hi;
+    if (hi - lo < 2) return undefined;
+    var mid = lo + (Math.floor((hi - lo) / 2));
+    if (a[mid] < n) { lo = mid; } else { hi = mid; }
+  }
+};
+
 module.exports.factorial = function(n) {
   for (var i = n, f = 1; i > 1; i--) f *= i;
   return f;
