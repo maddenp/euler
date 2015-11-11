@@ -16,16 +16,15 @@ function rotations(n) {
   return r;
 }
 
-var solution_limit = 1000000;
-var prime_limit = solution_limit * 10;
-var primes = pm.primes_up_to(prime_limit);
+var limit = 1000000;
+var primes = pm.primes_up_to(limit);
 var nsolutions = 0;
 
 function number_is_prime(n) {
   return pm.bisearch(primes, n) !== undefined;
 }
 
-for (var i = 2; i < solution_limit; i++) {
+for (var i = 2; i < limit; i++) {
   if (rotations(i).every(number_is_prime)) ++nsolutions;
 }
 
