@@ -21,12 +21,12 @@ var prime_limit = solution_limit * 10;
 var primes = pm.primes_up_to(prime_limit);
 var nsolutions = 0;
 
-function is_prime(n) {
+function number_is_prime(n) {
   return pm.bisearch(primes, n) !== undefined;
 }
 
 for (var i = 2; i < solution_limit; i++) {
-  if (rotations(i).every(is_prime)) ++nsolutions;
+  if (rotations(i).every(number_is_prime)) ++nsolutions;
 }
 
 console.log(nsolutions);
