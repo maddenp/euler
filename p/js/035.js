@@ -16,12 +16,15 @@ function rotations(n) {
   return r;
 }
 
-function bisearch(a, lo, hi, x) {
-  if (a[lo] === x) return lo;
-  if (a[hi] === x) return hi;
-  if (hi - lo < 2) return undefined;
-  var mid = lo + (Math.floor((hi - lo) / 2));
-  return a[mid] < x ? bisearch(a, mid, hi, x) : bisearch(a, lo, mid, x);
+function bisearch(a, x) {
+  var lo = 0, hi = a.length - 1;
+  while (true) {
+    if (a[lo] === x) return lo;
+    if (a[hi] === x) return hi;
+    if (hi - lo < 2) return undefined;
+    var mid = lo + (Math.floor((hi - lo) / 2));
+    if (a[mid] < x) { lo = mid; } else { hi = mid; }
+  }
 }
 
 var solution_limit = 1000000;
@@ -30,7 +33,7 @@ var primes = pm.primes_up_to(prime_limit);
 var nsolutions = 0;
 
 function is_prime(n) {
-  return bisearch(primes, 0, primes.length - 1, n) !== undefined;
+  return bisearch(primes, n) !== undefined;
 }
 
 for (var i = 2; i < solution_limit; i++) {
