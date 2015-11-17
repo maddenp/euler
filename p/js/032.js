@@ -6,7 +6,7 @@ var pm = require('./pm.js');
 
 function pandigital(n, m, p) {
   if (pm.ndigits(n) + pm.ndigits(m) + pm.ndigits(p) !== 9) return false;
-  var narray = (pm.n2a(n).concat(pm.n2a(m)).concat(pm.n2a(p))).sort();
+  var narray = (pm.n2a_decimal(n).concat(pm.n2a_decimal(m)).concat(pm.n2a_decimal(p))).sort();
   for (var i = 0; i < narray.length; i++) {
     if (narray[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
   }

@@ -81,14 +81,22 @@ module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
 };
 
-module.exports.n2a = function(n) {
+module.exports.n2a = function(n, base) {
   var a = [];
   while (n > 0) {
-    a.unshift(n % 10);
-    n = Math.floor(n / 10);
+    a.unshift(n % base);
+    n = Math.floor(n / base);
   }
   return a;
 };
+
+module.exports.n2a_binary = function(n) {
+  return module.exports.n2a(n, 2);
+}
+
+module.exports.n2a_decimal = function(n) {
+  return module.exports.n2a(n, 10);
+}
 
 module.exports.ndigits = function(n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
