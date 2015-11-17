@@ -13,7 +13,7 @@ function a_is_palindrome(a) {
 
 var double_base_palindromes = [];
 
-for (var n = 1; n < 1000000; n++) {
+for (var n = 1; n < 1000000; n += 2) {
   if (a_is_palindrome(pm.n2a_decimal(n)) && a_is_palindrome(pm.n2a_binary(n))) {
     double_base_palindromes.push(n);
   }
