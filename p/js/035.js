@@ -21,7 +21,7 @@ var primes = pm.primes_up_to(limit);
 var nsolutions = 0;
 
 function number_is_prime(n) {
-  return pm.bisearch(primes, n) !== undefined;
+  return primes[n];
 }
 
 for (var i = 2; i < limit; i++) {

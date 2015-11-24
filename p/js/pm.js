@@ -103,18 +103,16 @@ module.exports.ndigits = function(n) {
 };
 
 module.exports.primes_up_to = function(limit) {
-  var composites = [], primes = [];
+  var primes = [false, false];
   for (var i = 2; i < limit; i++) {
-    if (composites[i] === undefined) {
-      primes.push(i);
-      for (var j = i; j < limit; j += i) {
-        composites[j] = true;
-      }
+    if (primes[i] === false) continue;
+    primes[i] = true;
+    for (var j = i * 2; j < limit; j += i) {
+      primes[j] = false;
     }
   }
   return primes;
 }
-
 
 module.exports.proper_divisors = function(n) {
   var pds = [1];
