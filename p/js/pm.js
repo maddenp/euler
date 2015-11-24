@@ -4,8 +4,12 @@
 
 module.exports = {};
 
+module.exports.a2n = function(a) {
+  return (parseInt(a.join('')));
+}
+
 module.exports.a2s = function(a) {
-  return (a.reduce(function(m, e) { return m + e; }, ''));
+  return a.join('');
 };
 
 module.exports.array_add = function(a1, a2) {
