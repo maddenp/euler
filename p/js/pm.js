@@ -129,6 +129,15 @@ module.exports.proper_divisors = function(n) {
   return pds;
 };
 
+module.exports.readfile = function(f, alt) {
+  try {
+    var data = require('fs').readFileSync(f, 'utf8');
+  } catch (err) {
+    return alt;
+  }
+  return JSON.parse(data);
+}
+              
 module.exports.sum_of_proper_divisors = function(n) {
   return module.exports.array_sum(module.exports.proper_divisors(n));
 };
