@@ -4,26 +4,21 @@
 
 var pm = require('./pm.js');
 
-function truncatable_l2r(n, prime) {
+function truncatable(n, direction, prime) {
   var a = pm.n2a_decimal(n);
   while (a.length > 0) {
     if (! prime(pm.a2n(a))) return false;
-    a.shift();
-  }
-  return true
-}
-
-function truncatable_r2l(n, prime) {
-  var a = pm.n2a_decimal(n);
-  while (a.length > 0) {
-    if (! prime(pm.a2n(a))) return false;
-    a.pop();
+    if (direction == 'l2r') {
+      a.shift();
+    } else {
+      a.pop();
+    }
   }
   return true
 }
 
 function truncatable_both_ways(n, prime) {
-  return truncatable_l2r(n, prime) && truncatable_r2l(n, prime);
+  return truncatable(n, 'l2r', prime) && truncatable(n, 'r2l', prime);
 }
 
 var filename = '037.dat';
