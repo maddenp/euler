@@ -4,21 +4,17 @@
 
 var pm = require('./pm.js');
 
-function truncatable(n, direction, prime) {
+function truncatable(n, fn, prime) {
   var a = pm.n2a_decimal(n);
   while (a.length > 0) {
     if (! prime(pm.a2n(a))) return false;
-    if (direction == 'l2r') {
-      a.shift();
-    } else {
-      a.pop();
-    }
+    a[fn]();
   }
   return true
 }
 
 function truncatable_both_ways(n, prime) {
-  return truncatable(n, 'l2r', prime) && truncatable(n, 'r2l', prime);
+  return truncatable(n, 'shift', prime) && truncatable(n, 'pop', prime);
 }
 
 var filename = '037.dat';
