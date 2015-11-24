@@ -137,7 +137,11 @@ module.exports.readfile = function(f, alt) {
   }
   return JSON.parse(data);
 }
-              
+
 module.exports.sum_of_proper_divisors = function(n) {
   return module.exports.array_sum(module.exports.proper_divisors(n));
 };
+
+module.exports.writefile = function(f, data) {
+  require('fs').writeFileSync(f, JSON.stringify(data), 'utf8');
+}
