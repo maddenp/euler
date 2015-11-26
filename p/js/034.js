@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function sum_of_factorialized_digits(n, factorials) {
   return pm.array_sum(pm.n2a_decimal(n).map(function(n) { return factorials[n]; }));

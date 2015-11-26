@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 var pos = 1;
 var s = pm.readfile('022.dat');

@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 var pyramid = pm.readfile('067.dat');
 

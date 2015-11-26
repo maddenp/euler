@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 var fib_new, fib_prev, fib_this, i;
 

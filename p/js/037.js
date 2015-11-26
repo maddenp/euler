@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function truncatable(n, fn, prime) {
   var a = pm.n2a_decimal(n);

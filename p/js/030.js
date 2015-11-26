@@ -4,7 +4,7 @@
 
 var exponent = 5;
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function lift(a, exponent) {
   return a.map(function(n) { return Math.pow(n, exponent); });

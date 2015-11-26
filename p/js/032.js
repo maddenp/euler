@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function pandigital(n, m, p) {
   if (pm.ndigits(n) + pm.ndigits(m) + pm.ndigits(p) !== 9) return false;

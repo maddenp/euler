@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function a_is_palindrome(a) {
   for (var i = 0; i < Math.floor(a.length / 2); i++) {

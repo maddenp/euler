@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function rotations(n) {
   var a = pm.n2a_decimal(n), d = pm.ndigits(n), r = [];

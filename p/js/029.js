@@ -2,7 +2,7 @@
 
 "use strict";
 
-var pm = require('./pm.js');
+var pm = require('./pm');
 
 function arr2str(a) {
   return (a.reduce(function(m, e) { return m + e; }, ''));
