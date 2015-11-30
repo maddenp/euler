@@ -107,7 +107,7 @@ module.exports.ndigits = function(n) {
 };
 
 module.exports.pandigital = function(x) {
-  var a = typeof x === 'number' ? module.exports.n2a(x) : x;
+  var a = typeof x === 'number' ? module.exports.n2a(x) : x.slice(0);
   a.sort();
   for (var i = 0; i < a.length; i++) {
     if (a[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
