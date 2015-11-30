@@ -6,7 +6,7 @@ module.exports = {};
 
 module.exports.a2n = function(a) {
   return (parseInt(a.join('')));
-}
+};
 
 module.exports.a2s = function(a) {
   return a.join('');
@@ -96,11 +96,11 @@ module.exports.n2a = function(n, base) {
 
 module.exports.n2a_binary = function(n) {
   return module.exports.n2a(n, 2);
-}
+};
 
 module.exports.n2a_decimal = function(n) {
   return module.exports.n2a(n, 10);
-}
+};
 
 module.exports.ndigits = function(n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
@@ -113,7 +113,7 @@ module.exports.pandigital = function(x) {
     if (a[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
   }
   return true;
-}
+};
 
 module.exports.primes_up_to = function(limit) {
   var primes = [false, false];
@@ -125,7 +125,7 @@ module.exports.primes_up_to = function(limit) {
     }
   }
   return primes;
-}
+};
 
 module.exports.proper_divisors = function(n) {
   var pds = [1];
@@ -143,11 +143,11 @@ module.exports.proper_divisors = function(n) {
 module.exports.readfile = function(f, alt) {
   try {
     var data = require('fs').readFileSync(f, 'utf8');
+    return JSON.parse(data);
   } catch (err) {
     return alt;
   }
-  return JSON.parse(data);
-}
+};
 
 module.exports.sum_of_proper_divisors = function(n) {
   return module.exports.array_sum(module.exports.proper_divisors(n));
@@ -155,4 +155,4 @@ module.exports.sum_of_proper_divisors = function(n) {
 
 module.exports.writefile = function(f, data) {
   require('fs').writeFileSync(f, JSON.stringify(data), 'utf8');
-}
+};
