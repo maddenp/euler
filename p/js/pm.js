@@ -106,6 +106,15 @@ module.exports.ndigits = function(n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
 };
 
+module.exports.pandigital = function(x) {
+  var a = typeof x === 'number' ? module.exports.n2a(x) : x;
+  a.sort();
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
+  }
+  return true;
+}
+
 module.exports.primes_up_to = function(limit) {
   var primes = [false, false];
   for (var i = 2; i < limit; i++) {

@@ -4,20 +4,17 @@
 
 var pm = require('./pm');
 
-function pandigital(n, m, p) {
+function pandigital_product(n, m, p) {
   if (pm.ndigits(n) + pm.ndigits(m) + pm.ndigits(p) !== 9) return false;
-  var narray = (pm.n2a_decimal(n).concat(pm.n2a_decimal(m)).concat(pm.n2a_decimal(p))).sort();
-  for (var i = 0; i < narray.length; i++) {
-    if (narray[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
-  }
-  return true;
+  var narray = (pm.n2a_decimal(n).concat(pm.n2a_decimal(m)).concat(pm.n2a_decimal(p)));
+  return pm.pandigital(narray);
 }
 
 function pp_find(n_lo, n_hi, m_lo, m_hi, pp) {
   for (var n = n_lo; n < n_hi; n++) {
     for (var m = m_lo; m < m_hi; m++) {
       var p = n * m;
-      if (pandigital(n, m, p) && pp.indexOf(p) === -1) pp.push(p);
+      if (pandigital_product(n, m, p) && pp.indexOf(p) === -1) pp.push(p);
     }
   }
 }
