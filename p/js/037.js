@@ -10,7 +10,7 @@ function truncatable(n, fn, prime) {
     if (! prime(pm.a2n(a))) return false;
     a[fn]();
   }
-  return true
+  return true;
 }
 
 function truncatable_both_ways(n, prime) {
