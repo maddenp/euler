@@ -35,6 +35,14 @@ module.exports.array_add = function(a1, a2) {
   return a3;
 };
 
+module.exports.array_max = function(a) {
+  return Math.max.apply(null, a);
+}
+
+module.exports.array_min = function(a) {
+  return Math.min.apply(null, a);
+}
+
 module.exports.array_mult = function(a, n) {
   var carry = 0;
   for (var i = a.length-1; i >= 0; i--) {
@@ -81,11 +89,23 @@ module.exports.factorial = function(n) {
   return f;
 };
 
+module.exports.hypotenuse = function(a, b) {
+  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+}
+
+module.exports.integral = function(n) {
+  return n === Math.floor(n);
+}
+
 module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
 };
 
-module.exports.n2a = function(n, base) {
+module.exports.n2a_binary = function(n) {
+  return module.exports.n2a_common(n, 2);
+};
+
+module.exports.n2a_common = function(n, base) {
   var a = [];
   while (n > 0) {
     a.unshift(n % base);
@@ -94,12 +114,8 @@ module.exports.n2a = function(n, base) {
   return a;
 };
 
-module.exports.n2a_binary = function(n) {
-  return module.exports.n2a(n, 2);
-};
-
 module.exports.n2a_decimal = function(n) {
-  return module.exports.n2a(n, 10);
+  return module.exports.n2a_common(n, 10);
 };
 
 module.exports.ndigits = function(n) {
@@ -107,7 +123,7 @@ module.exports.ndigits = function(n) {
 };
 
 module.exports.pandigital = function(x) {
-  var a = typeof x === 'number' ? module.exports.n2a(x) : x.slice(0);
+  var a = typeof x === 'number' ? module.exports.n2a_decimal(x) : x.slice(0);
   a.sort();
   for (var i = 0; i < a.length; i++) {
     if (a[i] !== [1, 2, 3, 4, 5, 6, 7, 8, 9][i]) return false;
