@@ -22,7 +22,7 @@ for (var n = 3; n <= limit; n++) {
 }
 
 if (! experimental_limit) {
-  pm.writefile(filename, Math.max.apply(null, digit_factorials));
+  pm.writefile(filename, pm.array_max(digit_factorials));
 }
 
 console.log(pm.array_sum(digit_factorials));
