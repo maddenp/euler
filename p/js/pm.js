@@ -108,6 +108,13 @@ module.exports.is_pandigital = function(x, n) {
   return true;
 };
 
+module.exports.is_prime = function(n) {
+  for (var i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
 module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
 };
