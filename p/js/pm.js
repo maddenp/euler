@@ -140,6 +140,23 @@ module.exports.ndigits = function(n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
 };
 
+module.exports.permutations = function(n, a, fn) {
+  // https://en.wikipedia.org/wiki/Heap%27s_algorithm
+  if (n === 1) {
+    fn(a);
+  } else {
+    for (var i = 0; i < n - 1; i++) {
+      module.exports.permutations(n - 1, a, fn);
+      var tmp = a[n - 1];
+      if (n % 2 === 0) {
+        a[n - 1] = a[i];
+        a[i] = tmp;
+      } else {
+        a[n - 1] = a[0];
+        a[0] = tmp;
+      }
+    }
+    module.exports.permutations(n - 1, a, fn);
   }
 }
 
