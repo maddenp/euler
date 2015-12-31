@@ -97,6 +97,17 @@ module.exports.integral = function(n) {
   return n === Math.floor(n);
 }
 
+module.exports.is_pandigital = function(x, n) {
+  n = n === undefined ? 9 : n;
+  var digits = module.exports.range(1, n);
+  var a = typeof x === 'number' ? module.exports.n2a_decimal(x) : x.slice(0);
+  a.sort();
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] !== digits[i]) return false;
+  }
+  return true;
+};
+
 module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
 };

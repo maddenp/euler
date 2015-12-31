@@ -7,7 +7,7 @@ var pm = require('./pm');
 function pandigital_product(n, m, p) {
   if (pm.ndigits(n) + pm.ndigits(m) + pm.ndigits(p) !== 9) return false;
   var narray = (pm.n2a_decimal(n).concat(pm.n2a_decimal(m)).concat(pm.n2a_decimal(p)));
-  return pm.pandigital(narray);
+  return pm.is_pandigital(narray);
 }
 
 function pp_find(n_lo, n_hi, m_lo, m_hi, pp) {
