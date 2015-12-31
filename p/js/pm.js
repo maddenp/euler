@@ -174,6 +174,14 @@ module.exports.proper_divisors = function(n) {
   return pds;
 };
 
+module.exports.range = function(lo, hi) {
+  var a = [];
+  for (var i = lo; i <= hi; i++) {
+    a.push(i);
+  }
+  return a;
+}
+
 module.exports.readfile = function(f, alt) {
   try {
     var data = require('fs').readFileSync(f, 'utf8');
