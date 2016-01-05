@@ -13,7 +13,7 @@ for (var a = 1; a <= limit - 2; a++) {
   for (var b = a; b <= limit - a; b++) {
     var c = pm.hypotenuse(a, b);
     var perimeter = a + b + c;
-    if (pm.integral(perimeter) && perimeter <= limit) {
+    if (pm.is_integral(perimeter) && perimeter <= limit) {
       ++solutions[perimeter];
     }
   }
