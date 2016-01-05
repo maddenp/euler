@@ -206,6 +206,12 @@ module.exports.sum_of_proper_divisors = function(n) {
   return module.exports.array_sum(module.exports.proper_divisors(n));
 };
 
+module.exports.word_sum = function(name) {
+  return name.split('').reduce(function(sum, chr) {
+    return sum + chr.charCodeAt(0) - 64;
+  }, 0);
+}
+
 module.exports.writefile = function(f, data) {
   require('fs').writeFileSync(f, JSON.stringify(data), 'utf8');
 };
