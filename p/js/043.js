@@ -6,6 +6,8 @@ var pm = require('./pm');
 
 function test(a) {
   if (a[0] === 0) return false;
+  if (a[3] % 2 !== 0) return false;
+  if (a[5] % 5 !== 0) return false;
   var divisors = [2, 3, 5, 7, 11, 13, 17];
   for (var i = 7; i >= 1; i--) {
     if (pm.a2n(a.slice(i, i + 3)) % divisors[i - 1] !== 0) {
