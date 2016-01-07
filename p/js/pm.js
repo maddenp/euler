@@ -185,6 +185,12 @@ module.exports.proper_divisors = function(n) {
   return pds;
 };
 
+module.exports.quadratic_roots = function(a, b, c) {
+  var x0 = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+  var x1 = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+  return [x0, x1];
+}
+
 module.exports.range = function(lo, hi) {
   var a = [];
   for (var i = lo; i <= hi; i++) {
