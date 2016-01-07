@@ -37,11 +37,11 @@ module.exports.array_add = function(a1, a2) {
 
 module.exports.array_max = function(a) {
   return Math.max.apply(null, a);
-}
+};
 
 module.exports.array_min = function(a) {
   return Math.min.apply(null, a);
-}
+};
 
 module.exports.array_mult = function(a, n) {
   var carry = 0;
@@ -91,11 +91,11 @@ module.exports.factorial = function(n) {
 
 module.exports.hypotenuse = function(a, b) {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-}
+};
 
 module.exports.is_integral = function(n) {
   return n === Math.floor(n);
-}
+};
 
 module.exports.is_pandigital = function(x, n) {
   n = n === undefined ? 9 : n;
@@ -113,7 +113,7 @@ module.exports.is_prime = function(n) {
     if (n % i === 0) return false;
   }
   return true;
-}
+};
 
 module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
@@ -158,7 +158,7 @@ module.exports.permutations = function(n, a, fn) {
     }
     module.exports.permutations(n - 1, a, fn);
   }
-}
+};
 
 module.exports.primes_up_to = function(limit) {
   var primes = [false, false];
@@ -189,7 +189,7 @@ module.exports.quadratic_roots = function(a, b, c) {
   var x0 = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
   var x1 = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
   return [x0, x1];
-}
+};
 
 module.exports.range = function(lo, hi) {
   var a = [];
@@ -197,7 +197,7 @@ module.exports.range = function(lo, hi) {
     a.push(i);
   }
   return a;
-}
+};
 
 module.exports.readfile = function(f, alt) {
   try {
@@ -216,7 +216,7 @@ module.exports.word_sum = function(name) {
   return name.split('').reduce(function(sum, chr) {
     return sum + chr.charCodeAt(0) - 64;
   }, 0);
-}
+};
 
 module.exports.writefile = function(f, data) {
   require('fs').writeFileSync(f, JSON.stringify(data), 'utf8');
