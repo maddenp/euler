@@ -93,6 +93,11 @@ module.exports.hypotenuse = function(a, b) {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 };
 
+module.exports.is_geometric_number = function(a, b, c) {
+  var test = function(n) { return module.exports.is_integral(n) && n > 0; };
+  return module.exports.quadratic_roots(a, b, c).filter(test).length > 0;
+}
+
 module.exports.is_integral = function(n) {
   return n === Math.floor(n);
 };
@@ -108,12 +113,20 @@ module.exports.is_pandigital = function(x, n) {
   return true;
 };
 
+module.exports.is_pentagon_number = function(n) {
+  return module.exports.is_geometric_number(3, -1, -n *2);
+}
+
 module.exports.is_prime = function(n) {
   for (var i = 2; i <= Math.sqrt(n); i++) {
     if (n % i === 0) return false;
   }
   return true;
 };
+
+module.exports.is_triangle_number = function(n) {
+  return module.exports.is_geometric_number(1, 1, -n * 2);
+}
 
 module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
