@@ -93,6 +93,10 @@ module.exports.hypotenuse = function(a, b) {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 };
 
+module.exports.is_hexagon_number = function(n) {
+  return module.exports.is_geometric_number(2, -1, -n);
+}
+
 module.exports.is_geometric_number = function(a, b, c) {
   var test = function(n) { return module.exports.is_integral(n) && n > 0; };
   return module.exports.quadratic_roots(a, b, c).filter(test).length > 0;
