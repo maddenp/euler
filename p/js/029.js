@@ -4,22 +4,13 @@
 
 var pm = require('./pm');
 
-function arr2str(a) {
-  return (a.reduce(function(m, e) { return m + e; }, ''));
-}
-
-function exponentiate(base, exponent) {
-  var a = [base];
-  for (var i = 2; i <= exponent; i++) pm.array_mult(a, base);
-  return a;
-}
-
 var limit = 100;
 var ns = [];
 
 for (var a = 2; a <= limit; a++) {
+  var a_arr = pm.n2a(a);
   for (var b = 2; b <= limit; b++) {
-    ns.push(arr2str(exponentiate(a, b)));
+    ns.push(pm.a2n(pm.array_pow(a_arr, b)));
   }
 }
 

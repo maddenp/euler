@@ -44,28 +44,40 @@ module.exports.array_min = function(a) {
 };
 
 module.exports.array_mult = function(a, n) {
+  var p = a.slice(0);
   var carry = 0;
-  for (var i = a.length-1; i >= 0; i--) {
-    a[i] *= n;
+  var start = a.length - 1
+  for (var i = start; i >= 0; i--) {
+    p[i] *= n;
     if (carry !== 0) {
-      a[i] += carry;
+      p[i] += carry;
       carry = 0;
     }
-    if (a[i] > 9) {
+    if (p[i] > 9) {
       if (i === 0) {
-        while (a[0] >= 10) {
-          a.unshift(Math.floor(a[0] / 10));
-          a[1] %= 10;
+        while (p[0] >= 10) {
+          p.unshift(Math.floor(p[0] / 10));
+          p[1] %= 10;
         }
       } else {
-        carry = Math.floor(a[i] / 10);
-        a[i] %= 10;
+        carry = Math.floor(p[i] / 10);
+        p[i] %= 10;
       }
     }
   }
+  return p;
 };
 
-module.exports.array_product = function array_product(a) {
+module.exports.array_pow = function(a, exponent) {
+  var base = [1];
+  var n = module.exports.a2n(a);
+  for (var i = 0; i < exponent; i++) {
+    base = module.exports.array_mult(base, n);
+  }
+  return base;
+};
+
+module.exports.array_product = function(a) {
   return (a.reduce(function(m, e) { return m * e; }, 1));
 };
 
