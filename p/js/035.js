@@ -17,7 +17,7 @@ function rotations(n) {
 }
 
 var limit = 1000000;
-var primes = pm.primes_up_to(limit);
+var primes = pm.primes_map(limit);
 var nsolutions = 0;
 
 function number_is_prime(n) {

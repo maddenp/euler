@@ -200,7 +200,7 @@ module.exports.permutations = function(n, a, fn) {
   }
 };
 
-module.exports.primes_up_to = function(limit) {
+module.exports.primes_map = function(limit) {
   var primes = [false, false];
   for (var i = 2; i < limit; i++) {
     if (primes[i] === false) continue;

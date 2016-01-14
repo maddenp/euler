@@ -23,7 +23,7 @@ var tight_limit = pm.readfile(filename);
 var limit = tight_limit || guess_limit;
 
 var prime = function(limit) {
-  var primes = pm.primes_up_to(limit);
+  var primes = pm.primes_map(limit);
   return function(n) {
     return primes[n];
   };
