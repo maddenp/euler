@@ -15,6 +15,10 @@ function invalidate(p, primes) {
   }
 }
 
+var answers = [];
+
+// Wow, this is awful.
+
 for (var i = 0; i < primes.length; i++) {
   if (primes[i] === false) continue;
   var p = pm.uniques(pm.permarray(pm.n2a(primes[i])).map(pm.a2n), true);
@@ -24,16 +28,25 @@ for (var i = 0; i < primes.length; i++) {
   }
   p = p.filter(function(n) { return n >= lo && n <= hi; });
   p = p.filter(function(n) { return primes_map[n] === true; });
-  var pairs = [];
+  var x = {};
   for (var j = 0; j < p.length; j++) {
     for (var k = j + 1; k < p.length; k++) {
-      if (p[k] - p[j] === 3330) {
-        pairs.push([p[j], p[k]]);
+      var diff = p[k] - p[j];
+      if (!x[diff]) x[diff] = [];
+      x[diff].push([p[j], p[k]]); 
+    }
+  }
+  var sums = Object.keys(x);
+  for (var index in sums) {
+    var pairs = x[sums[index]];
+    if (pairs.length === 2) {
+      var elements = [pairs[0][0], pairs[0][1], pairs[1][0], pairs[1][1]];
+      var uniques = pm.uniques(elements, true);
+      if (uniques.length === 3) {
+        answers.push(uniques.join(''));
       }
     }
   }
-  if (pairs.length === 2) {
-    invalidate(p, primes);
-    console.log(pairs[0][0] + '' + pairs[0][1] + '' + pairs[1][1]);
-  }
 }
+
+console.log(pm.uniques(answers)[0]);
