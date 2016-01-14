@@ -5,7 +5,7 @@
 var pm = require('./pm');
 
 function truncatable(n, fn, prime) {
-  var a = pm.n2a_decimal(n);
+  var a = pm.n2a(n);
   while (a.length > 0) {
     if (! prime(pm.a2n(a))) return false;
     a[fn]();

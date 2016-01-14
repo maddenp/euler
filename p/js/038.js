@@ -5,9 +5,9 @@
 var pm = require('./pm');
 
 for (var result = 0, n = 1; n < 9999; n++) {
-  var a = pm.n2a_decimal(n);
+  var a = pm.n2a(n);
   for (var i = 2; a.length <= 9; i++) {
-    a = a.concat(pm.n2a_decimal(n * i));
+    a = a.concat(pm.n2a(n * i));
     if (a.length === 9 && pm.is_pandigital(a)) {
       result = pm.a2n(a);
     }

@@ -5,7 +5,7 @@
 var pm = require('./pm');
 
 function rotations(n) {
-  var a = pm.n2a_decimal(n), d = pm.ndigits(n), r = [];
+  var a = pm.n2a(n), d = pm.ndigits(n), r = [];
   for (var i = 0; i < d; i++) {
     var m = 0;
     for (var j = 0; j < d; j++) {

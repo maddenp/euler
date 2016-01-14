@@ -109,7 +109,7 @@ module.exports.is_integral = function(n) {
 module.exports.is_pandigital = function(x, n) {
   n = n === undefined ? 9 : n;
   var digits = module.exports.range(1, n);
-  var a = typeof x === 'number' ? module.exports.n2a_decimal(x) : x.slice(0);
+  var a = typeof x === 'number' ? module.exports.n2a(x) : x.slice(0);
   a.sort();
   for (var i = 0; i < a.length; i++) {
     if (a[i] !== digits[i]) return false;
@@ -142,6 +142,10 @@ module.exports.log = function(n) {
   return Math.log(n) / Math.log(10);
 };
 
+module.exports.n2a = function(n) {
+  return module.exports.n2a_common(n, 10);
+};
+
 module.exports.n2a_binary = function(n) {
   return module.exports.n2a_common(n, 2);
 };
@@ -153,10 +157,6 @@ module.exports.n2a_common = function(n, base) {
     n = Math.floor(n / base);
   }
   return a;
-};
-
-module.exports.n2a_decimal = function(n) {
-  return module.exports.n2a_common(n, 10);
 };
 
 module.exports.ndigits = function(n) {

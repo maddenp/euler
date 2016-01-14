@@ -5,7 +5,7 @@
 var pm = require('./pm');
 
 function digit(n, offset) {
-  var a = pm.n2a_decimal(n);
+  var a = pm.n2a(n);
   return a[a.length - offset - 1];
 }
 

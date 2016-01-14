@@ -22,7 +22,7 @@ function limit(exponent) {
 var matches = [];
 
 for (var n = 2; n < limit(exponent); n++) {
-  if (pm.array_sum(lift(pm.n2a_decimal(n), exponent)) === n) matches.push(n);
+  if (pm.array_sum(lift(pm.n2a(n), exponent)) === n) matches.push(n);
 }
 
 console.log(pm.array_sum(matches));
