@@ -200,6 +200,13 @@ module.exports.permutations = function(n, a, fn) {
   }
 };
 
+module.exports.permarray = function(a) {
+  var p = [];
+  var fn = function(x) { p.push(x.slice()); };
+  module.exports.permutations(a.length, a, fn);
+  return p;
+};
+
 module.exports.primes_map = function(limit) {
   var primes = [false, false];
   for (var i = 2; i < limit; i++) {
@@ -212,11 +219,12 @@ module.exports.primes_map = function(limit) {
   return primes;
 };
 
-module.exports.primes = function(lo, hi) {
+module.exports.primes = function(lo, hi, return_map) {
   var pm = module.exports.primes_map(hi);
   for (var i = lo, primes = []; i <= hi; i++) {
     if (pm[i]) primes.push(i);
   }
+  if (return_map) return [primes, pm];
   return primes;
 };
 
