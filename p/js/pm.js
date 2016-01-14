@@ -85,6 +85,11 @@ module.exports.array_sum = function(a) {
   return (a.reduce(function(m, e) { return m + e; }, 0));
 };
 
+module.exports.array_trunc = function(a, digits) {
+  if (a.length > digits) return a.slice(a.length - digits);
+  return a;
+};
+
 module.exports.bisearch = function(a, n) {
   var lo = 0, hi = a.length - 1;
   while (true) {
