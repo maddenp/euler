@@ -14,8 +14,6 @@ for (var a = 2; a <= limit; a++) {
   }
 }
 
-var sorted = ns.sort(function(n1, n2) { return n1 - n2; });
-
-var uniques = sorted.reduce(function(m, e) { return m[m.length - 1] === e ? m : m.concat([e]); }, []);
+var uniques = pm.uniques(ns, true);
 
 console.log(uniques.length);

@@ -24,13 +24,8 @@ function prime_factorization(n, primes_less_than_n) {
 var chain = [], count = 4, primes = [];
 
 for (var n = 2; chain.length < count; n++) {
-  var pf = prime_factorization(n, primes);
-  for (var i = 0, uniques = []; i < pf.length; i++) {
-    if (pf[i] !== uniques[uniques.length - 1]) {
-      uniques.push(pf[i]);
-    }
-  }
-  if (uniques.length === count) {
+  var unique_pfs = pm.uniques(prime_factorization(n, primes));
+  if (unique_pfs.length === count) {
     chain.push(n);
     continue;
   }

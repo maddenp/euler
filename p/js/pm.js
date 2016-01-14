@@ -247,6 +247,19 @@ module.exports.sum_of_proper_divisors = function(n) {
   return module.exports.array_sum(module.exports.proper_divisors(n));
 };
 
+module.exports.uniques = function(a, sort) {
+  if (sort === true) {
+    a = a.sort(function(e1, e2) { return e1 - e2; });
+  }
+  var u = [];
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] !== u[u.length - 1]) {
+      u.push(a[i]);
+    }
+  }
+  return u;
+};
+
 module.exports.word_sum = function(name) {
   return name.split('').reduce(function(sum, chr) {
     return sum + chr.charCodeAt(0) - 64;
