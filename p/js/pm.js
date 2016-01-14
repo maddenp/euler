@@ -212,6 +212,14 @@ module.exports.primes_map = function(limit) {
   return primes;
 };
 
+module.exports.primes = function(lo, hi) {
+  var pm = module.exports.primes_map(hi);
+  for (var i = lo, primes = []; i <= hi; i++) {
+    if (pm[i]) primes.push(i);
+  }
+  return primes;
+};
+
 module.exports.proper_divisors = function(n) {
   var pds = [1];
   for (var d = 2; d <= Math.sqrt(n); d++) {
