@@ -17,6 +17,14 @@ function invalidate(p, primes) {
 
 var answers = [];
 
+function filter1(n) {
+  return n >= lo && n <= hi;
+}
+
+function filter2(n) {
+  return primes_map[n] === true;
+}
+
 // Wow, this is awful.
 
 for (var i = 0; i < primes.length; i++) {
@@ -26,8 +34,7 @@ for (var i = 0; i < primes.length; i++) {
     invalidate(p, primes);
     continue;
   }
-  p = p.filter(function(n) { return n >= lo && n <= hi; });
-  p = p.filter(function(n) { return primes_map[n] === true; });
+  p = p.filter(filter1).filter(filter2);
   var x = {};
   for (var j = 0; j < p.length; j++) {
     for (var k = j + 1; k < p.length; k++) {
