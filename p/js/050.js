@@ -4,25 +4,39 @@
 
 var pm = require('./pm');
 
-var limit = 1000000, max_head = -1, max_tail = -1, primes = pm.primes(1, limit);
+var limit = 1000000;
+var max_chain_len = 0;
+var max_prime = 0;
+var sums = [];
 
-for (var goal = primes.length - 1; goal >=0; goal--) {
-  var head = goal - 1;
-  var sum = primes[head];
-  for (var tail = head - 1; tail >= 0; tail--) {
-    if (sum + primes[tail] > primes[goal]) {
-      sum = sum - primes[head] + primes[tail];
-      head--;
-    } else {
-      sum += primes[tail];
+var primes_and_is_prime = pm.primes(1, limit, true);
+var primes = primes_and_is_prime[0];
+var is_prime = primes_and_is_prime[1];
+
+for (var i = 0, sum = 0; i < primes.length; i++) {
+  sum += primes[i];
+  sums[i] = sum;
+}
+
+outer: for (var i = 0; i < sums.length - 1; i++) {
+  if (i > 0) {
+    for (var k = sums.length - 1; k >= i; k--) {
+      sums[k] -= sums[i - 1];
     }
-    if (sum === primes[goal]) {
-      if (head - tail > max_head - max_tail) {
-        max_head = head;
-        max_tail = tail;
+  }
+  for (var j = sums.length - 1; j >= i; j--) {
+    var chain_len = j - i;
+    if (chain_len <= max_chain_len) {
+      continue outer;
+    }
+    if (sums[j] <= limit && is_prime[sums[j]]) {
+      if (chain_len > max_chain_len) {
+        max_chain_len = chain_len;
+        max_prime = sums[j];
       }
+      continue outer;
     }
   }
 }
 
-console.log(pm.array_sum(primes.slice(max_tail, max_head + 1)));
+console.log(max_prime);
