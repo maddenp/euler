@@ -207,6 +207,23 @@ module.exports.permarray = function(a) {
   return p;
 };
 
+module.exports.prime_factorization = function(n, primes_less_than_n) {
+  var factors = [];
+  for (var i = 0; i < primes_less_than_n.length; i++) {
+    var p = primes_less_than_n[i];
+    while (n % p === 0) {
+      factors.push(p);
+      n /= p;
+    }
+    if (n === 1) break;
+  }
+  if (factors.length === 0) {
+    primes_less_than_n.push(n);
+    factors.push(n);
+  }
+  return factors;
+};
+
 module.exports.primes_map = function(limit) {
   var primes = [false, false];
   for (var i = 2; i < limit; i++) {
