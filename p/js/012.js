@@ -2,8 +2,17 @@
 
 "use strict";
 
-var i, j, n, s;
-for (s = 0, n = 1, i = 2; s < 250; n += i, i++) {
-  for (s = 0, j = 1; j <= Math.sqrt(n); j++) if (n % j === 0) s++;
+var i, j, sum = 0, triangle_number = 1;
+
+for (i = 2; sum <= 250; i++) {
+  sum = 0;
+  var increment = triangle_number % 2 === 0 ? 1 : 2;
+  for (j = 1; j <= Math.sqrt(triangle_number); j += increment) {
+    if (triangle_number % j === 0) {
+      ++sum;
+    }
+  }
+  triangle_number += i;
 }
-console.log(n - i + 1);
+
+console.log(triangle_number - i + 1);
