@@ -2,17 +2,35 @@
 
 "use strict";
 
-var sum = 0, triangle_number = 1;
+/*
+  The nth triangle number is the sum of the first n natural numbers, a sum
+  given by the formula n * (n + 1) / 2. As pointed out by bartmeijer in the
+  012 posts: "As n and n+1 have no factors in common (except for the number
+  1) one can multiply the factor counts in n/2 and n+1, or n and (n+1)/2 as
+  the case may be, to arrive at the factor count of the nth triangle number.
+  This makes things a lot faster."
+*/
 
-for (var i = 2; sum <= 250; i++) {
-  sum = 0;
-  var step = triangle_number % 2 === 0 ? 1 : 2;
-  for (var j = 1; j <= Math.sqrt(triangle_number); j += step) {
-    if (triangle_number % j === 0) {
-      ++sum;
-    }
+function ndivisors(n, divisors) {
+  var sum = 0;
+  for (var i = 1; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) sum += 2;
+    if (i * i === n) --sum;
   }
-  triangle_number += i;
+  return sum;
 }
 
-console.log(triangle_number - i + 1);
+var d, divisors = [], n = 1;
+
+while (true) {
+  if (n % 2 === 0) {
+    d = ndivisors(n / 2, divisors) * ndivisors(n + 1, divisors);
+  } else {
+    d = ndivisors(n, divisors) * ndivisors((n + 1) / 2, divisors);
+  }
+  if (d > 500) {
+    console.log((n * (n + 1)) / 2);
+    break;
+  }
+  ++n;
+}
