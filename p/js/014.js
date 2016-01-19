@@ -3,18 +3,13 @@
 "use strict";
 
 function chainlen(n) {
-  if (known[n]) return known[n];
-  for (var m = n, s = 1; m > 1; s++) {
-    m = (m & 1 === 1) ? (3 * m + 1) : (m / 2);
-    if (known[m]) {
-      s += known[m];
-      break;
-    }
+  for (var s = 1; n > 1; s++) {
+    n = (n & 1 === 1) ? (3 * n + 1) : (n / 2);
   }
-  return known[n] = s;
+  return s;
 }
 
-var known = [], maxlen = 1, maxn = 1, n;
+var maxlen = 1, maxn = 1, n;
 
 for (n = 1; n < 1000000; n++) {
   var c = chainlen(n);
