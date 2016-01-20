@@ -2,12 +2,11 @@
 
 "use strict";
 
+var pm = require('./pm');
+
 function is_composite(n) {
   if (n < 2) return true;
-  for (var i = 2; i <= Math.floor(Math.sqrt(n)); i++) {
-    if (n % i === 0) return true;
-  }
-  return false;
+  return !pm.is_prime(n);
 }
 
 var max = 0;
