@@ -4,7 +4,7 @@
 
 var pm = require('./pm');
 
-function is_composite(n) {
+function is_non_prime(n) {
   if (n < 2) return true;
   return !pm.is_prime(n);
 }
@@ -17,7 +17,7 @@ for (var a = -999; a < 1000; a++) {
     var count = 0;
     var n = 0;
     while (true) {
-      if (is_composite(n * (n + a) + b)) break;
+      if (is_non_prime(n * (n + a) + b)) break;
       ++n;
       ++count;
     }
