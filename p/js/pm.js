@@ -139,7 +139,7 @@ module.exports.is_pentagon_number = function(n) {
 };
 
 module.exports.is_prime = function(n) {
-  if (n % 2 === 0) return false;
+  if (n & 1 === 0) return false;
   for (var i = 3; i <= Math.sqrt(n); i += 1) {
     if (n % i === 0) return false;
   }
