@@ -12,11 +12,10 @@ function chainlen(n) {
   return (known[n] = s);
 }
 
-var known = [], maxlen = 1, maxn = 1, n;
+var c, known = [], maxlen = 1, maxn = 1, n;
 
 for (n = 1; n < 1000000; n++) {
-  var c = chainlen(n);
-  if (c > maxlen) {
+  if ((c = chainlen(n)) > maxlen) {
     maxlen = c;
     maxn = n;
   }
