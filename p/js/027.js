@@ -14,34 +14,36 @@ var product = 0;
 
 for (var a = 0; a < 1000; a++) {
   for (var b = -999; b < 1000; b++) {
-    var active_n = true;
-    var active_p = true;
-    var count_n = 0;
-    var count_p = 0;
+    var active_an = true;
+    var active_ap = true;
+    var count_an = 0;
+    var count_ap = 0;
     var n = 0;
-    while (active_n || active_p) {
-      if (active_n) {
-        if (is_non_prime(n * (n - a) + b)) {
-          active_n = false;
+    while (active_an || active_ap) {
+      var m = n * n;
+      var o = a * n;
+      if (active_an) {
+        if (is_non_prime(m - o + b)) {
+          active_an = false;
         } else {
-          ++count_n;
+          ++count_an;
         }
       }
-      if (active_p) {
-        if (is_non_prime(n * (n + a) + b)) {
-          active_p = false;
+      if (active_ap) {
+        if (is_non_prime(m + o + b)) {
+          active_ap = false;
         } else {
-          ++count_p;
+          ++count_ap;
         }
       }
       ++n;
     }
-    if (count_n > max) {
-      max = count_n;
+    if (count_an > max) {
+      max = count_an;
       product = -a * b;
     }
-    if (count_p > max) {
-      max = count_p;
+    if (count_ap > max) {
+      max = count_ap;
       product = +a * b;
     }
   }
