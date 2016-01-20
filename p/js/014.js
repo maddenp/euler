@@ -6,12 +6,10 @@ function chainlen(n) {
   for (var m = n, s = 1; m > 1; s++) {
     m = (m & 1 === 1) ? (3 * m + 1) : (m >>> 1);
     if (known[m]) {
-      s += known[m]
-      break;
+      return (known[n] = s + known[m]);
     }
   }
-  known[n] = s;
-  return s;
+  return (known[n] = s);
 }
 
 var known = [], maxlen = 1, maxn = 1, n;
