@@ -10,7 +10,8 @@ var ns = [];
 for (var a = 2; a <= limit; a++) {
   var a_arr = pm.n2a(a);
   for (var b = 2; b <= limit; b++) {
-    ns.push(pm.a2n(pm.array_pow(a_arr, b)));
+    a_arr = pm.array_mult(a_arr, a);
+    ns.push(pm.a2s(a_arr));
   }
 }
 
