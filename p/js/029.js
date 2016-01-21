@@ -5,16 +5,14 @@
 var pm = require('./pm');
 
 var limit = 100;
-var ns = [];
+var ns = {};
 
 for (var a = 2; a <= limit; a++) {
   var a_arr = pm.n2a(a);
   for (var b = 2; b <= limit; b++) {
     a_arr = pm.array_mult(a_arr, a);
-    ns.push(pm.a2s(a_arr));
+    ns[pm.a2s(a_arr)] = true;
   }
 }
 
-var uniques = pm.uniques(ns, true);
-
-console.log(uniques.length);
+console.log(Object.keys(ns).length)
