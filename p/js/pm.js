@@ -35,6 +35,24 @@ module.exports.array_add = function(a1, a2) {
   return a3;
 };
 
+module.exports.array_inc = function(a, increment) {
+  var n = increment || 1;
+  if (n > 9) {
+    throw "array_inc: increment argument must be < 10";
+  }
+  var changed = 0;
+  for (var i = a.length - 1; i >=0; i--) {
+    a[i] += n;
+    changed += n;
+    if (a[i] < 10) { n = 0; } else { a[i] -= 10; }
+  }
+  if (n === 1) {
+    a.unshift(n);
+    ++changed;
+  }
+  return changed;
+};
+
 module.exports.array_max = function(a) {
   return Math.max.apply(null, a);
 };

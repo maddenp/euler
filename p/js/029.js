@@ -15,4 +15,4 @@ for (var a = 2; a <= limit; a++) {
   }
 }
 
-console.log(Object.keys(ns).length)
+console.log(Object.keys(ns).length);

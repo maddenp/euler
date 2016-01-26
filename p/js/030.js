@@ -4,21 +4,6 @@
 
 var pm = require('./pm');
 
-function array_inc(a) {
-  var changed = 0;
-  var n = 1;
-  for (var i = a.length - 1; i >=0; i--) {
-    a[i] += n;
-    changed += n;
-    if (a[i] < 10) { n = 0 } else { a[i] -= 10; }
-  }
-  if (n === 1) {
-    a.unshift(n);
-    ++changed;
-  }
-  return changed;
-}
-
 function find_limit(exponent) {
   var c = Math.pow(9, exponent), max_int = 9, max_sum = c;
   while (max_sum >= max_int) {
@@ -29,8 +14,9 @@ function find_limit(exponent) {
 }
 
 function raise(a, exponent, changed, raised) {
+  var offset;
   for (var i = raised.length - 1; i >= 0; i--) {
-    var offset = a.length > raised.length ? 1 : 0;
+    offset = a.length > raised.length ? 1 : 0;
     if (changed > 0) {
       raised[i] = Math.pow(a[i + offset], exponent);
     }
@@ -53,7 +39,7 @@ for (var n = start; n < limit; n++) {
   if (digit_sum === n) {
     sum += n;
   }
-  var changed = array_inc(a);
+  var changed = pm.array_inc(a);
   raise(a, exponent, changed, raised);
 }
 
