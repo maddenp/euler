@@ -29,8 +29,15 @@ function number_is_prime(n) {
 }
 
 for (var i = 0; i < primes.length; i++) {
-  if (rotations(primes[i]).every(number_is_prime)) {
-    ++nsolutions;
+  if (primes_map[primes[i]]) {
+    var r = rotations(primes[i]);
+    if (r.every(number_is_prime)) {
+      ++nsolutions;
+    } else {
+      for (var j = 0; j < r.length; j++) {
+        primes_map[r[j]] = false;
+      }
+    }
   }
 }
 
