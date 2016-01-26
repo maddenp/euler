@@ -4,6 +4,10 @@
 
 var pm = require('./pm');
 
+function number_is_prime(n) {
+  return primes_map[n];
+}
+
 function rotations(n) {
   var a = pm.n2a(n), d = pm.ndigits(n), r = [];
   for (var i = 0; i < d; i++) {
@@ -17,16 +21,10 @@ function rotations(n) {
 }
 
 var limit = 1000000;
-var primes = pm.primes_map(limit);
 var nsolutions = 0;
-
-var primes_and_primes_map = pm.primes(1, 999999, true);
+var primes_and_primes_map = pm.primes(1, limit, true);
 var primes = primes_and_primes_map[0];
 var primes_map = primes_and_primes_map[1];
-
-function number_is_prime(n) {
-  return primes_map[n];
-}
 
 for (var i = 0; i < primes.length; i++) {
   if (primes_map[primes[i]]) {
