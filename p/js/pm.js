@@ -35,12 +35,10 @@ module.exports.array_add = function(a1, a2) {
   return a3;
 };
 
-module.exports.array_inc = function(a, increment) {
-  var n = increment || 1;
-  if (n > 9) {
-    throw "array_inc: increment argument must be < 10";
-  }
+module.exports.array_inc = function(a) {
+  // NOTE: This function mutates array 'a'.
   var changed = 0;
+  var n = 1;
   for (var i = a.length - 1; i >=0; i--) {
     a[i] += n;
     changed += n;
