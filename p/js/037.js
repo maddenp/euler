@@ -4,20 +4,15 @@
 
 var pm = require('./pm');
 
-function truncatable(n, fn, primes_map) {
-  var a = pm.n2a(n);
-  while (a.length > 0) {
-    if (! primes_map[pm.a2n(a)]) return false;
-    a[fn]();
+function truncatable_both_ways(n, primes_map) {
+  var m = n;
+  while (n > 0) {
+    if (!primes_map[n] || !primes_map[m]) return false;
+    n = Math.floor(n / 10);
+    m = m % Math.pow(10, Math.floor(Math.log10(m)));
   }
   return true;
 }
-
-function truncatable_both_ways(n, primes_map) {
-  return truncatable(n, 'shift', primes_map) &&
-    truncatable(n, 'pop', primes_map);
-}
-
 var filename = '037.dat';
 var guess_limit = 1000000;
 var tight_limit = pm.readfile(filename);
@@ -37,7 +32,7 @@ for (var i = 0; i < primes.length; i++) {
   }
 }
 
-if (! tight_limit) {
+if (!tight_limit) {
   pm.writefile(filename, n + 1);
 }
 
