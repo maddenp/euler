@@ -32,9 +32,11 @@ var prime = function(limit) {
 var truncatable_primes = [];
 
 for (var n = 11; n < limit; n += 2) {
-  if (truncatable_both_ways(n, prime)) {
-    truncatable_primes.push(n);
-    if (truncatable_primes.length === 11) break;
+  if (prime(n)) {
+    if (truncatable_both_ways(n, prime)) {
+      truncatable_primes.push(n);
+      if (truncatable_primes.length === 11) break;
+    }
   }
 }
 
