@@ -241,7 +241,7 @@ module.exports.prime_factorization = function(n, primes_less_than_n) {
 };
 
 module.exports.primes_map = function(limit) {
-  var primes = [];
+  var primes = {};
   for (var i = 2; i < limit; i++) {
     if (primes[i] === false) continue;
     primes[i] = true;
