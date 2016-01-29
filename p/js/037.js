@@ -13,15 +13,11 @@ function truncatable_both_ways(n, primes_map) {
   }
   return true;
 }
-var filename = '037.dat';
-var guess_limit = 1000000;
-var tight_limit = pm.readfile(filename);
-var limit = tight_limit || guess_limit;
 
+var limit = 1000000;
 var primes_and_primes_map = pm.primes(11, limit, true);
 var primes = primes_and_primes_map[0];
 var primes_map = primes_and_primes_map[1];
-
 var truncatable_primes = [];
 
 for (var i = 0; i < primes.length; i++) {
@@ -30,10 +26,6 @@ for (var i = 0; i < primes.length; i++) {
     truncatable_primes.push(n);
     if (truncatable_primes.length === 11) break;
   }
-}
-
-if (!tight_limit) {
-  pm.writefile(filename, n + 1);
 }
 
 console.log(pm.array_sum(truncatable_primes));
