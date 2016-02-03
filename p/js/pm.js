@@ -131,8 +131,17 @@ module.exports.is_hexagon_number = function(n) {
 };
 
 module.exports.is_geometric_number = function(a, b, c) {
-  var test = function(n) { return module.exports.is_integral(n) && n > 0; };
-  return module.exports.quadratic_roots(a, b, c).filter(test).length > 0;
+  var test = function(n) {
+    return n > 0 && module.exports.is_integral(n);
+  };
+  var roots = module.exports.quadratic_roots(a, b, c);
+  for (var i = 0; i < 2; i++) {
+    var root = roots[i];
+    if (root > 0 && root === Math.floor(root)) {
+      return true;
+    }
+  }
+  return false;
 };
 
 module.exports.is_integral = function(n) {
