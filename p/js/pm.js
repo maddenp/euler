@@ -168,19 +168,6 @@ module.exports.is_power_of = function(n, b) {
   return x === Math.floor(x);
 };
 
-module.exports.ordered_insert = function(a, n) {
-  var b = [];
-  for (var i = 0; i < a.length; i++) {
-    if (n && a[i] >= n) {
-      if (a[i] > n) b.push(n);
-      n = false;
-    }
-    b.push(a[i]);
-  }
-  if (n) b.push(n);
-  return b;
-};
-
 module.exports.is_prime = function(n) {
   if ((n & 1) === 0) return false;
   for (var i = 3; i <= Math.sqrt(n); i += 1) {
@@ -221,6 +208,30 @@ module.exports.n2a_common = function(n, base) {
 
 module.exports.ndigits = function(n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
+};
+
+module.exports.ordered_insert = function(a, n) {
+  var b = [];
+  for (var i = 0; i < a.length; i++) {
+    if (n && a[i] >= n) {
+      if (a[i] > n) b.push(n);
+      n = false;
+    }
+    b.push(a[i]);
+  }
+  if (n) b.push(n);
+  return b;
+};
+
+module.exports.ordered_insert_in_place = function(a, n) {
+  if (a.length === 0) {
+    a.push(n);
+  } else {
+    for (var i = 0; i < a.length && a[i] <= n; i++) {
+      if (a[i] === n) return;
+    }
+    a.splice(i, 0, n);
+  }
 };
 
 module.exports.permutations = function(n, a, fn) {
