@@ -3,19 +3,18 @@
 "use strict";
 
 function prime_factors(n, primes, factors) {
-  var x = false;
+  var count = 1, factor = false;
   for (var i = Math.floor(Math.sqrt(n)); i >= 0; i--) {
     if (primes[i] && n % i === 0) {
-      x = i;
+      factor = i;
       break;
     }
   }
-  if (x) {
+  if (factor) {
     var m = n;
-    while (m % x === 0) m /= x;
-    var count = 1 + (m === 1 ? 0 : factors[m]);
+    while (m % factor === 0) m /= factor;
+    count += m === 1 ? 0 : factors[m];
   } else {
-    var count = 1;
     primes[n] = true;
   }
   factors[n] = count;
