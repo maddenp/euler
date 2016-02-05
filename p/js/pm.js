@@ -163,6 +163,11 @@ module.exports.is_pentagon_number = function(n) {
   return module.exports.is_geometric_number(3, -1, -n *2);
 };
 
+module.exports.is_power_of = function(n, b) {
+  var x = Math.log(n) / Math.log(b);
+  return x === Math.floor(x);
+};
+
 module.exports.is_prime = function(n) {
   if ((n & 1) === 0) return false;
   for (var i = 3; i <= Math.sqrt(n); i += 1) {
