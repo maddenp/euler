@@ -20,7 +20,7 @@ var a = pm.range(0, 9);
 var answers = [];
 
 pm.permutations(a.length, a, function(x) {
-  if (test(x)) answers.push(pm.a2n(x))
+  if (test(x)) answers.push(pm.a2n(x));
 });
 
 console.log(pm.array_sum(answers));

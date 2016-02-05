@@ -22,7 +22,7 @@ function prime_factors(n, primes, factors) {
   }
   factors[n] = count;
   return count;
-};
+}
 
 var chain_len = 0, factors = {}, goal = 4, primes = [];
 
