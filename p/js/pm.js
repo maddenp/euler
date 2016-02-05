@@ -180,7 +180,7 @@ module.exports.is_triangle_number = function(n) {
   return module.exports.is_geometric_number(1, 1, -n * 2);
 };
 
-module.exports.log = function(n) {
+module.exports.log10 = function(n) {
   return Math.log(n) / Math.log(10);
 };
 
