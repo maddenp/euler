@@ -5,14 +5,16 @@
 var pm = require('./pm');
 
 function ordered_insert(a, n) {
-  if (a.length === 0) {
-    a.push(n);
-  } else {
-    for (var i = 0; i < a.length && a[i] <= n; i++) {
-      if (a[i] === n) return;
+  var b = [];
+  for (var i = 0; i < a.length; i++) {
+    if (n && a[i] >= n) {
+      if (a[i] > n) b.push(n);
+      n = false;
     }
-    a.splice(i, 0, n);
+    b.push(a[i]);
   }
+  if (n) b.push(n);
+  return b;
 }
 
 function prime_factors(n, primes, factors) {
@@ -25,8 +27,7 @@ function prime_factors(n, primes, factors) {
   }
   var f = [];
   if (y > 1) {
-    f = factors[n / y].slice();
-    ordered_insert(f, y);
+    f = ordered_insert(factors[n / y], y);
   }
   factors[n] = f;
   if (f.length === 0) {
