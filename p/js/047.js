@@ -3,13 +3,16 @@
 "use strict";
 
 function prime_factors(n, primes, factors) {
-  var count = 1, factor = false;
-  for (var i = Math.floor(Math.sqrt(n)); i >= 0; i--) {
+  var count = 1, factor = false, i = Math.floor(Math.sqrt(n));
+  if (i % 2 === 0) --i;
+  while (i > 2) {
     if (primes[i] && n % i === 0) {
       factor = i;
       break;
     }
+    i -= 2;
   }
+  if (!factor && n !== 2 && n % 2 === 0) factor = 2;
   if (factor) {
     var m = n;
     while (m % factor === 0) m /= factor;
