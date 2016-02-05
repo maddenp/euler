@@ -2,8 +2,6 @@
 
 "use strict";
 
-var pm = require('./pm');
-
 function ordered_insert(a, n) {
   var b = [];
   for (var i = 0; i < a.length; i++) {
