@@ -168,6 +168,19 @@ module.exports.is_power_of = function(n, b) {
   return x === Math.floor(x);
 };
 
+module.exports.ordered_insert = function(a, n) {
+  var b = [];
+  for (var i = 0; i < a.length; i++) {
+    if (n && a[i] >= n) {
+      if (a[i] > n) b.push(n);
+      n = false;
+    }
+    b.push(a[i]);
+  }
+  if (n) b.push(n);
+  return b;
+};
+
 module.exports.is_prime = function(n) {
   if ((n & 1) === 0) return false;
   for (var i = 3; i <= Math.sqrt(n); i += 1) {
