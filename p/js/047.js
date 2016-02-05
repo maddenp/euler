@@ -18,22 +18,15 @@ function ordered_insert(a, n) {
 }
 
 function prime_factors(n, primes, factors) {
-  var y = 1;
-  for (var i = Math.floor(Math.sqrt(n)); i >= 0; i--) {
+  var lpf = false;
+  for (var i = Math.floor(Math.sqrt(n)); !lpf && i >= 0; i--) {
     if (primes[i] && n % i === 0) {
-      y = i;
-      break;
+      lpf = i;
     }
   }
-  var f = [];
-  if (y > 1) {
-    f = ordered_insert(factors[n / y], y);
-  }
+  var f = lpf ? ordered_insert(factors[n / lpf], lpf) : [n];
+  if (!lpf) primes[n] = true;
   factors[n] = f;
-  if (f.length === 0) {
-    primes[n] = true;
-    factors[n] = [n];
-  }
   return factors[n];
 };
 
