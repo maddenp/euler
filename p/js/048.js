@@ -6,15 +6,16 @@ var pm = require('./pm');
 
 function low_order_pow(a, exponent, digits) {
   var base = [1];
-  var n = pm.a2n(a);
   for (var i = 0; i < exponent; i++) {
-    base = pm.array_trunc(pm.array_mult(base, n), 10);
+    base = pm.array_trunc(pm.array_mult(base, exponent), 10);
   }
   return base;
 }
 
-for (var i = 1, sum = [0]; i <= 1000; i++) {
-  sum = pm.array_trunc(pm.array_add(sum, low_order_pow(pm.n2a(i), i, 10)), 10);
+var a =[1];
+for (var n = 1, sum = [0]; n <= 1000; n++) {
+  sum = pm.array_add(sum, low_order_pow(a, n, 10));
+  pm.array_inc(a);
 }
 
-console.log(pm.a2n(sum));
+console.log(pm.a2n(pm.array_trunc(sum, 10)));
