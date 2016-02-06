@@ -4,11 +4,15 @@
 
 var pm = require('./pm');
 
-for (var n = 1, sum = [0], even = false; n <= 1000; n++) {
+var even = false;
+var sum = [0];
+
+for (var n = 1; n <= 1000; n++) {
   var product = even ? [1] : [n];
   var limit = even ? n / 2 : (n - 1) / 2;
+  var multiplier = n * n;
   for (var i = 0; i < limit; i++) {
-    product = pm.array_trunc(pm.array_mult(product, n * n), 10);
+    product = pm.array_trunc(pm.array_mult(product, multiplier), 10);
   }
   sum = pm.array_add(sum, product);
   even = !even;
