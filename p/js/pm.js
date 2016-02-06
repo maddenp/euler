@@ -224,6 +224,7 @@ module.exports.ordered_insert = function(a, n) {
 };
 
 module.exports.ordered_insert_in_place = function(a, n) {
+  // NOTE: This function mutates array 'a'.
   if (a.length === 0) {
     a.push(n);
   } else {
