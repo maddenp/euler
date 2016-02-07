@@ -35,6 +35,36 @@ module.exports.array_add = function(a1, a2) {
   return a3;
 };
 
+module.exports.array_exp = function(b, n) {
+  var a = [1];
+  while (n > 0) {
+    var b_int = module.exports.a2n(b);
+    if ((n & 1) === 0) {
+      b = module.exports.array_mult(b, b_int);
+      n /= 2;
+    } else {
+      a = module.exports.array_mult(a, b_int);
+      n -= 1;
+    }
+  }
+  return a;
+};
+
+module.exports.array_exp_trunc = function(b, n, max) {
+  var a = [1];
+  while (n > 0) {
+    var b_int = module.exports.a2n(b);
+    if ((n & 1) === 0) {
+      b = module.exports.array_trunc(module.exports.array_mult(b, b_int), max);
+      n /= 2;
+    } else {
+      a = module.exports.array_trunc(module.exports.array_mult(a, b_int), max);
+      n -= 1;
+    }
+  }
+  return a;
+};
+
 module.exports.array_inc = function(a) {
   // NOTE: This function mutates array 'a'.
   var changed = 0;
