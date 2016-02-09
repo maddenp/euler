@@ -15,8 +15,9 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
   for (var zeroes = 0; zeroes < prime.length; zeroes++) {
     mask.push(0);
   }
-  for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
+  mask_loop: for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
     pm.array_inc(mask, 2);
+    var composites = 0;
     var tweaked = prime.slice();
     var generated_primes = [];
     digit_loop: for (var digit = 0; digit < 10; digit++) {
@@ -34,6 +35,11 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
         if (generated_primes.length === goal) {
           console.log(pm.array_min(generated_primes));
           break prime_loop;
+        }
+      } else {
+        ++composites;
+        if (composites > (10 - goal)) {
+          continue mask_loop;
         }
       }
     }
