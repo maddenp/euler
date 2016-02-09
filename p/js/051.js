@@ -17,8 +17,8 @@ out: for (var primes_idx = 0; primes_idx < primes.length; primes_idx++) {
     mask.push(0);
   }
   for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
-    var tweaked = prime.slice();
     pm.array_inc(mask, 2);
+    var tweaked = prime.slice();
     var generated_primes = [];
     for (var replacement = 0; replacement < 10; replacement++) {
       for (var position = 0; position < prime.length; position++) {
