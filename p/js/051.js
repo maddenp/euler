@@ -19,7 +19,6 @@ out: for (var i = 0; i < primes.length; i++) {
     b.push(0);
   }
   for (var j = 1; j < Math.pow(2, a.length) - 1; j++) {
-    var count = 0;
     var c = a.slice();
     pm.array_inc(b, 2);
     var candidates = [];
@@ -33,8 +32,7 @@ out: for (var i = 0; i < primes.length; i++) {
       var x = pm.a2n(c);
       if (is_prime[x]) {
         candidates.push(x);
-        ++count;
-        if (count === goal) {
+        if (candidates.length === goal) {
           console.log(pm.array_min(candidates));
           break out;
         }
