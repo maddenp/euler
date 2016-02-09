@@ -13,10 +13,10 @@ var is_prime = primes_and_is_prime[1];
 out: for (var primes_idx = 0; primes_idx < primes.length; primes_idx++) {
   var prime = pm.n2a(primes[primes_idx]);
   var mask = [];
-  for (var mask_count = 0; mask_count < prime.length; mask_count++) {
+  for (var zeroes = 0; zeroes < prime.length; zeroes++) {
     mask.push(0);
   }
-  for (var mask_idx = 1; mask_idx < Math.pow(2, prime.length) - 1; mask_idx++) {
+  for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
     var tweaked = prime.slice();
     pm.array_inc(mask, 2);
     var generated_primes = [];
@@ -27,9 +27,9 @@ out: for (var primes_idx = 0; primes_idx < primes.length; primes_idx++) {
         }
       }
       if (tweaked[0] === 0) continue;
-      var x = pm.a2n(tweaked);
-      if (is_prime[x]) {
-        generated_primes.push(x);
+      var candidate = pm.a2n(tweaked);
+      if (is_prime[candidate]) {
+        generated_primes.push(candidate);
         if (generated_primes.length === goal) {
           console.log(pm.array_min(generated_primes));
           break out;
