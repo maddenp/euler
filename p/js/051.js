@@ -23,11 +23,11 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
     digit_loop: for (var digit = 0; digit < 10; digit++) {
       for (var position = 0; position < prime.length; position++) {
         if (mask[position]) {
+          if (position === 0 && digit === 0) {
+            continue digit_loop;
+          }
           tweaked[position] = digit;
         }
-      }
-      if (tweaked[0] === 0) {
-        continue;
       }
       var candidate = pm.a2n(tweaked);
       if (is_prime[candidate]) {
