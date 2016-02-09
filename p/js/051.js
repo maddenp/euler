@@ -5,8 +5,7 @@
 var pm = require('./pm');
 
 var goal = 8;
-var limit = 1000000;
-var primes_and_is_prime = pm.primes(1, limit, true);
+var primes_and_is_prime = pm.primes(1, 1000000, true);
 var primes = primes_and_is_prime[0];
 var is_prime = primes_and_is_prime[1];
 
