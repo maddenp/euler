@@ -65,14 +65,15 @@ module.exports.array_exp_trunc = function(b, n, max) {
   return a;
 };
 
-module.exports.array_inc = function(a) {
+module.exports.array_inc = function(a, base) {
   // NOTE: This function mutates array 'a'.
+  base = base || 10;
   var changed = 0;
   var n = 1;
   for (var i = a.length - 1; i >=0; i--) {
     a[i] += n;
     changed += n;
-    if (a[i] < 10) { n = 0; } else { a[i] -= 10; }
+    if (a[i] < base) { n = 0; } else { a[i] -= base; }
   }
   if (n === 1) {
     a.unshift(n);
