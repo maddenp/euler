@@ -44,8 +44,8 @@ for (var num = 10; num < 100; num++) {
   }
 }
 
-var prod_num = pm.array_product(results.map(function(r) { return r.num; }));
-var prod_den = pm.array_product(results.map(function(r) { return r.den; }));
+var prod_num = pm.array_product(results.map(function (r) { return r.num; }));
+var prod_den = pm.array_product(results.map(function (r) { return r.den; }));
 var prod_ratio = new Ratio(prod_num, prod_den);
 var prod_ratio_lowest_form = lowest_form(prod_ratio);
 console.log(prod_ratio_lowest_form.den);

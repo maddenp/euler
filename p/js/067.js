@@ -6,7 +6,7 @@ var pm = require('./pm');
 
 var pyramid = pm.readfile('067.dat');
 
-var Tree = function(pyramid, index, level, parent) {
+var Tree = function (pyramid, index, level, parent) {
   var lindex = level + index + 0;
   var rindex = level + index + 1;
   if (pyramid[lindex]) {

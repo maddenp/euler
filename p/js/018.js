@@ -21,7 +21,7 @@ var pyramid =
    4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23
 ];
 
-var Tree = function(pyramid, index, level, parent) {
+var Tree = function (pyramid, index, level, parent) {
   var lindex = level + index + 0;
   var rindex = level + index + 1;
   if (pyramid[lindex]) {

@@ -2,7 +2,7 @@
 
 "use strict";
 
-var double_array = function(a) {
+var double_array = function (a) {
   var carry = false;
   for (var i = a.length-1; i >= 0; i--) {
     a[i] *= 2;
@@ -24,4 +24,4 @@ var double_array = function(a) {
 var a = [1];
 for (var i = 0; i < 1000; i++) double_array(a);
 
-console.log(a.reduce(function(m, e) { return m + e; }));
+console.log(a.reduce(function (m, e) { return m + e; }));
