@@ -4,16 +4,16 @@
 
 module.exports = {};
 
-module.exports.a2n = function(a) {
+module.exports.a2n = function (a) {
   return (parseInt(a.join('')));
 };
 
-module.exports.a2s = function(a) {
+module.exports.a2s = function (a) {
   return a.join('');
 };
 
-module.exports.array_add = function(a1, a2) {
-  var zero_pad = function(a, n) {
+module.exports.array_add = function (a1, a2) {
+  var zero_pad = function (a, n) {
     for (var i = 0; i < n; i++) {
       a.unshift(0);
     }
@@ -35,7 +35,7 @@ module.exports.array_add = function(a1, a2) {
   return a3;
 };
 
-module.exports.array_exp = function(b, n) {
+module.exports.array_exp = function (b, n) {
   var a = [1];
   while (n > 0) {
     var b_int = module.exports.a2n(b);
@@ -50,7 +50,7 @@ module.exports.array_exp = function(b, n) {
   return a;
 };
 
-module.exports.array_exp_trunc = function(b, n, max) {
+module.exports.array_exp_trunc = function (b, n, max) {
   var a = [1];
   while (n > 0) {
     var b_int = module.exports.a2n(b);
@@ -65,7 +65,7 @@ module.exports.array_exp_trunc = function(b, n, max) {
   return a;
 };
 
-module.exports.array_inc = function(a, base) {
+module.exports.array_inc = function (a, base) {
   // NOTE: This function mutates array 'a'.
   base = base || 10;
   var changed = 0;
@@ -82,15 +82,15 @@ module.exports.array_inc = function(a, base) {
   return changed;
 };
 
-module.exports.array_max = function(a) {
+module.exports.array_max = function (a) {
   return Math.max.apply(null, a);
 };
 
-module.exports.array_min = function(a) {
+module.exports.array_min = function (a) {
   return Math.min.apply(null, a);
 };
 
-module.exports.array_mult = function(a, n) {
+module.exports.array_mult = function (a, n) {
   var p = a.slice(0);
   var carry = 0;
   var start = a.length - 1;
@@ -115,7 +115,7 @@ module.exports.array_mult = function(a, n) {
   return p;
 };
 
-module.exports.array_pow = function(a, exponent) {
+module.exports.array_pow = function (a, exponent) {
   var base = [1];
   var n = module.exports.a2n(a);
   for (var i = 0; i < exponent; i++) {
@@ -124,20 +124,20 @@ module.exports.array_pow = function(a, exponent) {
   return base;
 };
 
-module.exports.array_product = function(a) {
-  return (a.reduce(function(m, e) { return m * e; }, 1));
+module.exports.array_product = function (a) {
+  return (a.reduce(function (m, e) { return m * e; }, 1));
 };
 
-module.exports.array_sum = function(a) {
-  return (a.reduce(function(m, e) { return m + e; }, 0));
+module.exports.array_sum = function (a) {
+  return (a.reduce(function (m, e) { return m + e; }, 0));
 };
 
-module.exports.array_trunc = function(a, digits) {
+module.exports.array_trunc = function (a, digits) {
   if (a.length > digits) return a.slice(a.length - digits);
   return a;
 };
 
-module.exports.bisearch = function(a, n) {
+module.exports.bisearch = function (a, n) {
   var lo = 0, hi = a.length - 1;
   while (true) {
     if (a[lo] === n) return lo;
@@ -148,21 +148,21 @@ module.exports.bisearch = function(a, n) {
   }
 };
 
-module.exports.factorial = function(n) {
+module.exports.factorial = function (n) {
   for (var i = n, f = 1; i > 1; i--) f *= i;
   return f;
 };
 
-module.exports.hypotenuse = function(a, b) {
+module.exports.hypotenuse = function (a, b) {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 };
 
-module.exports.is_hexagon_number = function(n) {
+module.exports.is_hexagon_number = function (n) {
   return module.exports.is_geometric_number(2, -1, -n);
 };
 
-module.exports.is_geometric_number = function(a, b, c) {
-  var test = function(n) {
+module.exports.is_geometric_number = function (a, b, c) {
+  var test = function (n) {
     return n > 0 && module.exports.is_integral(n);
   };
   var roots = module.exports.quadratic_roots(a, b, c);
@@ -175,11 +175,11 @@ module.exports.is_geometric_number = function(a, b, c) {
   return false;
 };
 
-module.exports.is_integral = function(n) {
+module.exports.is_integral = function (n) {
   return n === Math.floor(n);
 };
 
-module.exports.is_pandigital = function(x, n) {
+module.exports.is_pandigital = function (x, n) {
   n = n === undefined ? 9 : n;
   var digits = module.exports.range(1, n);
   var a = typeof x === 'number' ? module.exports.n2a(x) : x.slice(0);
@@ -190,16 +190,16 @@ module.exports.is_pandigital = function(x, n) {
   return true;
 };
 
-module.exports.is_pentagon_number = function(n) {
+module.exports.is_pentagon_number = function (n) {
   return module.exports.is_geometric_number(3, -1, -n *2);
 };
 
-module.exports.is_power_of = function(n, b) {
+module.exports.is_power_of = function (n, b) {
   var x = Math.log(n) / Math.log(b);
   return x === Math.floor(x);
 };
 
-module.exports.is_prime = function(n) {
+module.exports.is_prime = function (n) {
   if ((n & 1) === 0) return false;
   for (var i = 3; i <= Math.sqrt(n); i += 1) {
     if (n % i === 0) return false;
@@ -207,28 +207,28 @@ module.exports.is_prime = function(n) {
   return true;
 };
 
-module.exports.is_square = function(n) {
+module.exports.is_square = function (n) {
   var r = Math.sqrt(n);
   return r === Math.floor(r);
 };
 
-module.exports.is_triangle_number = function(n) {
+module.exports.is_triangle_number = function (n) {
   return module.exports.is_geometric_number(1, 1, -n * 2);
 };
 
-module.exports.log10 = function(n) {
+module.exports.log10 = function (n) {
   return Math.log(n) / Math.log(10);
 };
 
-module.exports.n2a = function(n) {
+module.exports.n2a = function (n) {
   return module.exports.n2a_common(n, 10);
 };
 
-module.exports.n2a_binary = function(n) {
+module.exports.n2a_binary = function (n) {
   return module.exports.n2a_common(n, 2);
 };
 
-module.exports.n2a_common = function(n, base) {
+module.exports.n2a_common = function (n, base) {
   var a = [];
   while (n > 0) {
     a.unshift(n % base);
@@ -237,11 +237,11 @@ module.exports.n2a_common = function(n, base) {
   return a;
 };
 
-module.exports.ndigits = function(n) {
+module.exports.ndigits = function (n) {
   return Math.floor(Math.log(n) / Math.log(10)) + 1;
 };
 
-module.exports.ordered_insert = function(a, n) {
+module.exports.ordered_insert = function (a, n) {
   var b = [];
   for (var i = 0; i < a.length; i++) {
     if (n && a[i] >= n) {
@@ -254,7 +254,7 @@ module.exports.ordered_insert = function(a, n) {
   return b;
 };
 
-module.exports.ordered_insert_in_place = function(a, n) {
+module.exports.ordered_insert_in_place = function (a, n) {
   // NOTE: This function mutates array 'a'.
   if (a.length === 0) {
     a.push(n);
@@ -266,7 +266,7 @@ module.exports.ordered_insert_in_place = function(a, n) {
   }
 };
 
-module.exports.permutations = function(n, a, fn) {
+module.exports.permutations = function (n, a, fn) {
   // https://en.wikipedia.org/wiki/Heap%27s_algorithm
   if (n === 1) {
     fn(a);
@@ -286,14 +286,14 @@ module.exports.permutations = function(n, a, fn) {
   }
 };
 
-module.exports.permarray = function(a) {
+module.exports.permarray = function (a) {
   var p = [];
-  var fn = function(x) { p.push(x.slice()); };
+  var fn = function (x) { p.push(x.slice()); };
   module.exports.permutations(a.length, a, fn);
   return p;
 };
 
-module.exports.prime_factorization = function(n, primes_less_than_n) {
+module.exports.prime_factorization = function (n, primes_less_than_n) {
   var factors = [];
   for (var i = 0; i < primes_less_than_n.length; i++) {
     var p = primes_less_than_n[i];
@@ -310,7 +310,7 @@ module.exports.prime_factorization = function(n, primes_less_than_n) {
   return factors;
 };
 
-module.exports.primes_map = function(limit) {
+module.exports.primes_map = function (limit) {
   var primes = {};
   for (var i = 2; i <= limit; i++) {
     if (primes[i] === false) continue;
@@ -322,7 +322,7 @@ module.exports.primes_map = function(limit) {
   return primes;
 };
 
-module.exports.primes = function(lo, hi, return_map) {
+module.exports.primes = function (lo, hi, return_map) {
   var pm = module.exports.primes_map(hi);
   for (var i = lo, primes = []; i <= hi; i++) {
     if (pm[i]) primes.push(i);
@@ -331,7 +331,7 @@ module.exports.primes = function(lo, hi, return_map) {
   return primes;
 };
 
-module.exports.proper_divisors = function(n) {
+module.exports.proper_divisors = function (n) {
   var pds = [1];
   for (var d = 2; d <= Math.sqrt(n); d++) {
     if (n % d === 0) {
@@ -344,13 +344,13 @@ module.exports.proper_divisors = function(n) {
   return pds;
 };
 
-module.exports.quadratic_roots = function(a, b, c) {
+module.exports.quadratic_roots = function (a, b, c) {
   var x0 = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
   var x1 = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
   return [x0, x1];
 };
 
-module.exports.range = function(lo, hi) {
+module.exports.range = function (lo, hi) {
   var a = [];
   for (var i = lo; i <= hi; i++) {
     a.push(i);
@@ -358,7 +358,7 @@ module.exports.range = function(lo, hi) {
   return a;
 };
 
-module.exports.readfile = function(f, alt) {
+module.exports.readfile = function (f, alt) {
   try {
     var data = require('fs').readFileSync(f, 'utf8');
     return JSON.parse(data);
@@ -367,13 +367,13 @@ module.exports.readfile = function(f, alt) {
   }
 };
 
-module.exports.sum_of_proper_divisors = function(n) {
+module.exports.sum_of_proper_divisors = function (n) {
   return module.exports.array_sum(module.exports.proper_divisors(n));
 };
 
-module.exports.uniques = function(a, sort) {
+module.exports.uniques = function (a, sort) {
   if (sort === true) {
-    a = a.sort(function(e1, e2) { return e1 - e2; });
+    a = a.sort(function (e1, e2) { return e1 - e2; });
   }
   var u = [];
   for (var i = 0; i < a.length; i++) {
@@ -384,12 +384,12 @@ module.exports.uniques = function(a, sort) {
   return u;
 };
 
-module.exports.word_sum = function(name) {
-  return name.split('').reduce(function(sum, chr) {
+module.exports.word_sum = function (name) {
+  return name.split('').reduce(function (sum, chr) {
     return sum + chr.charCodeAt(0) - 64;
   }, 0);
 };
 
-module.exports.writefile = function(f, data) {
+module.exports.writefile = function (f, data) {
   require('fs').writeFileSync(f, JSON.stringify(data), 'utf8');
 };
