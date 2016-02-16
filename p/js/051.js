@@ -16,27 +16,15 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
     mask.push(0);
   }
   mask_loop: for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
-
     pm.array_inc(mask, 2);
-
-    // If the mask is allowed to tweak the digit in the prime's low-order (10^0)
-    // position, then the generated "primes" will be in the set ...0, ...1, ...2
-    // through ...9. But six of these (...0, ...2, ...4, ...5, ...6, and ...8)
-    // are certainly composite, leaving only four candidates (...1, ...3, ...7
-    // and ...9), so that an eight-prime family cannot be obtained. So, the mask
-    // cannot tweak the low-order posiiton.
-
-    if (mask[mask.length - 1] === 1) continue mask_loop;
-
+    if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
     var composites = 0;
     var tweaked = prime.slice();
     var generated_primes = [];
     digit_loop: for (var digit = 0; digit < 10; digit++) {
       for (var position = 0; position < prime.length; position++) {
         if (mask[position]) {
-          if (position === 0 && digit === 0) {
-            continue digit_loop;
-          }
+          if (position === 0 && digit === 0)  continue digit_loop;
           tweaked[position] = digit;
         }
       }
@@ -49,11 +37,25 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
         }
       } else {
         ++composites;
-        // Too many composites => not enough primes.
         if (composites > (10 - goal)) {
-          continue mask_loop;
+          continue mask_loop; // See note 2
         }
       }
     }
   }
 }
+
+/* Notes
+ *
+ * 1. If the mask is allowed to tweak the digit in the prime's low-order (10^0)
+ * position, then the generated "primes" will be in the set ...0, ...1, ...2
+ * through ...9. But six of these (...0, ...2, ...4, ...5, ...6, and ...8) are
+ * certainly composite, leaving only four candidates (...1, ...3, ...7 and ...9)
+ * so that an eight-prime family cannot be obtained. So, the mask cannot tweak
+ * the low-order posiiton.
+ *
+ * 2. If too many composites have been seen, there's no possibility that enough
+ * of the remaining generated numbers will be prime to complete the n-prime
+ * family.
+ *
+ */
