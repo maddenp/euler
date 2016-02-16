@@ -16,7 +16,18 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
     mask.push(0);
   }
   mask_loop: for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
+
     pm.array_inc(mask, 2);
+
+    // If the mask is allowed to tweak the digit in the prime's low-order (10^0)
+    // position, then the generated "primes" will be in the set ...0, ...1, ...2
+    // through ...9. But six of these (...0, ...2, ...4, ...5, ...6, and ...8)
+    // are certainly composite, leaving only four candidates (...1, ...3, ...7
+    // and ...9), so that an eight-prime family cannot be obtained. So, the mask
+    // cannot tweak the low-order posiiton.
+
+    if (mask[mask.length - 1] === 1) continue mask_loop;
+
     var composites = 0;
     var tweaked = prime.slice();
     var generated_primes = [];
@@ -38,6 +49,7 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
         }
       } else {
         ++composites;
+        // Too many composites => not enough primes.
         if (composites > (10 - goal)) {
           continue mask_loop;
         }
