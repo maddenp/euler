@@ -18,15 +18,16 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
   mask_loop: for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
     pm.array_inc(mask, 2);
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
+//     var ones = 0;
+//     for (var i = 0; i < mask.length; i++) ones += mask[i];
+//     if ((ones % 3) !== 0) continue mask_loop;
     var composites = 0;
     var tweaked = prime.slice();
     var generated_primes = [];
     digit_loop: for (var digit = 0; digit < 10; digit++) {
       for (var position = 0; position < prime.length; position++) {
-        if (mask[position]) {
-          if (position === 0 && digit === 0)  continue digit_loop;
-          tweaked[position] = digit;
-        }
+        if (position === 0 && digit === 0)  continue digit_loop;
+        if (mask[position]) tweaked[position] = digit;
       }
       var candidate = pm.a2n(tweaked);
       if (is_prime[candidate]) {
