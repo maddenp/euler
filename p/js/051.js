@@ -30,6 +30,7 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
         if (mask[position]) tweaked[position] = digit;
       }
       var candidate = pm.a2n(tweaked);
+      if (candidate % 3 === 0) continue mask_loop; // See note 3
       if (is_prime[candidate]) {
         generated_primes.push(candidate);
         if (generated_primes.length === goal) {
@@ -39,7 +40,7 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
       } else {
         ++composites;
         if (composites > (10 - goal)) {
-          continue mask_loop; // See note 3
+          continue mask_loop; // See note 4
         }
       }
     }
@@ -77,7 +78,10 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
  * which is insufficient for the 8-prime family requirement. So, the mask
  * must have a number of 1s that is a multiple of 3.
  *
- * 3. If too many composites have been seen, there's no possibility that enough
+ * 3. If the candidate is divisble by 3, then the entire family will be, since
+ * the mask has an even number of 1s (see note 2).
+ *
+ * 4. If too many composites have been seen, there's no possibility that enough
  * of the remaining generated numbers will be prime to complete the n-prime
  * family.
  *
