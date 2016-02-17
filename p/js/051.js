@@ -29,8 +29,7 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
       if (candidate % 3 === 0) continue mask_loop; // See note 3
       if (is_prime[candidate]) {
         if (!smallest || candidate < smallest) smallest = candidate;
-        ++count;
-        if (count === 8) {
+        if (++count === 8) {
           console.log(smallest);
           break prime_loop;
         }
