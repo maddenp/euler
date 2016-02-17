@@ -10,10 +10,10 @@ prime_loop: for (var i = 3; i < is_prime.length; i++) {
   if (!is_prime[i]) continue prime_loop;
   var prime = pm.n2a(i);
   var mask = [0];
-  mask_loop: for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
+  mask_loop: for (var j = 1; j < Math.pow(2, prime.length) - 1; j++) {
     pm.array_inc(mask, 2);
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
-    for (var ones = 0, j = 0; j < mask.length; j++) ones += mask[j];
+    for (var ones = 0, k = 0; k < mask.length; k++) ones += mask[k];
     if ((ones % 3) !== 0) continue mask_loop; // See note 2
     var composites = 0;
     var count = 0;
