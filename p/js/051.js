@@ -24,7 +24,7 @@ prime_loop: for (var i = 3; i < is_prime.length; i++) {
       if (mask[position]) tweaked[position] = 0;
     }
     var candidate = pm.a2n(tweaked);
-    var nincr = 0;
+    var increment_count = 0;
     do {
       if (pm.ndigits(candidate) === tweaked.length) {
         if (is_prime[candidate]) {
@@ -38,8 +38,8 @@ prime_loop: for (var i = 3; i < is_prime.length; i++) {
         }
       }
       candidate += increment;
-      ++nincr;
-    } while (nincr < 10);
+      ++increment_count;
+    } while (increment_count < 10);
   }
 }
 
