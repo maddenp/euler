@@ -15,21 +15,19 @@ prime_loop: for (var i = 3; i < is_prime.length; i++) {
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
     for (var ones = 0, k = 0; k < mask.length; k++) ones += mask[k];
     if ((ones % 3) !== 0) continue mask_loop; // See note 2
+    var candidate = 0;
     var composites = 0;
+    var exp = 0;
+    var increment = pm.a2n(mask);
+    var increment_count = 0;
+    var prime = i;
     var primes = 0;
     var smallest = undefined;
-    var increment = pm.a2n(mask);
-
-    var prime = i;
-    var exp = 0;
-    var candidate = 0;
     while (prime > 0) {
       candidate += Math.pow(10, exp) * (mask[mask.length - 1 - exp] === 1 ? 0 : prime % 10);
       prime = Math.floor(prime / 10);
       ++exp;
     }
-    
-    var increment_count = 0;
     do {
       if (pm.ndigits(candidate) === ndigits) {
         if (is_prime[candidate]) {
