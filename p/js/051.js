@@ -19,23 +19,27 @@ prime_loop: for (var i = 3; i < is_prime.length; i++) {
     var count = 0;
     var smallest = undefined;
     var tweaked = prime.slice();
-    digit_loop: for (var digit = 0; digit < 10; digit++) {
-      for (var position = 0; position < tweaked.length; position++) {
-        if (position === 0 && digit === 0) continue digit_loop;
-        if (mask[position]) tweaked[position] = digit;
-      }
-      var candidate = pm.a2n(tweaked);
-      if (candidate % 3 === 0) continue mask_loop; // See note 3
-      if (is_prime[candidate]) {
-        if (!smallest || candidate < smallest) smallest = candidate;
-        if (++count === 8) {
-          console.log(smallest);
-          break prime_loop;
-        }
-      } else {
-        if (++composites > 2) continue mask_loop; // See note 4
-      }
+    var increment = pm.a2n(mask);
+    for (var position = 0; position < tweaked.length; position++) {
+      if (mask[position]) tweaked[position] = 0;
     }
+    var candidate = pm.a2n(tweaked);
+    var nincr = 0;
+    do {
+      if (pm.ndigits(candidate) === tweaked.length) {
+        if (is_prime[candidate]) {
+          if (!smallest || candidate < smallest) smallest = candidate;
+          if (++count === 8) {
+            console.log(smallest);
+            break prime_loop;
+          }
+        } else {
+          if (++composites > 2) continue mask_loop; // See note 4
+        }
+      }
+      candidate += increment;
+      ++nincr;
+    } while (nincr < 10);
   }
 }
 
