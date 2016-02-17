@@ -4,17 +4,13 @@
 
 var pm = require('./pm');
 
-var goal = 8;
 var primes_and_is_prime = pm.primes(1, 1000000, true);
 var primes = primes_and_is_prime[0];
 var is_prime = primes_and_is_prime[1];
 
 prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
   var prime = pm.n2a(primes[primenum]);
-  var mask = [];
-  for (var zeroes = 0; zeroes < prime.length; zeroes++) {
-    mask.push(0);
-  }
+  var mask = [0];
   mask_loop: for (var masknum = 1; masknum < Math.pow(2, prime.length) - 1; masknum++) {
     pm.array_inc(mask, 2);
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
@@ -33,13 +29,13 @@ prime_loop: for (var primenum = 0; primenum < primes.length; primenum++) {
       if (candidate % 3 === 0) continue mask_loop; // See note 3
       if (is_prime[candidate]) {
         generated_primes.push(candidate);
-        if (generated_primes.length === goal) {
+        if (generated_primes.length === 8) {
           console.log(pm.array_min(generated_primes));
           break prime_loop;
         }
       } else {
         ++composites;
-        if (composites > (10 - goal)) {
+        if (composites > 2) {
           continue mask_loop; // See note 4
         }
       }
