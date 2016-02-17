@@ -8,28 +8,33 @@ var is_prime = pm.primes_map(1000000);
 
 prime_loop: for (var i = 3; i < is_prime.length; i++) {
   if (!is_prime[i]) continue prime_loop;
-  var prime = pm.n2a(i);
   var mask = [0];
-  mask_loop: for (var j = 1; j < Math.pow(2, prime.length) - 1; j++) {
+  var ndigits = pm.ndigits(i);
+  mask_loop: for (var j = 1; j < Math.pow(2, ndigits) - 1; j++) {
     pm.array_inc(mask, 2);
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
     for (var ones = 0, k = 0; k < mask.length; k++) ones += mask[k];
     if ((ones % 3) !== 0) continue mask_loop; // See note 2
     var composites = 0;
-    var count = 0;
+    var primes = 0;
     var smallest = undefined;
-    var tweaked = prime.slice();
     var increment = pm.a2n(mask);
-    for (var position = 0; position < tweaked.length; position++) {
-      if (mask[position]) tweaked[position] = 0;
+
+    var prime = i;
+    var exp = 0;
+    var candidate = 0;
+    while (prime > 0) {
+      candidate += Math.pow(10, exp) * (mask[mask.length - 1 - exp] === 1 ? 0 : prime % 10);
+      prime = Math.floor(prime / 10);
+      ++exp;
     }
-    var candidate = pm.a2n(tweaked);
+    
     var increment_count = 0;
     do {
-      if (pm.ndigits(candidate) === tweaked.length) {
+      if (pm.ndigits(candidate) === ndigits) {
         if (is_prime[candidate]) {
           if (!smallest || candidate < smallest) smallest = candidate;
-          if (++count === 8) {
+          if (++primes === 8) {
             console.log(smallest);
             break prime_loop;
           }
