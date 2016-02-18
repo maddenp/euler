@@ -19,9 +19,20 @@ var n = 0;
 
 loop: while (++n) {
   pm.array_inc(a);
-  for (var m = 2; m <= 6; m++) {
-    if (!is_permutation(a, n * m)) continue loop;
+  if (a[0] === 1) { // See note 1
+    for (var m = 2; m <= 6; m++) {
+      if (!is_permutation(a, n * m)) continue loop;
+    }
+    console.log(n);
+    break;
   }
-  console.log(n);
-  break;
 }
+
+/* Notes
+ *
+ * 1. If the most significant digit of the number under consideration is > 1,
+ * then 6 times that leading digit will be at least 12, which will make the
+ * 6x variant more digits than the 1x initial number, so that they cannot have
+ * the same digits.
+ *
+ */
