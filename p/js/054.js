@@ -62,7 +62,7 @@ const three_of_a_kind_3 = hand => {
 };
 
 const straight_4 = hand => {
-  if (hand.values[4] === hand.values[0] + 4) {
+  if (pm.array_equal(hand.values.map(x => x - hand.values[0]), [0, 1, 2, 3, 4])) {
     return {hand: 4, values: hand.values};
   }
   return three_of_a_kind_3(hand);
@@ -95,9 +95,10 @@ const four_of_a_kind_7 = hand => {
 };
 
 const straight_flush_8 = hand => {
-  if (Object.keys(hand.suits).length === 1
-      && hand.values[4] === hand.values[0] + 4) {
-    return {hand: 8, values: hand.values}
+  if (Object.keys(hand.suits).length === 1) {
+    if (pm.array_equal(hand.values.map(x => x - hand.values[0]), [0, 1, 2, 3, 4])) {
+      return {hand: 8, values: hand.values};
+    }
   }
   return four_of_a_kind_7(hand);
 };
@@ -141,10 +142,10 @@ require('fs').readFileSync('054.dat', 'utf8').split('\n').forEach(line => {
   var deal2 = deal.slice(5);
   var p1 = eval_hand(deal1);
   var p2 = eval_hand(deal2);
-  console.log('p1: ' + JSON.stringify(deal1) + ' -> ' + hand_name(p1.hand) + ' (' + p1.hand + ') '+ ' (values ' + JSON.stringify(p1.values) + ')');
-  console.log('p2: ' + JSON.stringify(deal2) + ' -> ' + hand_name(p2.hand) + ' (' + p2.hand + ') '+ ' (values ' + JSON.stringify(p2.values) + ')');
+//   console.log('p1: ' + JSON.stringify(deal1) + ' -> ' + hand_name(p1.hand) + ' (' + p1.hand + ') '+ ' (values ' + JSON.stringify(p1.values) + ')');
+//   console.log('p2: ' + JSON.stringify(deal2) + ' -> ' + hand_name(p2.hand) + ' (' + p2.hand + ') '+ ' (values ' + JSON.stringify(p2.values) + ')');
   var winner = showdown(p1, p2);
-  console.log('winner: ' + winner);
+//   console.log('winner: ' + winner);
   if (winner === undefined) console.log(JSON.stringify(deal));
   if (winner === 1) ++p1_wins;
 });
