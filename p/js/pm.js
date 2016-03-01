@@ -35,6 +35,14 @@ module.exports.array_add = function (a1, a2) {
   return a3;
 };
 
+module.exports.array_equal = function (a1, a2) {
+  if (a1.length !== a2.length) return false;
+  for (var i = 0; i < a1.length; i++) {
+    if (a1[i] !== a2[i]) return false;
+  }
+  return true;
+};
+
 module.exports.array_exp = function (b, n) {
   var a = [1];
   while (n > 0) {
