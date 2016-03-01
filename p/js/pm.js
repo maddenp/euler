@@ -136,6 +136,11 @@ module.exports.array_product = function (a) {
   return (a.reduce(function (m, e) { return m * e; }, 1));
 };
 
+module.exports.array_n_sort = function (a, reverse) {
+  if (reverse) return a.sort(function (e1, e2) { return e2 - e1; });
+  return a.sort(function (e1, e2) { return e1 - e2; });
+};
+
 module.exports.array_sum = function (a) {
   return (a.reduce(function (m, e) { return m + e; }, 0));
 };
@@ -191,7 +196,7 @@ module.exports.is_pandigital = function (x, n) {
   n = n === undefined ? 9 : n;
   var digits = module.exports.range(1, n);
   var a = typeof x === 'number' ? module.exports.n2a(x) : x.slice(0);
-  a.sort();
+  a = module.exports.array_n_sort(a);
   for (var i = 0; i < a.length; i++) {
     if (a[i] !== digits[i]) return false;
   }
@@ -381,7 +386,7 @@ module.exports.sum_of_proper_divisors = function (n) {
 
 module.exports.uniques = function (a, sort) {
   if (sort === true) {
-    a = a.sort(function (e1, e2) { return e1 - e2; });
+    a = module.exports.array_n_sort(a);
   }
   var u = [];
   for (var i = 0; i < a.length; i++) {
