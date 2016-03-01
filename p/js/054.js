@@ -124,7 +124,7 @@ const showdown = (p1, p2) => {
   if (p1.hand > p2.hand) return 1;
   if (p2.hand > p1.hand) return 2;
   if (p1.values.length !== p2.values.length) throw "lengths of values do not match";
-  for (var i = 0; i < p1.values.length; i++) {
+  while (p1.values.length > 0) {
     var v1 = p1.values.pop();
     var v2 = p2.values.pop();
     if (v1 > v2) return 1;
@@ -140,9 +140,9 @@ require('fs').readFileSync('test', 'utf8').split('\n').forEach(line => {
   var deal = line.split(' ');
   var p1 = eval_hand(deal.slice(0, 5));
   var p2 = eval_hand(deal.slice(5));
-  var winner = showdown(p1, p2);
   console.log('p1: ' + JSON.stringify(deal.slice(0, 5)) + ' -> ' + hand_name(p1.hand) + ' (values ' + JSON.stringify(p1.values) + ')');
   console.log('p2: ' + JSON.stringify(deal.slice(5))    + ' -> ' + hand_name(p2.hand) + ' (values ' + JSON.stringify(p2.values) + ')');
+  var winner = showdown(p1, p2);
   console.log('winner: ' + winner);
   if (winner === 1) {
     ++p1_wins
