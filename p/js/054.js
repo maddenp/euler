@@ -135,12 +135,15 @@ const showdown = (p1, p2) => {
 
 var p1_wins = 0;
 
-require('fs').readFileSync('054.dat', 'utf8').split('\n').forEach(line => {
-// require('fs').readFileSync('test', 'utf8').split('\n').forEach(line => {
+// require('fs').readFileSync('054.dat', 'utf8').split('\n').forEach(line => {
+require('fs').readFileSync('test', 'utf8').split('\n').forEach(line => {
   var deal = line.split(' ');
   var p1 = eval_hand(deal.slice(0, 5));
   var p2 = eval_hand(deal.slice(5));
   var winner = showdown(p1, p2);
+  console.log('p1: ' + JSON.stringify(deal.slice(0, 5)) + ' -> ' + hand_name(p1.hand) + ' (values ' + JSON.stringify(p1.values) + ')');
+  console.log('p2: ' + JSON.stringify(deal.slice(5))    + ' -> ' + hand_name(p2.hand) + ' (values ' + JSON.stringify(p2.values) + ')');
+  console.log('winner: ' + winner);
   if (winner === 1) {
     ++p1_wins
   } else {
