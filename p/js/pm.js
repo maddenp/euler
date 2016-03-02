@@ -123,6 +123,11 @@ module.exports.array_mult = function (a, n) {
   return p;
 };
 
+module.exports.array_n_sort = function (a, reverse) {
+  if (reverse) return a.sort(function (e1, e2) { return e2 - e1; });
+  return a.sort(function (e1, e2) { return e1 - e2; });
+};
+
 module.exports.array_pow = function (a, exponent) {
   var base = [1];
   var n = module.exports.a2n(a);
@@ -136,9 +141,10 @@ module.exports.array_product = function (a) {
   return (a.reduce(function (m, e) { return m * e; }, 1));
 };
 
-module.exports.array_n_sort = function (a, reverse) {
-  if (reverse) return a.sort(function (e1, e2) { return e2 - e1; });
-  return a.sort(function (e1, e2) { return e1 - e2; });
+module.exports.array_reverse = function (a) {
+  var b = [];
+  for (var i = a.length - 1; i >= 0; i--) b.push(a[i]);
+  return b;
 };
 
 module.exports.array_sum = function (a) {
