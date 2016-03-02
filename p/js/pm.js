@@ -192,6 +192,13 @@ module.exports.is_integral = function (n) {
   return n === Math.floor(n);
 };
 
+module.exports.is_palindrome = function (a) {
+  for (var i = 0; i < Math.floor(a.length / 2); i++) {
+    if (a[i] !== a[a.length - (i + 1)]) return false;
+  }
+  return true;
+};
+
 module.exports.is_pandigital = function (x, n) {
   n = n === undefined ? 9 : n;
   var digits = module.exports.range(1, n);
