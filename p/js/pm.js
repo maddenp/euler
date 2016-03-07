@@ -1,4 +1,5 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
@@ -349,7 +350,7 @@ module.exports.primes_map = function (limit) {
 };
 
 module.exports.primes = function (lo, hi, return_map) {
-  var pm = module.exports.primes_map(hi);
+  const pm = module.exports.primes_map(hi);
   for (var i = lo, primes = []; i <= hi; i++) {
     if (pm[i]) primes.push(i);
   }

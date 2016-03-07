@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 function pandigital_product(n, m, p) {
   if (pm.ndigits(n) + pm.ndigits(m) + pm.ndigits(p) !== 9) return false;

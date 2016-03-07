@@ -3,7 +3,7 @@
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 const hand_name = hand_value => {
   return {

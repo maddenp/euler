@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 var is_prime = pm.primes_map(1000000);
 

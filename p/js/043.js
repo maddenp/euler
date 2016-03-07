@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 function test(a) {
   if (a[0] === 0)                                 return false;

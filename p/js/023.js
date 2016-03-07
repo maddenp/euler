@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 function abundant_numbers(limit) {
   var ans = [];

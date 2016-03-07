@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 for (var result = 0, n = 1; n < 9999; n++) {
   var a = pm.n2a(n);

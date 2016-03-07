@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 for (var i = 2, a = [1], n = 100; i < n + 1; i++) {
   a = pm.array_mult(a, i);

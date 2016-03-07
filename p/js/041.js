@@ -1,4 +1,5 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
@@ -7,7 +8,7 @@
  *       divisible by 3, and therefore composite.
  */
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 var limit = 7;
 var result = 0;

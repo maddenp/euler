@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 var lo = 1000, hi = 9999;
 var result = pm.primes(lo, hi, true);

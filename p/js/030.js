@@ -1,8 +1,9 @@
 /* jshint node: true */
+/* jshint esversion: 6 */
 
 "use strict";
 
-var pm = require('./pm');
+const pm = require('./pm');
 
 function find_limit(exponent) {
   var c = Math.pow(9, exponent), max_int = 9, max_sum = c;
