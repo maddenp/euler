@@ -37,7 +37,7 @@ const hand_suits = hand => (
 
 const high_card_0 = hand => {
   return {hand: 0, values: hand.values};
-}
+};
 
 const one_pair_1 = hand => {
   var pair = Object.keys(hand.counts).reduce((m, e) => m || (hand.counts[e] === 2 ? e : false), false);
@@ -87,8 +87,7 @@ const full_house_6 = hand => {
 };
 
 const four_of_a_kind_7 = hand => {
-  if (hand.values[0] === hand.values[3]
-      || hand.values[1] === hand.values[4]) {
+  if (hand.values[0] === hand.values[3] || hand.values[1] === hand.values[4]) {
     return {hand: 7, values: hand.values};
   }
   return full_house_6(hand);
@@ -105,8 +104,7 @@ const straight_flush_8 = hand => {
 
 const royal_flush_9 = hand => {
   hand.values = pm.array_n_sort(hand.cards.map(card => card.value));
-  if (Object.keys(hand.suits).length === 1
-      && pm.array_equal(hand.values, [10, 11, 12, 13, 14])) {
+  if (Object.keys(hand.suits).length === 1 && pm.array_equal(hand.values, [10, 11, 12, 13, 14])) {
     return {hand: 9, values: hand.values};
   }
   return straight_flush_8(hand);
@@ -114,11 +112,7 @@ const royal_flush_9 = hand => {
 
 const eval_hand = hand => {
   var cards = hand.map(card => ({value: card_value(card), suit: card_suit(card)}));
-  var hand = {
-    cards: cards,
-    suits: hand_suits(cards)
-  };
-  return royal_flush_9(hand);
+  return royal_flush_9({cards: cards, suits: hand_suits(cards)});
 };
 
 const showdown = (p1, p2) => {
@@ -132,7 +126,7 @@ const showdown = (p1, p2) => {
     if (v2 > v1) return 2;
   }
   return undefined;
-}
+};
 
 var p1_wins = 0;
 
