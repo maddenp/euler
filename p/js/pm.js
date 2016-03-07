@@ -100,7 +100,7 @@ module.exports.array_min = function (a) {
 };
 
 module.exports.array_mult = function (a, n) {
-  var p = a.slice(0);
+  var p = a.slice();
   var carry = 0;
   var start = a.length - 1;
   for (var i = start; i >= 0; i--) {
