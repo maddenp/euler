@@ -1,7 +1,12 @@
-sum = 0;
-for (i = 0; i < 1000; i++) {
-    if((i%3==0) || (i%5==0)){
-    	sum+=i;
-    }    
+function multiplesOfThreeAndFive(number, sum){
+	if(number == 0){
+		return sum;
+	}
+	else if(number % 3 == 0 || number % 5 == 0){
+		return multiplesOfThreeAndFive(number-1, sum += number)
+	}
+	else return multiplesOfThreeAndFive(number-1, sum)
+
 }
-console.log(sum)
+
+console.log(multiplesOfThreeAndFive(999, 0))
