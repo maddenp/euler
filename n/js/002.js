@@ -1,16 +1,14 @@
-before = 0;
-current = 1;
-after = 0;
-sumOfEvens = 0;
-foMillion = 4000000;
+function evenFibs(before, current, sum){
+	if(before > 40000000 || current > 4000000){
+		return sum;
+	}
+	else if(current % 2 == 0){
+		return evenFibs(current, before + current, sum)
+	}
+	else{
+		return evenFibs(current, before + current, sum += current)
 
-while((before<foMillion) && (after<foMillion)){
-    after = current + before;
-    before = current;
-    current = after;
-    if(after%2==0){
-        sumOfEvens = sumOfEvens + current;
-        
-    }
+	}
 }
-console.log("Sum of evens: " + sumOfEvens);
+
+console.log(evenFibs(0, 1, 0))
