@@ -5,22 +5,18 @@
 
 const pm = require('./pm');
 
-var inc = 2;
 var on_diagonal = 1;
 var on_diagonal_prime = 0;
 var side = 3;
 var x = 1;
 
-while (true) {
+do {
   for (var i = 0; i < 4; i++) {
-    x += inc;
+    x += (side - 1);
     ++on_diagonal;
     if (pm.is_prime(x)) ++on_diagonal_prime;
   }
-  if (on_diagonal_prime / on_diagonal < .1) {
-    console.log(side);
-    break;
-  }
-  inc += 2;
   side += 2;
-}
+} while (on_diagonal_prime / on_diagonal >= 0.1);
+
+console.log(side - 2);
