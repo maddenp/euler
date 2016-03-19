@@ -5,7 +5,7 @@
 
 const pm = require('./pm');
 
-var highest_tested = 3;
+var hiprime = 3;
 var n = 1;
 var on_diagonal = 1;
 var on_diagonal_prime = 0;
@@ -15,13 +15,11 @@ var side = 3;
 const is_prime = n => {
   if (n === 2) return true;
   if ((n & 1) === 0) return false;
-  for (var m = highest_tested + 2; m <= Math.sqrt(n); m += 2) {
+  for (var m = hiprime + 2; m <= Math.sqrt(n); m += 2) {
     if (pm.is_prime(m)) primes.push(m);
   }
-  if (m - 2 > highest_tested) {
-    highest_tested = m - 2;
-  }
-  for (var i = 0; primes[i] <= Math.sqrt(n); i++) {
+  if (m - 2 > hiprime) hiprime = m - 2;
+  for (var i = 0; i < primes.length && primes[i] <= Math.sqrt(n); i++) {
     if (n % primes[i] === 0) return false;
   }
   return true;
