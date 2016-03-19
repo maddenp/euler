@@ -247,6 +247,53 @@ module.exports.log10 = function (n) {
   return Math.log(n) / Math.log(10);
 };
 
+module.exports.miller_rabin = function (n) {
+  // https://goo.gl/ZBJ09T
+  if (n < 2) return false;
+  const limit = 3215031751;
+  const witnesses = [2, 3, 5, 7];
+  if (witnesses.indexOf(n) !== -1) return true;
+  if ((n & 1) === 0) return false;
+  if (n > limit) throw 'Current Miller-Rabin limit ' + limit + ' exceeded';
+  var d = n - 1;
+  var r = 0;
+  while (true) {
+    var o = d / 2;
+    if (o !== Math.floor(o)) break;
+    ++r;
+    d = o;
+  }
+  witnesses: for (var i = 0; i < witnesses.length; i++) {
+    var a = witnesses[i];
+    var x = module.exports.modexp(a, d, n);
+    if (x === 1 || x === n - 1) continue witnesses;
+    for (var j = 0; j < r - 1; j++) {
+      x = module.exports.modexp(x, 2, n);
+      if (x === 1) {
+        return false;
+      }
+      if (x === n - 1) continue witnesses;
+    }
+    return false;
+  }
+  return true;
+};
+
+module.exports.modexp = function (b, e, m) {
+  // https://goo.gl/ldzssx
+  const limit = Math.floor(Math.sqrt(Number.MAX_SAFE_INTEGER));
+  if (m - 1 > limit) throw 'modexp will overflow with modulus ' + m;
+  if (m === 1) return 0;
+  var r = 1;
+  b = b % m;
+  while (e > 0) {
+    if ((e & 1) === 1) r = (r * b) % m;
+    e >>= 1;
+    b = (b * b) % m;
+  }
+  return r;
+};
+
 module.exports.n2a = function (n) {
   return module.exports.n2a_common(n, 10);
 };
@@ -377,6 +424,11 @@ module.exports.quadratic_roots = function (a, b, c) {
   return [x0, x1];
 };
 
+module.exports.random_int_between = function (lo, hi) {
+  // Note: Bounds are inclusive.
+  return Math.floor(Math.random() * ((hi + 1) - lo) + lo);
+};
+  
 module.exports.range = function (lo, hi) {
   var a = [];
   for (var i = lo; i <= hi; i++) {
