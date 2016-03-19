@@ -227,9 +227,10 @@ module.exports.is_power_of = function (n, b) {
 };
 
 module.exports.is_prime = function (n) {
+  if (n === 2) return true;
   if ((n & 1) === 0) return false;
-  for (var i = 3; i <= Math.sqrt(n); i += 2) {
-    if (n % i === 0) return false;
+  for (var m = 3; m <= Math.sqrt(n); m += 2) {
+    if (n % m === 0) return false;
   }
   return true;
 };

@@ -5,16 +5,33 @@
 
 const pm = require('./pm');
 
+var highest_tested = 3;
+var n = 1;
 var on_diagonal = 1;
 var on_diagonal_prime = 0;
+var primes = [2, 3];
 var side = 3;
-var x = 1;
+
+const is_prime = n => {
+  if (n === 2) return true;
+  if ((n & 1) === 0) return false;
+  for (var m = highest_tested + 2; m <= Math.sqrt(n); m += 2) {
+    if (pm.is_prime(m)) primes.push(m);
+  }
+  if (m - 2 > highest_tested) {
+    highest_tested = m - 2;
+  }
+  for (var i = 0; primes[i] <= Math.sqrt(n); i++) {
+    if (n % primes[i] === 0) return false;
+  }
+  return true;
+};
 
 do {
   for (var i = 0; i < 4; i++) {
-    x += (side - 1);
+    n += (side - 1);
     ++on_diagonal;
-    if (pm.is_prime(x)) ++on_diagonal_prime;
+    if (is_prime(n)) ++on_diagonal_prime;
   }
   side += 2;
 } while (on_diagonal_prime / on_diagonal >= 0.1);
