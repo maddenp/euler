@@ -226,6 +226,21 @@ module.exports.is_power_of = function (n, b) {
   return x === Math.floor(x);
 };
 
+module.exports.is_prime_opt = (() => {
+  var primes = [2, 3];
+  return n => {
+    if (n === 2) return true;
+    if ((n & 1) === 0) return false;
+    for (var m = primes[primes.length - 1] + 2; m <= Math.sqrt(n); m += 2) {
+      if (module.exports.is_prime(m)) primes.push(m);
+    }
+    for (var i = 0; i < primes.length && primes[i] <= Math.sqrt(n); i++) {
+      if (n % primes[i] === 0) return false;
+    }
+    return true;
+  };
+})();
+
 module.exports.is_prime = function (n) {
   if (n === 2) return true;
   if ((n & 1) === 0) return false;
