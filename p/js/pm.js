@@ -257,7 +257,10 @@ module.exports.prime = (() => {
     }
     return primes[nextidx++];
   };
-  return {check, next};
+  const reset = () => {
+    nextidx = 0;
+  };
+  return {check, next, reset};
 })();
 
 module.exports.is_square = function (n) {
