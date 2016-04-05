@@ -235,7 +235,7 @@ module.exports.is_prime = function (n) {
   return true;
 };
 
-module.exports.prime = (() => {
+module.exports.prime = () => {
   var nextidx = 0;
   var primes = [2, 3];
   const check = n => {
@@ -257,11 +257,8 @@ module.exports.prime = (() => {
     }
     return primes[nextidx++];
   };
-  const reset = () => {
-    nextidx = 0;
-  };
-  return {check, next, reset};
-})();
+  return {check, next};
+};
 
 module.exports.is_square = function (n) {
   var r = Math.sqrt(n);
