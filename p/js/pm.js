@@ -235,9 +235,10 @@ module.exports.is_prime = function (n) {
   return true;
 };
 
-module.exports.is_prime_opt = (() => {
+module.exports.prime = (() => {
+  var nextidx = 0;
   var primes = [2, 3];
-  return n => {
+  const check = n => {
     if (n === 2) return true;
     if ((n & 1) === 0) return false;
     for (var m = primes[primes.length - 1] + 2; m <= Math.sqrt(n); m += 2) {
@@ -248,6 +249,15 @@ module.exports.is_prime_opt = (() => {
     }
     return true;
   };
+  const next = () => {
+    if (nextidx > primes.length - 1) {
+      var n = primes[primes.length - 1] + 2;
+      while (!check(n)) n += 2;
+      primes.push(n);
+    }
+    return primes[nextidx++];
+  };
+  return {check, next};
 })();
 
 module.exports.is_square = function (n) {
