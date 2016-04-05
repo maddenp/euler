@@ -19,13 +19,17 @@ const primes = pm.primes(1, limit);
 
 const x = primes.reduce((m, e) => Object.defineProperty(m, e, {value: [], enumerable: true}), {});
 
+const match = (p1, p2) => {
+  const n1 = p2 * Math.pow(10, pm.ndigits(p1)) + p1;
+  const n2 = p1 * Math.pow(10, pm.ndigits(p2)) + p2;
+  return pm.prime.check(n1) && pm.prime.check(n2) ? true : false;
+};
+
 for (var i = 0; i < primes.length; i++) {
-  var p0 = primes[i];
+  var p1 = primes[i];
   for (var j = 0; j < i; j++) {
-    var p1 = primes[j];
-    var n1 = p1 * Math.pow(10, pm.ndigits(p0)) + p0;
-    var n2 = p0 * Math.pow(10, pm.ndigits(p1)) + p1;
-    if (pm.prime.check(n1) && pm.prime.check(n2)) x[p0].push(p1);
+    var p2 = primes[j];
+    if (match(p1, p2)) x[p1].push(p2);
   }
 }
 
