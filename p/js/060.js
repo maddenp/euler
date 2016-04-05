@@ -5,61 +5,43 @@
 
 const pm = require('./pm');
 
-/*
- * The primes 3, 7, 109, and 673, are quite remarkable. By taking any two primes
- * and concatenating them in any order the result will always be prime. For
- * example, taking 7 and 109, both 7109 and 1097 are prime. The sum of these four
- * primes, 792, represents the lowest sum for a set of four primes with this
- * property. Find the lowest sum for a set of five primes for which any two primes
- * concatenate to produce another prime.
-*/
+// [3, 7, 109, 673] => 792
 
-const limit = 1000;
-const primes = pm.primes(1, limit);
+const limit = 5;
 
-const x = primes.reduce((m, e) => Object.defineProperty(m, e, {value: [], enumerable: true}), {});
-
-const match = (p1, p2) => {
+const fail = (p1, p2) => {
   const n1 = p2 * Math.pow(10, pm.ndigits(p1)) + p1;
   const n2 = p1 * Math.pow(10, pm.ndigits(p2)) + p2;
-  return pm.prime.check(n1) && pm.prime.check(n2) ? true : false;
+  return pm.prime.check(n1) && pm.prime.check(n2) ? false : true;
 };
 
-for (var i = 0; i < primes.length; i++) {
-  var p1 = primes[i];
-  for (var j = 0; j < i; j++) {
-    var p2 = primes[j];
-    if (match(p1, p2)) x[p1].push(p2);
-  }
-}
+const magic = 12596849;
 
-const search = (x, a, n) => {
-  for (var i = 0; i < primes.length; i++) {
-    var p = primes[i];
-    if (p === a[0]) continue;
-    var match = true;
-    for (var j = 0; j < a.length; j++) {
-      if (x[p][j] !== a[j]) {
-        match = false;
-        break;
-      }
-    }
-    if (match) {
-      a.push(p);
-      if (a.length === n) {
-        return a;
-      } else {
-        return search(x, a, n);
-      }
-    }
-  }
-  return false;
-};
+const primes = pm.primes(1, magic);
 
-for (var i = 0; i < primes.length; i++) {
-  var result = search(x, [primes[i]], 4);
-  if (result) {
-    console.log(pm.array_sum(result));
-    break;
+var low = magic;
+
+for (var x = 0; x < primes.length; x++) {
+
+  pm.prime.reset();
+  var a = [primes[x]];
+
+  do { var p = pm.prime.next(); } while (p !== a[0]);
+
+  out: for (var i = 0; i < limit - 1; i++) {
+    var sum = pm.array_sum(a);
+    do {
+      p = pm.prime.next();
+      if (sum + p > low) break out;
+    } while (a.some(n => fail(p, n)));
+    a.push(p);
   }
+
+  if (a.length === limit) {
+    console.log(a);
+    var sum = pm.array_sum(a);
+    console.log(sum);
+    if (sum < low) low = sum;
+  }
+
 }
