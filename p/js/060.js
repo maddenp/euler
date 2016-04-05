@@ -16,32 +16,31 @@ const fail = (p1, p2) => {
 };
 
 const magic = 12596849;
+var low = magic;
 
 const primes = pm.primes(1, magic);
 
-var low = magic;
+const f = (a, limit) => {
+  pm.prime.reset();
+  do { var p = pm.prime.next(); } while (p !== a[a.length - 1]);
+  var sum = pm.array_sum(a);
+  do {
+    p = pm.prime.next();
+    if (sum + p > low) return;
+  } while (a.some(n => fail(p, n)));
+  a.push(p);
+  if (b.length === limit) {
+    sum = pm.array_sum(a);
+    if (sum < low) {
+      console.log(a, sum);
+      low = sum;
+    }
+  } else {
+    f(a, limit);
+  }
+};
 
 for (var x = 0; x < primes.length; x++) {
-
-  pm.prime.reset();
+  var base = primes[x];
   var a = [primes[x]];
-
-  do { var p = pm.prime.next(); } while (p !== a[0]);
-
-  out: for (var i = 0; i < limit - 1; i++) {
-    var sum = pm.array_sum(a);
-    do {
-      p = pm.prime.next();
-      if (sum + p > low) break out;
-    } while (a.some(n => fail(p, n)));
-    a.push(p);
-  }
-
-  if (a.length === limit) {
-    console.log(a);
-    var sum = pm.array_sum(a);
-    console.log(sum);
-    if (sum < low) low = sum;
-  }
-
 }
