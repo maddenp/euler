@@ -236,17 +236,23 @@ module.exports.is_prime = function (n) {
 };
 
 module.exports.prime = () => {
+  var known = {};
   var nextidx = 0;
   var primes = [2, 3];
   const check = n => {
     if (n === 2) return true;
     if ((n & 1) === 0) return false;
+    if (known[n]) return true;
     for (var m = primes[primes.length - 1] + 2; m <= Math.sqrt(n); m += 2) {
-      if (module.exports.is_prime(m)) primes.push(m);
+      if (module.exports.is_prime(m)) {
+        primes.push(m);
+        known[m] = true;
+      }
     }
     for (var i = 0; i < primes.length && primes[i] <= Math.sqrt(n); i++) {
       if (n % primes[i] === 0) return false;
     }
+    known[n] = true;
     return true;
   };
   const next = () => {
