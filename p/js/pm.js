@@ -235,18 +235,18 @@ module.exports.is_prime = function (n) {
   return true;
 };
 
-module.exports.prime = () => {
-  var known = {};
-  var nextidx = 0;
+module.exports.prime = (() => {
+
+  var known = {2: true, 3: true};
   var primes = [2, 3];
+
   const check = n => {
-    if (n === 2) return true;
-    if ((n & 1) === 0) return false;
     if (known[n]) return true;
+    if ((n & 1) === 0) return false;
     for (var m = primes[primes.length - 1] + 2; m <= Math.sqrt(n); m += 2) {
-      if (module.exports.is_prime(m)) {
-        primes.push(m);
+      if (module.exports.is_prime(m)) { // why use slow is_prime()?
         known[m] = true;
+        primes.push(m);
       }
     }
     for (var i = 0; i < primes.length && primes[i] <= Math.sqrt(n); i++) {
@@ -255,16 +255,20 @@ module.exports.prime = () => {
     known[n] = true;
     return true;
   };
-  const next = () => {
-    if (nextidx > primes.length - 1) {
+
+  const prime_at = i => {
+    while (i > primes.length - 1) {
       var n = primes[primes.length - 1] + 2;
       while (!check(n)) n += 2;
+      known[n] = true;
       primes.push(n);
     }
-    return primes[nextidx++];
+    return primes[i];
   };
-  return {check, next};
-};
+
+  return {check, prime_at};
+
+})();
 
 module.exports.is_square = function (n) {
   var r = Math.sqrt(n);

@@ -17,26 +17,26 @@ const f = (a, p, sum, limit) => {
     if (sum < low) low = sum;
     return true;
   }
-  const prime = pm.prime();
-  do { var x = prime.next(); } while (x !== p);
+  var i = 0;
+  do { var q = gprime.prime_at(i++); } while (q !== p);
   while (true) {
-    x = prime.next();
-    var newsum = sum + x;
+    q = gprime.prime_at(i++);
+    var newsum = sum + q;
     if (newsum > low) break;
-    if (f(a.concat(p), x, newsum, limit)) break;
+    if (f(a.concat(p), q, newsum, limit)) break;
   }
   return false;
 };
 
-const gprime = pm.prime();
+const gprime = pm.prime;
 
 var low = Number.MAX_SAFE_INTEGER;
 
-var p = gprime.next(); // move past 2, which is no good
+var i = 1;
 
 while (true) {
-  var p = gprime.next();
-  f([], p, p, 5);
+  var p = gprime.prime_at(i++);
+  f([], p, p, 4);
   if (p > low) break;
 }
 
