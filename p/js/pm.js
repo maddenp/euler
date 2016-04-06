@@ -244,7 +244,7 @@ module.exports.prime = (() => {
     if (known[n]) return true;
     if ((n & 1) === 0) return false;
     for (var m = primes[primes.length - 1] + 2; m <= Math.sqrt(n); m += 2) {
-      if (module.exports.is_prime(m)) { // why use slow is_prime()?
+      if (check(m)) {
         known[m] = true;
         primes.push(m);
       }

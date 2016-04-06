@@ -8,7 +8,7 @@ const pm = require('./pm');
 const fail = (p1, p2) => {
   const n1 = p2 * Math.pow(10, pm.ndigits(p1)) + p1;
   const n2 = p1 * Math.pow(10, pm.ndigits(p2)) + p2;
-  return gprime.check(n1) && gprime.check(n2) ? false : true;
+  return x.check(n1) && x.check(n2) ? false : true;
 };
 
 const f = (a, p, sum, limit) => {
@@ -17,10 +17,9 @@ const f = (a, p, sum, limit) => {
     if (sum < low) low = sum;
     return true;
   }
-  var i = 0;
-  do { var q = gprime.prime_at(i++); } while (q !== p);
+  for (var i = 0, q = 0; q !== p; q = x.prime_at(i++)) {}
   while (true) {
-    q = gprime.prime_at(i++);
+    q = x.prime_at(i++);
     var newsum = sum + q;
     if (newsum > low) break;
     if (f(a.concat(p), q, newsum, limit)) break;
@@ -28,15 +27,15 @@ const f = (a, p, sum, limit) => {
   return false;
 };
 
-const gprime = pm.prime;
+const x = pm.prime;
 
 var low = Number.MAX_SAFE_INTEGER;
 
 var i = 1;
 
 while (true) {
-  var p = gprime.prime_at(i++);
-  f([], p, p, 4);
+  var p = x.prime_at(i++);
+  f([], p, p, 5);
   if (p > low) break;
 }
 
