@@ -5,44 +5,38 @@
 
 const pm = require('./pm');
 
-// [3, 7, 109, 673] => 792
-
-const gprime = pm.prime();
-
-const fail = (p1, p2) => {
+const pass = (p1, p2) => {
   const n1 = p2 * Math.pow(10, pm.ndigits(p1)) + p1;
   const n2 = p1 * Math.pow(10, pm.ndigits(p2)) + p2;
-  return gprime.check(n1) && gprime.check(n2) ? false : true;
+  return gprime.check(n1) && gprime.check(n2) ? true : false;
 };
 
 const f = (a, p, sum, limit) => {
-  if (a.some(n => fail(n, p))) {
-    return;
-  }
-  if (a.length + 1 === limit) {
-    if (sum < low) {
-//       console.log(a.concat(p), sum);
-      low = sum;
-    }
-  } else {
-    const prime = pm.prime();
-    do { var x = prime.next(); } while (x !== p);
-    while (true) {
-      x = prime.next();
-      var newsum = sum + x;
-      if (newsum > low) break;
-      f(a.concat(p), x, newsum, limit);
+  if (a.every(n => pass(n, p))) {
+    if (a.length + 1 === limit) {
+      if (sum < low) low = sum;
+    } else {
+      const prime = pm.prime();
+      do { var x = prime.next(); } while (x !== p);
+      while (true) {
+        x = prime.next();
+        var newsum = sum + x;
+        if (newsum > low) break;
+        f(a.concat(p), x, newsum, limit);
+      }
     }
   }
 };
 
-var low = Number.MAX_SAFE_INTEGER; //12596849;
+const gprime = pm.prime();
 
-do { var p = gprime.next(); } while (p !== 3);
+var low = Number.MAX_SAFE_INTEGER;
+
+var p = gprime.next(); // move past 2, which is no good
 
 while (true) {
-  f([], p, p, 5);
-  p = gprime.next();
+  var p = gprime.next();
+  f([], p, p, 4);
   if (p > low) break;
 }
 
