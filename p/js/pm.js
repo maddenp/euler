@@ -226,15 +226,6 @@ module.exports.is_power_of = function (n, b) {
   return x === Math.floor(x);
 };
 
-module.exports.is_prime = function (n) {
-  if (n === 2) return true;
-  if ((n & 1) === 0) return false;
-  for (var m = 3; m <= Math.sqrt(n); m += 2) {
-    if (n % m === 0) return false;
-  }
-  return true;
-};
-
 module.exports.prime = (() => {
 
   var known = {2: true, 3: true};

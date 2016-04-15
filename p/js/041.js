@@ -10,12 +10,14 @@
 
 const pm = require('./pm');
 
+const prime = pm.prime;
+
 var limit = 7;
 var result = 0;
 
 function update_result(a) {
   var n = pm.a2n(a);
-  if (pm.is_prime(n) && n > result) {
+  if (prime.check(n) && n > result) {
     result = n;
   }
 }

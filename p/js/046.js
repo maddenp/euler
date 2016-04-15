@@ -5,8 +5,10 @@
 
 const pm = require('./pm');
 
+const prime = pm.prime;
+
 function conjecture_holds_for(n) {
-  if (pm.is_prime(n)) {
+  if (prime.check(n)) {
     primes.push(n);
     return true;
   }

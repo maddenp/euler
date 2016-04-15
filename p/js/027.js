@@ -5,9 +5,11 @@
 
 const pm = require('./pm');
 
+const prime = pm.prime;
+
 function is_non_prime(n) {
   if (n < 2) return true;
-  return !pm.is_prime(n);
+  return !prime.check(n);
 }
 
 var max = 0;
