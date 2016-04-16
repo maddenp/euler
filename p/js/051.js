@@ -5,12 +5,14 @@
 
 const pm = require('./pm');
 
-var is_prime = pm.primes_map(1000000);
+const prime = pm.prime;
 
-prime_loop: for (var i = 3; i < is_prime.length; i++) {
-  if (!is_prime[i]) continue prime_loop;
+var i = 0;
+
+prime_loop: while (true) {
+  ++i;
   var mask = [0];
-  var ndigits = pm.ndigits(i);
+  var ndigits = pm.ndigits(prime.prime_at(i));
   mask_loop: for (var j = 1; j < Math.pow(2, ndigits) - 1; j++) {
     pm.array_inc(mask, 2);
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
@@ -21,17 +23,17 @@ prime_loop: for (var i = 3; i < is_prime.length; i++) {
     var exp = 0;
     var increment = pm.a2n(mask);
     var increment_count = 0;
-    var prime = i;
+    var q = prime.prime_at(i);
     var primes = 0;
     var smallest = undefined;
-    while (prime > 0) {
-      candidate += Math.pow(10, exp) * (mask[mask.length - 1 - exp] === 1 ? 0 : prime % 10);
-      prime = Math.floor(prime / 10);
+    while (q > 0) {
+      candidate += Math.pow(10, exp) * (mask[mask.length - 1 - exp] === 1 ? 0 : q % 10);
+      q = Math.floor(q / 10);
       ++exp;
     }
     do {
       if (pm.ndigits(candidate) === ndigits) {
-        if (is_prime[candidate]) {
+        if (prime.check(candidate)) {
           if (!smallest || candidate < smallest) smallest = candidate;
           if (++primes === 8) {
             console.log(smallest);
