@@ -22,7 +22,7 @@ var truncatable_primes = [];
 var i = prime.index_of(11);
 
 while (i++) {
-  var n = prime.prime_at(i);
+  var n = prime.at(i);
   if (truncatable_both_ways(n)) {
     truncatable_primes.push(n);
     if (truncatable_primes.length === 11) break;

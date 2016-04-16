@@ -17,9 +17,9 @@ const f = (a, p, sum, limit) => {
     if (sum < low) low = sum;
     return true;
   }
-  for (var i = 0, q = 0; q !== p; q = x.prime_at(i++)) {}
+  for (var i = 0, q = 0; q !== p; q = x.at(i++)) {}
   while (true) {
-    q = x.prime_at(i++);
+    q = x.at(i++);
     var newsum = sum + q;
     if (newsum > low) break;
     if (f(a.concat(p), q, newsum, limit)) break;
@@ -34,7 +34,7 @@ var low = Number.MAX_SAFE_INTEGER;
 var i = 1;
 
 while (true) {
-  var p = x.prime_at(i++);
+  var p = x.at(i++);
   f([], p, p, 5);
   if (p > low) break;
 }

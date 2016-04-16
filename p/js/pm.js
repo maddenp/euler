@@ -249,11 +249,11 @@ module.exports.prime = (() => {
   };
 
   const index_of = n => {
-    while (top() < n) prime_at(primes.length);
+    while (top() < n) at(primes.length);
     return primes.indexOf(n);
   };
 
-  const prime_at = i => {
+  const at = i => {
     while (i > primes.length - 1) {
       var n = primes[primes.length - 1] + 2;
       while (!check(n)) n += 2;
@@ -267,7 +267,7 @@ module.exports.prime = (() => {
     primes[primes.length - 1]
   );
 
-  return {check, index_of, known, prime_at, primes, top};
+  return {check, index_of, known, at, primes, top};
 
 })();
 

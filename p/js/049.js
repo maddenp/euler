@@ -29,9 +29,9 @@ function filter2(n) {
 
 // Wow, this is awful.
 
-for (var i = 0; prime.prime_at(i) <= hi; i++) {
+for (var i = 0; prime.at(i) <= hi; i++) {
   if (x[i] === false) continue;
-  var p = pm.uniques(pm.permarray(pm.n2a(prime.prime_at(i))).map(pm.a2n), true);
+  var p = pm.uniques(pm.permarray(pm.n2a(prime.at(i))).map(pm.a2n), true);
   if (p.indexOf(1487) !== -1) {
     invalidate(p, x);
     continue;

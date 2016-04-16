@@ -11,7 +11,7 @@ var i = 1;
 
 prime_loop: while (i++) {
   var mask = [0];
-  var ndigits = pm.ndigits(prime.prime_at(i));
+  var ndigits = pm.ndigits(prime.at(i));
   mask_loop: for (var j = 1; j < Math.pow(2, ndigits) - 1; j++) {
     pm.array_inc(mask, 2);
     if (mask[mask.length - 1] === 1) continue mask_loop; // See note 1
@@ -22,7 +22,7 @@ prime_loop: while (i++) {
     var exp = 0;
     var increment = pm.a2n(mask);
     var increment_count = 0;
-    var q = prime.prime_at(i);
+    var q = prime.at(i);
     var primes = 0;
     var smallest = undefined;
     while (q > 0) {
