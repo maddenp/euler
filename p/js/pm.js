@@ -232,6 +232,7 @@ module.exports.prime = (() => {
   var primes = [2, 3];
 
   const check = n => {
+    if (n < 2) return false;
     if (known[n]) return true;
     if ((n & 1) === 0) return false;
     for (var m = primes[primes.length - 1] + 2; m <= Math.sqrt(n); m += 2) {
@@ -247,6 +248,11 @@ module.exports.prime = (() => {
     return true;
   };
 
+  const index_of = n => {
+    while (top() < n) prime_at(primes.length);
+    return primes.indexOf(n);
+  };
+
   const prime_at = i => {
     while (i > primes.length - 1) {
       var n = primes[primes.length - 1] + 2;
@@ -257,7 +263,11 @@ module.exports.prime = (() => {
     return primes[i];
   };
 
-  return {check, known, prime_at, primes};
+  const top = () => (
+    primes[primes.length - 1]
+  );
+
+  return {check, index_of, known, prime_at, primes, top};
 
 })();
 

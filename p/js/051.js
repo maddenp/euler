@@ -7,10 +7,9 @@ const pm = require('./pm');
 
 const prime = pm.prime;
 
-var i = 0;
+var i = 1;
 
-prime_loop: while (true) {
-  ++i;
+prime_loop: while (i++) {
   var mask = [0];
   var ndigits = pm.ndigits(prime.prime_at(i));
   mask_loop: for (var j = 1; j < Math.pow(2, ndigits) - 1; j++) {
