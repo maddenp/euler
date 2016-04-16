@@ -12,15 +12,16 @@ const pairable = (p1, p2) => {
 };
 
 const f = (p, q, pairs, sum, depth) => {
+  q = parseInt(q);
   if (pairable(p, q)) {
     sum += q;
     if (depth === goal) {
       if (sum + p < low) low = sum + p;
     } else {
       Object.keys(pairs).forEach(x => {
-        f(p, pairs[x].val, pairs[x].sub, sum, depth + 1);
+        f(p, x, pairs[x], sum, depth + 1);
       });
-      pairs[p] = {val: p, sub: {}};
+      pairs[p] = {};
     }
   }
 };
@@ -35,9 +36,9 @@ while (true) {
   var p = pm.prime.at(i++);
   if (p === 2 || p === 5) continue;
   Object.keys(roots).forEach(q => {
-    f(p, roots[q].val, roots[q].sub, 0, 2);
+    f(p, q, roots[q], 0, 2);
   });
-  roots[p] = {val: p, sub: {}};
+  roots[p] = {};
   if (p > low) break;
 }
 
