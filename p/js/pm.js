@@ -257,7 +257,7 @@ module.exports.prime = (() => {
     return primes[i];
   };
 
-  return {check, prime_at};
+  return {check, known, prime_at, primes};
 
 })();
 

@@ -5,14 +5,15 @@
 
 const pm = require('./pm');
 
-var lo = 1000, hi = 9999;
-var result = pm.primes(lo, hi, true);
-var primes = result[0];
-var primes_map = result[1];
+const hi = 9999;
+const lo = 1000;
+const prime = pm.prime;
 
-function invalidate(p, primes) {
+var x = [];
+
+function invalidate(p, x) {
   for (var i = 0; i < p.length; i++) {
-    primes[primes.indexOf(p[i])] = false;
+    x[prime.primes.indexOf(p[i])] = false;
   }
 }
 
@@ -23,16 +24,16 @@ function filter1(n) {
 }
 
 function filter2(n) {
-  return primes_map[n] === true;
+  return prime.check(n);
 }
 
 // Wow, this is awful.
 
-for (var i = 0; i < primes.length; i++) {
-  if (primes[i] === false) continue;
-  var p = pm.uniques(pm.permarray(pm.n2a(primes[i])).map(pm.a2n), true);
+for (var i = 0; prime.prime_at(i) <= hi; i++) {
+  if (x[i] === false) continue;
+  var p = pm.uniques(pm.permarray(pm.n2a(prime.prime_at(i))).map(pm.a2n), true);
   if (p.indexOf(1487) !== -1) {
-    invalidate(p, primes);
+    invalidate(p, x);
     continue;
   }
   p = p.filter(filter1).filter(filter2);
