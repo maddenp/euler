@@ -1,12 +1,13 @@
 /* jshint node: true */
 /* jshint esversion: 6 */
+/* jshint loopfunc: true */
 
 "use strict";
 
 const pm = require('./pm');
 
 const lc_lo = 97;
-const lc_hi = 122
+const lc_hi = 122;
 const uc_lo = 65;
 const uc_hi = 90;
 const printable_lo = 32;
@@ -15,7 +16,7 @@ const vowel_freq_english = {a: 0.08167, e: 0.12702, i: 0.06966, o: 0.07507, u: 0
 
 var count = [];
 var min_error = Number.MAX_SAFE_INTEGER;
-var min_plaintext = undefined;
+var min_plaintext;
 
 var ciphertext = pm.readfile('059.dat');
 ciphertext = ciphertext.split(',');
