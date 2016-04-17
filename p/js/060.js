@@ -7,13 +7,14 @@ const pm = require('./pm');
 
 const cat = (a, b) => b * Math.pow(10, pm.ndigits(a)) + a;
 const goal = 5;
-const intsort = (a, b) => a - b;
+const node = () => ({a: [], o: {}});
 
 const pairable = (p1, p2) => (
   pm.prime.check(cat(p1, p2)) && pm.prime.check(cat(p2, p1)) ? true : false
 );
 
-const search = (p, q, pairs, sum, depth) => {
+const search = (p, q, roots, sum, depth) => {
+  var pairs = roots.o[q];
   q = parseInt(q);
   if (pairable(p, q)) {
     sum += q;
@@ -21,21 +22,19 @@ const search = (p, q, pairs, sum, depth) => {
       console.log(sum + p);
       process.exit();
     } else {
-      Object.keys(pairs).sort(intsort).forEach(x => {
-        search(p, x, pairs[x], sum, depth + 1);
-      });
-      pairs[p] = {};
+      pairs.a.forEach(r => search(p, r, pairs, sum, depth + 1));
+      pairs.a.push(p);
+      pairs.o[p] = node();
     }
   }
 };
 
 var i = 0;
-var roots = {};
+var roots = node();
 
 while (true) {
   var p = pm.prime.at(i++);
-  Object.keys(roots).sort(intsort).forEach(q => {
-    search(p, q, roots[q], 0, 2);
-  });
-  roots[p] = {};
+  roots.a.forEach(q => search(p, q, roots, 0, 2));
+  roots.a.push(p);
+  roots.o[p] = node();
 }
