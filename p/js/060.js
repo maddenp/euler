@@ -18,15 +18,14 @@ const f = (p, q, pairs, sum, depth) => {
     if (depth === goal) {
       if (sum + p < low) low = sum + p;
     } else {
-      Object.keys(pairs).forEach(x => {
-        f(p, x, pairs[x], sum, depth + 1);
-      });
+      Object.keys(pairs).forEach(x => f(p, x, pairs[x], sum, depth + 1));
       pairs[p] = {};
     }
   }
 };
 
 const goal = 5;
+// const goal = 4;
 
 var i = 0;
 var low = Number.MAX_SAFE_INTEGER;
@@ -34,12 +33,10 @@ var roots = {};
 
 while (true) {
   var p = pm.prime.at(i++);
-  if (p === 2 || p === 5) continue;
-  Object.keys(roots).forEach(q => {
-    f(p, q, roots[q], 0, 2);
-  });
-  roots[p] = {};
   if (p > low) break;
+  if (p === 2 || p === 5) continue;
+  Object.keys(roots).forEach(q => f(p, q, roots[q], 0, 2));
+  roots[p] = {};
 }
 
 console.log(low);
