@@ -15,17 +15,17 @@ const f = (p, q, pairs, sum, depth) => {
   q = parseInt(q);
   if (pairable(p, q)) {
     sum += q;
+    var subpairs = pairs[q];
     if (depth === goal) {
       if (sum + p < low) low = sum + p;
     } else {
-      Object.keys(pairs).forEach(x => f(p, x, pairs[x], sum, depth + 1));
-      pairs[p] = {};
+      Object.keys(subpairs).forEach(x => f(p, x, subpairs, sum, depth + 1));
+      subpairs[p] = {};
     }
   }
 };
 
 const goal = 5;
-// const goal = 4;
 
 var i = 0;
 var low = Number.MAX_SAFE_INTEGER;
@@ -35,7 +35,7 @@ while (true) {
   var p = pm.prime.at(i++);
   if (p > low) break;
   if (p === 2 || p === 5) continue;
-  Object.keys(roots).forEach(q => f(p, q, roots[q], 0, 2));
+  Object.keys(roots).forEach(q => f(p, q, roots, 0, 2));
   roots[p] = {};
 }
 
