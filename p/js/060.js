@@ -4,6 +4,7 @@
 "use strict";
 
 const pm = require('./pm');
+
 const cat = (a, b) => b * Math.pow(10, pm.ndigits(a)) + a;
 const goal = 5;
 const intsort = (a, b) => a - b;
@@ -16,15 +17,14 @@ const search = (p, q, pairs, sum, depth) => {
   q = parseInt(q);
   if (pairable(p, q)) {
     sum += q;
-    var subpairs = pairs[q];
     if (depth === goal) {
       console.log(sum + p);
       process.exit();
     } else {
-      Object.keys(subpairs).sort(intsort).forEach(x => {
-        search(p, x, subpairs, sum, depth + 1);
+      Object.keys(pairs).sort(intsort).forEach(x => {
+        search(p, x, pairs[x], sum, depth + 1);
       });
-      subpairs[p] = {};
+      pairs[p] = {};
     }
   }
 };
@@ -35,7 +35,7 @@ var roots = {};
 while (true) {
   var p = pm.prime.at(i++);
   Object.keys(roots).sort(intsort).forEach(q => {
-    search(p, q, roots, 0, 2);
+    search(p, q, roots[q], 0, 2);
   });
   roots[p] = {};
 }
