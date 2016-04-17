@@ -4,39 +4,38 @@
 "use strict";
 
 const pm = require('./pm');
+const cat = (a, b) => b * Math.pow(10, pm.ndigits(a)) + a;
+const goal = 5;
+const intsort = (a, b) => a - b;
 
-const pairable = (p1, p2) => {
-  const n1 = p2 * Math.pow(10, pm.ndigits(p1)) + p1;
-  const n2 = p1 * Math.pow(10, pm.ndigits(p2)) + p2;
-  return pm.prime.check(n1) && pm.prime.check(n2) ? true : false;
-};
+const pairable = (p1, p2) => (
+  pm.prime.check(cat(p1, p2)) && pm.prime.check(cat(p2, p1)) ? true : false
+);
 
-const f = (p, q, pairs, sum, depth) => {
+const search = (p, q, pairs, sum, depth) => {
   q = parseInt(q);
   if (pairable(p, q)) {
     sum += q;
     var subpairs = pairs[q];
     if (depth === goal) {
-      if (sum + p < low) low = sum + p;
+      console.log(sum + p);
+      process.exit();
     } else {
-      Object.keys(subpairs).forEach(x => f(p, x, subpairs, sum, depth + 1));
+      Object.keys(subpairs).sort(intsort).forEach(x => {
+        search(p, x, subpairs, sum, depth + 1);
+      });
       subpairs[p] = {};
     }
   }
 };
 
-const goal = 5;
-
 var i = 0;
-var low = Number.MAX_SAFE_INTEGER;
 var roots = {};
 
 while (true) {
   var p = pm.prime.at(i++);
-  if (p > low) break;
-  if (p === 2 || p === 5) continue;
-  Object.keys(roots).forEach(q => f(p, q, roots, 0, 2));
+  Object.keys(roots).sort(intsort).forEach(q => {
+    search(p, q, roots, 0, 2);
+  });
   roots[p] = {};
 }
-
-console.log(low);
