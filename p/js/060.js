@@ -20,12 +20,7 @@ const search = (p, q, roots, sum, depth) => {
     if (depth === goal && sum + p < low) {
       low = sum + p;
     } else {
-      const keys = Object.keys(roots[q]);
-      for (var i = 0; i < keys.length; i++) {
-        if (search(p, keys[i], roots[q], sum, depth + 1)) {
-          delete roots[q][keys[i]];
-        }
-      }
+      Object.keys(roots[q]).forEach(r => search(p, r, roots[q], sum, depth + 1));
       roots[q][p] = {};
     }
   }
@@ -39,12 +34,7 @@ while (true) {
   var p = pm.prime.at(primeidx++);
   if (p > low) break;
   if (p === 2 || p === 5) continue;
-  const keys = Object.keys(roots);
-  for (var i = 0; i < keys.length; i++) {
-    if (search(p, keys[i], roots, 0, 2)) {
-      delete roots[keys[i]];
-    }
-  }
+  Object.keys(roots).forEach(q => search(p, q, roots, 0, 2));
   roots[p] = {};
 }
 
