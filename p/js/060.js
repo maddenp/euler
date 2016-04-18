@@ -37,11 +37,11 @@ var roots = node();
 
 while (true) {
   var p = pm.prime.at(i++);
+  if (p > low) break;
   if (p === 2 || p === 5) continue;
   roots.a.forEach(q => search(p, q, roots, 0, 2));
   roots.a.push(p);
   roots.o[p] = node();
-  if (p > low) break;
 }
 
 console.log(low);
