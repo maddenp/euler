@@ -14,24 +14,19 @@ const pairable = (p1, p2) => (
 
 const search = (p, q, roots, sum, depth) => {
   q = parseInt(q);
+  sum += q;
+  if (sum >= low) return true;
   if (pairable(p, q)) {
-    sum += q;
-    if (sum < low) {
-      if (depth === goal && sum + p < low) {
-        low = sum + p;
-      } else {
-        var pairs = roots[q];
-        const keys = Object.keys(pairs);
-        for (var i = 0; i < keys.length; i++) {
-          if (search(p, keys[i], pairs, sum, depth + 1)) {
-            delete pairs[keys[i]];
-          }
-        }
-        pairs[p] = {};
-      }
-      return false;
+    if (depth === goal && sum + p < low) {
+      low = sum + p;
     } else {
-      return true;
+      const keys = Object.keys(roots[q]);
+      for (var i = 0; i < keys.length; i++) {
+        if (search(p, keys[i], roots[q], sum, depth + 1)) {
+          delete roots[q][keys[i]];
+        }
+      }
+      roots[q][p] = {};
     }
   }
 };
