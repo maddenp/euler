@@ -14,6 +14,11 @@ const pairable = (p1, p2) => (
   pm.prime.check(cat(p1, p2)) && pm.prime.check(cat(p2, p1)) ? true : false
 );
 
+const prune = (q, roots) => {
+  roots.a.splice(roots.a.indexOf(q), 1);
+  delete roots.o[q];
+};
+
 const search = (p, q, roots, sum, depth) => {
   var pairs = roots.o[q];
   q = parseInt(q);
@@ -23,23 +28,35 @@ const search = (p, q, roots, sum, depth) => {
       if (depth === goal && sum + p < low) {
         low = sum + p;
       } else {
-        pairs.a.forEach(r => search(p, r, pairs, sum, depth + 1));
+        for (var i = 0; i < pairs.a.length; i++) {
+          if (search(p, pairs.a[i], pairs, sum, depth + 1)) {
+            prune(q, roots, depth);
+          }
+        }
         pairs.a.push(p);
         pairs.o[p] = node();
       }
+      return false;
+    } else {
+      prune(q, roots, depth);
+      return true;
     }
   }
 };
 
-var i = 0;
+var primeidx = 0;
 var low = Number.MAX_SAFE_INTEGER;
 var roots = node();
 
 while (true) {
-  var p = pm.prime.at(i++);
+  var p = pm.prime.at(primeidx++);
   if (p > low) break;
   if (p === 2 || p === 5) continue;
-  roots.a.forEach(q => search(p, q, roots, 0, 2));
+  for (var i = 0; i < roots.a.length; i++) {
+    if (search(p, roots.a[i], roots, 0, 2)) {
+      prune(q, roots, 0);
+    }
+  }
   roots.a.push(p);
   roots.o[p] = node();
 }
