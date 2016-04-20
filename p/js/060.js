@@ -5,37 +5,55 @@
 
 const pm = require('./pm');
 
-const cat = (a, b) => b * Math.pow(10, pm.ndigits(a)) + a;
+const cat = (a, b) => parseInt(a + b);
+
 const goal = 5;
 
 const pairable = (p1, p2) => (
   pm.prime.check(cat(p1, p2)) && pm.prime.check(cat(p2, p1)) ? true : false
 );
 
-const search = (p, q, roots, sum, depth) => {
-  q = parseInt(q);
-  sum += q;
-  if (sum >= low) return true;
-  if (pairable(p, q)) {
-    if (depth === goal && sum + p < low) {
-      low = sum + p;
-    } else {
-      Object.keys(roots[q]).forEach(r => search(p, r, roots[q], sum, depth + 1));
-      roots[q][p] = {};
-    }
+const max_clique_with = (p, roots) => {
+  var clique = [p];
+  Object.keys(roots).forEach(q => {
+    if (q !== p && clique.every(r => roots[r][q])) clique.push(q);
+  });
+  if (clique.length === goal) {
+    return pm.array_sum(clique.map(n => parseInt(n)));
   }
 };
 
-var primeidx = 0;
+var chunksize = 1000;
+var limit = chunksize;
 var low = Number.MAX_SAFE_INTEGER;
+var p = 0;
+var primeidx = 0;
 var roots = {};
 
-while (true) {
-  var p = pm.prime.at(primeidx++);
-  if (p > low) break;
-  if (p === 2 || p === 5) continue;
-  Object.keys(roots).forEach(q => search(p, q, roots, 0, 2));
-  roots[p] = {};
+while (p < low) {
+
+  while (p < limit) {
+    var p = pm.prime.at(primeidx++);
+    if (p === 2 || p === 5) continue;
+    if (p > low) break;
+    roots[p] = {};
+    Object.keys(roots).forEach(q => {
+      if (q !== p) {
+        if (pairable(p, q)) {
+          roots[p][q] = true;
+          roots[q][p] = true;
+        }
+      }
+    });
+  }
+
+  Object.keys(roots).forEach(p => {
+    var sum = max_clique_with(p, roots);
+    if (sum && sum < low) low = sum;
+  });
+
+  limit = low === Number.MAX_SAFE_INTEGER ? limit + chunksize : low;
+
 }
 
 console.log(low);
