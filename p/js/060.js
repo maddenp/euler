@@ -18,8 +18,8 @@ var p = 0;
 var primeidx = 0;
 var roots = {};
 
-while (p < limit) {
-  var p = pm.prime.at(primeidx++);
+const make_pairs_for_prime_at_idx = (idx) => {
+  var p = pm.prime.at(idx);
   roots[p] = {};
   Object.keys(roots).forEach(q => {
     if (pairable(p, q)) {
@@ -27,7 +27,10 @@ while (p < limit) {
       roots[q][p] = true;
     }
   });
-}
+  return p;
+};
+
+while (make_pairs_for_prime_at_idx(primeidx++) < limit);
 
 const k = Object.keys(roots);
 
