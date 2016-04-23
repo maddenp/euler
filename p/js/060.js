@@ -23,11 +23,9 @@ while (p < limit) {
   if (p === 2 || p === 5) continue;
   roots[p] = {};
   Object.keys(roots).forEach(q => {
-    if (q !== p) {
-      if (pairable(p, q)) {
-        roots[p][q] = true;
-        roots[q][p] = true;
-      }
+    if (pairable(p, q)) {
+      roots[p][q] = true;
+      roots[q][p] = true;
     }
   });
 }
