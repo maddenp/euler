@@ -11,11 +11,6 @@ const pairable = (p1, p2) => (
   pm.prime.check(cat(p1, p2)) && pm.prime.check(cat(p2, p1)) ? true : false
 );
 
-var limit = 10000;
-var low = Number.MAX_SAFE_INTEGER;
-var max = 0;
-var roots = {};
-
 const f = idx => {
   const p = pm.prime.at(idx);
   if (!roots[p]) {
@@ -30,9 +25,12 @@ const f = idx => {
   return p;
 };
 
+var limit = 9000;
+var low = Number.MAX_SAFE_INTEGER;
+var roots = {};
+
 for (var i1 = 1, a = 0; a < limit; i1++) {
   a = f(i1);
-  if (a > max) max = a;
   var sum_a = a;
   if (sum_a * 5 > low) break;
   for (var i2 = i1 + 1, b = 0; b < limit; i2++) {
@@ -62,10 +60,4 @@ for (var i1 = 1, a = 0; a < limit; i1++) {
   }
 }
 
-if (low === Number.MAX_SAFE_INTEGER) {
-  console.log('No solution found.');
-} else if (max * 5 < low) {
-  console.log('Search space too small.');
-} else {
-  console.log(low);
-}
+if (low !== Number.MAX_SAFE_INTEGER) console.log(low);
