@@ -14,7 +14,6 @@ const pairable = (p1, p2) => (
 var limit = 10000;
 var low = Number.MAX_SAFE_INTEGER;
 var max = 0;
-var p = 0;
 var primeidx = 0;
 var roots = {};
 
