@@ -7,8 +7,6 @@ const pm = require('./pm');
 
 const cat = (a, b) => parseInt(a + b);
 
-const goal = 5;
-
 const pairable = (p1, p2) => (
   pm.prime.check(cat(p1, p2)) && pm.prime.check(cat(p2, p1)) ? true : false
 );
