@@ -20,7 +20,6 @@ var roots = {};
 
 while (p < limit) {
   var p = pm.prime.at(primeidx++);
-  if (p === 2 || p === 5) continue;
   roots[p] = {};
   Object.keys(roots).forEach(q => {
     if (pairable(p, q)) {
