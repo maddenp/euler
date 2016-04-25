@@ -5,6 +5,21 @@
 
 const pm = require('./pm');
 
+const bron_kerbosch = (pairs, r, p, x) => {
+  if (p.length === 0 && x.length === 0 && r.length === goal) {
+    var sum = pm.array_sum(r);
+    if (sum < min) min = sum;
+  } else {
+    p = p.slice();
+    x = x.slice();
+    p.slice().forEach(v => {
+      bron_kerbosch(pairs, r.concat(v), intersection(p, pairs[v]), intersection(x, pairs[v]));
+      p.splice(p.indexOf(v), 1);
+      x.push(v);
+    });
+  }
+};
+
 const intersection = (a1, a2) => {
   const a3 = [];
   const x1 = a1.length < a2.length ? a1 : a2;
@@ -47,21 +62,6 @@ for (var i = 0; i < limit; i++) {
 }
 
 var min = Number.MAX_SAFE_INTEGER;
-
-const bron_kerbosch = (pairs, r, p, x) => {
-  if (p.length === 0 && x.length === 0 && r.length === goal) {
-    var sum = pm.array_sum(r);
-    if (sum < min) min = sum;
-  } else {
-    p = p.slice();
-    x = x.slice();
-    p.slice().forEach(v => {
-      bron_kerbosch(pairs, r.concat(v), intersection(p, pairs[v]), intersection(x, pairs[v]));
-      p.splice(p.indexOf(v), 1);
-      x.push(v);
-    });
-  }
-};
 
 bron_kerbosch(pairs, [], Object.keys(pairs).map(s => parseInt(s)), []);
 
