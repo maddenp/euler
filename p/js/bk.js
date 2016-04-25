@@ -38,7 +38,7 @@ for (var i = 0; i < limit; i++) {
 
 var min = Number.MAX_SAFE_INTEGER;
 
-const bron_kerbosch = (pairs, r, p, x, depth) => {
+const bron_kerbosch = (pairs, r, p, x) => {
   if (p.length === 0 && x.length === 0 && r.length === goal) {
     var sum = pm.array_sum(r);
     if (sum < min) min = sum;
@@ -46,13 +46,19 @@ const bron_kerbosch = (pairs, r, p, x, depth) => {
     p = p.slice();
     x = x.slice();
     p.slice().forEach(v => {
-      bron_kerbosch(pairs, r.concat(v), intersection(p, pairs[v]), intersection(x, pairs[v]), depth+1);
+      bron_kerbosch(pairs, r.concat(v), intersection(p, pairs[v]), intersection(x, pairs[v]));
       p.splice(p.indexOf(v), 1);
       x.push(v);
     });
   }
 };
 
-bron_kerbosch(pairs, [], Object.keys(pairs).map(s => parseInt(s)), [], 0);
+bron_kerbosch(pairs, [], Object.keys(pairs).map(s => parseInt(s)), []);
 
-console.log(min);
+if (min === Number.MAX_SAFE_INTEGER) {
+  console.log('No ' + goal + '-clique found');
+} else if (pm.prime.primes[pm.prime.primes.length - 1] * goal < min) {
+  console.log('Insufficient search space');
+} else {
+  console.log(min);
+}
