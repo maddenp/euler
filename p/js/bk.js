@@ -52,7 +52,7 @@ const pairable = (p1, p2) => (
 );
 
 const goal = 5;
-const limit = 1051;
+const limit = 1051; // experimentally derived
 const pairs = {};
 
 for (var i = 0; i < limit; i++) {
