@@ -5,11 +5,6 @@
 
 const pm = require('./pm');
 
-// const intersection = (a1, a2) => {
-//   const isin = a => e => a.indexOf(e) !== -1;
-//   return a1.length < a2.length ? a1.filter(isin(a2)) : a2.filter(isin(a1));
-// };
-
 const intersection = (a1, a2) => {
   const a3 = [];
   const x1 = a1.length < a2.length ? a1 : a2;
@@ -40,7 +35,7 @@ const make_pairs = (p, pairs) => {
 };
 
 const pairable = (p1, p2) => (
-  pm.prime.check(parseInt(p1 + p2)) && pm.prime.check(parseInt(p2 + p1))
+  pm.miller_rabin(parseInt(p1 + p2)) && pm.miller_rabin(parseInt(p2 + p1))
 );
 
 const goal = 5;
