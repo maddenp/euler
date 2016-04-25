@@ -5,9 +5,24 @@
 
 const pm = require('./pm');
 
+// const intersection = (a1, a2) => {
+//   const isin = a => e => a.indexOf(e) !== -1;
+//   return a1.length < a2.length ? a1.filter(isin(a2)) : a2.filter(isin(a1));
+// };
+
 const intersection = (a1, a2) => {
-  const isin = a => e => a.indexOf(e) !== -1;
-  return a1.length < a2.length ? a1.filter(isin(a2)) : a2.filter(isin(a1));
+  const a3 = [];
+  const x1 = a1.length < a2.length ? a1 : a2;
+  const x2 = a1.length < a2.length ? a2 : a1;
+  var from = 0;
+  for (var i = 0; i < x1.length; i++) {
+    var found_at = x2.indexOf(x1[i], from);
+    if (found_at !== -1) {
+      a3.push(x1[i]);
+      from = found_at;
+    }
+  }
+  return a3;
 };
 
 const make_pairs = (p, pairs) => {
