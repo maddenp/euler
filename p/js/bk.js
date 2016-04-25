@@ -39,11 +39,9 @@ const make_pairs = (p, pairs) => {
   if (!pairs[p]) {
     pairs[p] = [];
     Object.keys(pairs).forEach(q => {
-      if (p !== q) {
-        if (pairable(p, q)) {
-          pairs[p].push(q);
-          pairs[q].push(p);
-        }
+      if (pairable(p, q)) {
+        pairs[p].push(q);
+        pairs[q].push(p);
       }
     });
   }
