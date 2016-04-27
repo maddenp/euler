@@ -18,7 +18,7 @@ const hi_lo = n => {
   return {hi, lo};
 };
 
-const fns = [f3, f4, f5];//, f6, f7, f8];
+const fns = [f3, f4, f5, f6, f7, f8];
 const ns = {};
 const his = {};
 const los = {};
@@ -48,7 +48,7 @@ for (var i = 0; i < fns.length; i++) {
 const base = 3;
 var nsbase = Object.keys(ns[base]);
 
-for (var i1 = 0; i1 < nsbase.length; i1++) {
+out: for (var i1 = 0; i1 < nsbase.length; i1++) {
   var soln = [];
   var types = {};
   var hibase = ns[base][nsbase[i1]].hi;
@@ -71,7 +71,48 @@ for (var i1 = 0; i1 < nsbase.length; i1++) {
               var n3 = c3.n;
               types[c3.t] = true;
               soln.push(n3);
-              if (ns[c3.t][c3.n].lo === hibase) console.log(soln);
+              var maybe4 = his[ns[c3.t][n3].lo];
+              if (maybe4) {
+                for (var i4 = 0; i4 < maybe4.length; i4++) {
+                  var c4 = maybe4[i4];
+                  if (!types[c4.t]) {
+                    var n4 = c4.n;
+                    types[c4.t] = true;
+                    soln.push(n4);
+                    var maybe5 = his[ns[c4.t][n4].lo];
+                    if (maybe5) {
+                      for (var i5 = 0; i5 < maybe5.length; i5++) {
+                        var c5 = maybe5[i5];
+                        if (!types[c5.t]) {
+                          var n5 = c5.n;
+                          types[c5.t] = true;
+                          soln.push(n5);
+                          var maybe6 = his[ns[c5.t][n5].lo];
+                          if (maybe6) {
+                            for (var i6 = 0; i6 < maybe6.length; i6++) {
+                              var c6 = maybe6[i6];
+                              if (!types[c6.t]) {
+                                var n6 = c6.n;
+                                types[c6.t] = true;
+                                soln.push(n6);
+                                if (ns[c6.t][c6.n].lo === hibase) {
+                                  console.log(pm.array_sum(soln));
+                                }
+                                soln.pop();
+                                delete types[c6.t];
+                              }
+                            }
+                          }
+                          soln.pop();
+                          delete types[c5.t];
+                        }
+                      }
+                    }
+                    soln.pop();
+                    delete types[c4.t];
+                  }
+                }
+              }
               soln.pop();
               delete types[c3.t];
             }
