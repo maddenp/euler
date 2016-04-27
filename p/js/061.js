@@ -51,8 +51,8 @@ var nsbase = Object.keys(ns[base]);
 for (var i1 = 0; i1 < nsbase.length; i1++) {
   var types = {};
   var soln = [];
-  types[base] = true;
   var n1 = parseInt(nsbase[i1]);
+  types[base] = true;
   soln.push(n1);
   var hibase = ns[base][n1].hi;
   var candidates2 = his[ns[base][n1].lo];
@@ -60,21 +60,18 @@ for (var i1 = 0; i1 < nsbase.length; i1++) {
     for (var i2 = 0; i2 < candidates2.length; i2++) {
       var c2 = candidates2[i2];
       if (!types[c2.t]) {
-        types[c2.t] = true;
         var n2 = c2.n;
+        types[c2.t] = true;
         soln.push(n2);
         var candidates3 = his[ns[c2.t][n2].lo];
         if (candidates3) {
           for (var i3 = 0; i3 < candidates3.length; i3++) {
             var c3 = candidates3[i3];
             if (!types[c3.t]) {
-              types[c3.t] = true;
               var n3 = c3.n;
+              types[c3.t] = true;
               soln.push(n3);
-              if (Object.keys(types).length === 3) {
-                var lolast = ns[c3.t][c3.n].lo;
-                if (lolast === hibase) console.log(soln);
-              }
+              if (ns[c3.t][c3.n].lo === hibase) console.log(soln);
               soln.pop();
               delete types[c3.t];
             }
