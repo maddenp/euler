@@ -177,11 +177,7 @@ module.exports.hypotenuse = function (a, b) {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 };
 
-module.exports.is_hexagon_number = function (n) {
-  return module.exports.is_geometric_number(2, -1, -n);
-};
-
-module.exports.is_geometric_number = function (a, b, c) {
+module.exports.is_figurate = function (a, b, c) {
   var test = function (n) {
     return n > 0 && module.exports.is_integral(n);
   };
@@ -193,6 +189,18 @@ module.exports.is_geometric_number = function (a, b, c) {
     }
   }
   return false;
+};
+
+module.exports.is_figurate_3 = function (n) {
+  return module.exports.is_figurate(1, 1, -n * 2);
+};
+
+module.exports.is_figurate_5 = function (n) {
+  return module.exports.is_figurate(3, -1, -n *2);
+};
+
+module.exports.is_figurate_6 = function (n) {
+  return module.exports.is_figurate(2, -1, -n);
 };
 
 module.exports.is_integral = function (n) {
@@ -215,10 +223,6 @@ module.exports.is_pandigital = function (x, n) {
     if (a[i] !== digits[i]) return false;
   }
   return true;
-};
-
-module.exports.is_pentagon_number = function (n) {
-  return module.exports.is_geometric_number(3, -1, -n *2);
 };
 
 module.exports.is_power_of = function (n, b) {
@@ -274,10 +278,6 @@ module.exports.prime = (() => {
 module.exports.is_square = function (n) {
   var r = Math.sqrt(n);
   return r === Math.floor(r);
-};
-
-module.exports.is_triangle_number = function (n) {
-  return module.exports.is_geometric_number(1, 1, -n * 2);
 };
 
 module.exports.log10 = function (n) {

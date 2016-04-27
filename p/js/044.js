@@ -18,7 +18,7 @@ out: while (true) {
   for (var i = 0; i < last; i++) {
     var diff = pn[last] - pn[i];
     var sum  = pn[last] + pn[i];
-    if (pm.is_pentagon_number(diff) && pm.is_pentagon_number(sum)) {
+    if (pm.is_figurate_5(diff) && pm.is_figurate_5(sum)) {
       console.log(pn[last] - pn[i]);
       break out;
     }

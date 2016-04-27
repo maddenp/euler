@@ -13,7 +13,7 @@ var n = 144;
 
 while (true) {
   var h = hexagon_number(n);
-  if (pm.is_pentagon_number(h) && pm.is_triangle_number(h)) {
+  if (pm.is_figurate_5(h) && pm.is_figurate_3(h)) {
     console.log(h);
     break;
   }
