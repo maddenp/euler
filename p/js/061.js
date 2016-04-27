@@ -49,24 +49,24 @@ const base = 3;
 var nsbase = Object.keys(ns[base]);
 
 for (var i1 = 0; i1 < nsbase.length; i1++) {
-  var types = {};
   var soln = [];
+  var types = {};
+  var hibase = ns[base][nsbase[i1]].hi;
   var n1 = parseInt(nsbase[i1]);
   types[base] = true;
   soln.push(n1);
-  var hibase = ns[base][n1].hi;
-  var candidates2 = his[ns[base][n1].lo];
-  if (candidates2) {
-    for (var i2 = 0; i2 < candidates2.length; i2++) {
-      var c2 = candidates2[i2];
+  var maybe2 = his[ns[base][n1].lo];
+  if (maybe2) {
+    for (var i2 = 0; i2 < maybe2.length; i2++) {
+      var c2 = maybe2[i2];
       if (!types[c2.t]) {
         var n2 = c2.n;
         types[c2.t] = true;
         soln.push(n2);
-        var candidates3 = his[ns[c2.t][n2].lo];
-        if (candidates3) {
-          for (var i3 = 0; i3 < candidates3.length; i3++) {
-            var c3 = candidates3[i3];
+        var maybe3 = his[ns[c2.t][n2].lo];
+        if (maybe3) {
+          for (var i3 = 0; i3 < maybe3.length; i3++) {
+            var c3 = maybe3[i3];
             if (!types[c3.t]) {
               var n3 = c3.n;
               types[c3.t] = true;
