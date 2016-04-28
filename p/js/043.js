@@ -20,7 +20,7 @@ function test(a) {
 var a = pm.range(0, 9);
 var answers = [];
 
-pm.permutations(a, function (x) {
+pm.permutations_map(a, function (x) {
   if (test(x)) answers.push(pm.a2n(x));
 });
 
