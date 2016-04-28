@@ -377,13 +377,14 @@ module.exports.ordered_insert_in_place = function (a, n) {
   }
 };
 
-module.exports.permutations = function (n, a, fn) {
+module.exports.permutations = function (a, fn, n) {
   // https://en.wikipedia.org/wiki/Heap%27s_algorithm
+  n = n || a.length;
   if (n === 1) {
     fn(a);
   } else {
     for (var i = 0; i < n - 1; i++) {
-      module.exports.permutations(n - 1, a, fn);
+      module.exports.permutations(a, fn, n - 1);
       var tmp = a[n - 1];
       if (n % 2 === 0) {
         a[n - 1] = a[i];
@@ -393,14 +394,14 @@ module.exports.permutations = function (n, a, fn) {
         a[0] = tmp;
       }
     }
-    module.exports.permutations(n - 1, a, fn);
+    module.exports.permutations(a, fn, n - 1);
   }
 };
 
 module.exports.permarray = function (a) {
   var p = [];
   var fn = function (x) { p.push(x.slice()); };
-  module.exports.permutations(a.length, a, fn);
+  module.exports.permutations(a, fn);
   return p;
 };
 

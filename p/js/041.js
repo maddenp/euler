@@ -24,7 +24,7 @@ function update_result(a) {
 
 for (var d = limit; d > 0; d--) {
   var a = pm.range(1, d);
-  pm.permutations(a.length, a, update_result);
+  pm.permutations(a, update_result);
   if (result > 0) {
     console.log(result);
     break;
