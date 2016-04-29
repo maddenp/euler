@@ -5,28 +5,16 @@
 
 const pm = require('./pm');
 
-const is_cbrt = n => {
-  const x = Math.cbrt(n);
-  return Math.floor(x) === x;
-};
+const o = {};
 
-var n = 1;
-
-while (true) {
+for (var n = 1; true; n++) {
   var cube = Math.pow(n, 3);
-  var perms = pm.permarray(pm.n2a(cube));
-  var perms = perms.filter(a => a[0] !== 0);
-  var perms = pm.array_n_sort(perms.map(pm.a2n));
-  var uniqs = [];
-  for (var i = 0; i < perms.length; i++) {
-    if (uniqs.length === 0 || perms[i] !== uniqs[uniqs.length - 1]) {
-      uniqs.push(perms[i]);
-    }
-  }
-  var ncubes = uniqs.reduce((m, e) => is_cbrt(e) ? m + 1 : m, 0);
-  if (ncubes === 3) {
-    console.log(cube);
-    break;
-  }
-  ++n;
+  var a = pm.n2a(cube);
+  var histogram = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  for (var i = 0; i < a.length; i++) ++histogram[a[i]];
+  var k = pm.a2s(histogram);
+  o[k] = o[k] ? [o[k][0] + 1, o[k][1]] : [1, cube];
+  if (o[k][0] === 5) break;
 }
+
+console.log(o[k][1]);
