@@ -3,8 +3,6 @@
 
 "use strict";
 
-const pm = require('./pm');
-
 const period_length = n => {
   
   const a = Math.floor(Math.sqrt(n));
