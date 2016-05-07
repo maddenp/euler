@@ -5,32 +5,34 @@
 
 const pm = require('./pm');
 
-const g = n => {
+const period_length = n => {
   
-  const f = (o) => {
-    o.b = (o.n - o.c * o.c) / o.b;
-    o.a = Math.floor((Math.sqrt(o.n) - o.c) / o.b);
-    o.c = -o.c - o.a * o.b;
-  };
-
   const a = Math.floor(Math.sqrt(n));
   const b = 1;
   const c = -a;
   const seen = {b: {c: true}};
+  const o = {n, a, b, c};
+  var i = 0;
 
-  var o = {n, a, b, c};
-
-  for (var i = 0; i < 10; i++) {
-    f(o);
+  while (true) {
+    o.b = (o.n - o.c * o.c) / o.b;
+    o.a = Math.floor((Math.sqrt(o.n) - o.c) / o.b);
+    o.c = -o.c - o.a * o.b;
     if (seen[o.b] && seen[o.b][o.c]) return i;
     seen[o.b] = seen[o.b] || {};
     seen[o.b][o.c] = true;
+    ++i;
   }
-  console.log(seen);
+
 };
 
-for (var n = 2; n <= 13; n++) {
+const limit = 10000;
+var odds = 0;
+
+for (var n = 2; n <= limit; n++) {
   if (Math.sqrt(n) !== Math.floor(Math.sqrt(n))) {
-    console.log(n, g(n));
+    if (period_length(n) % 2 === 1) ++odds;
   }
 }
+
+console.log(odds);
