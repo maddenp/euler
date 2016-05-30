@@ -118,6 +118,19 @@ module.exports.array_sum = function (a) {
   return (a.reduce(function (m, e) { return m + e; }, 0));
 };
 
+module.exports.array_times_array = function (a1, a2) {
+  var p = [0];
+  for (var i = a2.length - 1; i >= 0; i--) {
+    var term = module.exports.array_times_int(a1, a2[i]);
+    var padding_zeros = a2.length - (i + 1);
+    for (var j = 0; j < padding_zeros; j++) {
+      term.push(0);
+    }
+    p = module.exports.array_add(p, term);
+  }
+  return p;
+};
+
 module.exports.array_times_int = function (a, n) {
   var p = a.slice();
   var carry = 0;
