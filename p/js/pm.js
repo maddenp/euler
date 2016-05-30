@@ -49,10 +49,10 @@ module.exports.array_exp = function (b, n) {
   while (n > 0) {
     var b_int = module.exports.a2n(b);
     if ((n & 1) === 0) {
-      b = module.exports.array_mult(b, b_int);
+      b = module.exports.array_times_int(b, b_int);
       n /= 2;
     } else {
-      a = module.exports.array_mult(a, b_int);
+      a = module.exports.array_times_int(a, b_int);
       n -= 1;
     }
   }
@@ -64,10 +64,10 @@ module.exports.array_exp_trunc = function (b, n, max) {
   while (n > 0) {
     var b_int = module.exports.a2n(b);
     if ((n & 1) === 0) {
-      b = module.exports.array_trunc(module.exports.array_mult(b, b_int), max);
+      b = module.exports.array_trunc(module.exports.array_times_int(b, b_int), max);
       n /= 2;
     } else {
-      a = module.exports.array_trunc(module.exports.array_mult(a, b_int), max);
+      a = module.exports.array_trunc(module.exports.array_times_int(a, b_int), max);
       n -= 1;
     }
   }
@@ -99,7 +99,7 @@ module.exports.array_min = function (a) {
   return Math.min.apply(null, a);
 };
 
-module.exports.array_mult = function (a, n) {
+module.exports.array_times_int = function (a, n) {
   var p = a.slice();
   var carry = 0;
   var start = a.length - 1;
@@ -133,7 +133,7 @@ module.exports.array_pow = function (a, exponent) {
   var base = [1];
   var n = module.exports.a2n(a);
   for (var i = 0; i < exponent; i++) {
-    base = module.exports.array_mult(base, n);
+    base = module.exports.array_times_int(base, n);
   }
   return base;
 };

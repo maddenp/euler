@@ -10,7 +10,7 @@ var max = 0;
 for (var b = 1; b <= 100; b++) {
   var a = [1];
   for (var e = 1; e <= 100; e++) {
-    a = pm.array_mult(a, b);
+    a = pm.array_times_int(a, b);
     var sum = pm.array_sum(a);
     if (sum > max) max = sum;
   }

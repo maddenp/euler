@@ -10,12 +10,12 @@ const f = (i, limit) => {
   const a = i % 3 === 2 ? 2 * k : 1;
   if (i === limit) return {num: [1], den: [a]};
   const x = f(i + 1, limit);
-  return {num: x.den, den: pm.array_add(pm.array_mult(x.den, a), x.num)};
+  return {num: x.den, den: pm.array_add(pm.array_times_int(x.den, a), x.num)};
 };
 
 const g = limit => {
   const x = f(1, limit - 1);
-  return {num: pm.array_add(pm.array_mult(x.den, 2), x.num), den: x.den};
+  return {num: pm.array_add(pm.array_times_int(x.den, 2), x.num), den: x.den};
 };
 
 const n = 100;

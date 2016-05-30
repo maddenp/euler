@@ -11,8 +11,8 @@ var b1 = [2], b2 = [5];
 var count = 0;
 
 for (var i = 0; i < 998; i++) {
-  var ax = pm.array_add(pm.array_mult(a2, 2), a1);
-  var bx = pm.array_add(pm.array_mult(b2, 2), b1);
+  var ax = pm.array_add(pm.array_times_int(a2, 2), a1);
+  var bx = pm.array_add(pm.array_times_int(b2, 2), b1);
   a1 = a2; a2 = ax;
   b1 = b2; b2 = bx;
   if (ax.length > bx.length) ++count;

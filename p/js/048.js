@@ -13,7 +13,7 @@ for (var n = 1; n <= 1000; n++) {
   var limit = even ? n / 2 : (n - 1) / 2;
   var multiplier = n * n;
   for (var i = 0; i < limit; i++) {
-    product = pm.array_trunc(pm.array_mult(product, multiplier), 10);
+    product = pm.array_trunc(pm.array_times_int(product, multiplier), 10);
   }
   sum = pm.array_add(sum, product);
   even = !even;
