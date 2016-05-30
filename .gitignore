@@ -22,3 +22,4 @@ n/java solutions/projectEuler/out/production/projectEuler/Euler/SolutionLauncher
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
 .idea/scopes/scope_settings.xml
+node_modules
