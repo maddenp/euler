@@ -3,7 +3,7 @@
 
 "use strict";
 
-const f = (n, limit) => {
+const apply_to_convergents = (n, f) => {
   
   var a = Math.floor(Math.sqrt(n));
   var b = 1;
@@ -18,7 +18,7 @@ const f = (n, limit) => {
 
   // http://goo.gl/uSYJLz for info on method for calculating convergent
 
-  while (i++ < limit) {
+  while (true) {
     b = (n - c * c) / b;
     a = Math.floor((Math.sqrt(n) - c) / b);
     c = -c - a * b;
@@ -28,9 +28,20 @@ const f = (n, limit) => {
     conv_den = a * conv_den + conv_den_old;
     conv_num_old = tmp_num;
     conv_den_old = tmp_den;
-    console.log('###',conv_num,conv_den);
+    if (f(n, conv_num, conv_den)) {
+      return([conv_num, conv_den]);
+    }
   }
 
 };
 
-console.log(f(2, 8));
+const f = (d, x, y) => {
+  console.log('x='+x+' d='+d+' y='+y);
+  return x * x - d * y * y === 1;
+}
+
+for (var i = 2; i <= 1000; i++) {
+  console.log('###',i);
+  if (Math.sqrt(i) === Math.floor(Math.sqrt(i))) continue;
+  console.log(apply_to_convergents(i, f));
+}
