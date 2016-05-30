@@ -104,15 +104,6 @@ module.exports.array_n_sort = function (a, reverse) {
   return a.sort(function (e1, e2) { return e1 - e2; });
 };
 
-module.exports.array_pow = function (a, exponent) {
-  var base = [1];
-  var n = module.exports.a2n(a);
-  for (var i = 0; i < exponent; i++) {
-    base = module.exports.array_times_int(base, n);
-  }
-  return base;
-};
-
 module.exports.array_product = function (a) {
   return (a.reduce(function (m, e) { return m * e; }, 1));
 };
