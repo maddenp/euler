@@ -65,7 +65,7 @@
 065=272
 067=7273
 
-X=$(basename $(wildcard *.js))
+X=$(sort $(basename $(wildcard *.js)))
 
 .PHONY: test $(X)
 
