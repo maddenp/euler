@@ -99,31 +99,6 @@ module.exports.array_min = function (a) {
   return Math.min.apply(null, a);
 };
 
-module.exports.array_times_int = function (a, n) {
-  var p = a.slice();
-  var carry = 0;
-  var start = a.length - 1;
-  for (var i = start; i >= 0; i--) {
-    p[i] *= n;
-    if (carry !== 0) {
-      p[i] += carry;
-      carry = 0;
-    }
-    if (p[i] > 9) {
-      if (i === 0) {
-        while (p[0] >= 10) {
-          p.unshift(Math.floor(p[0] / 10));
-          p[1] %= 10;
-        }
-      } else {
-        carry = Math.floor(p[i] / 10);
-        p[i] %= 10;
-      }
-    }
-  }
-  return p;
-};
-
 module.exports.array_n_sort = function (a, reverse) {
   if (reverse) return a.sort(function (e1, e2) { return e2 - e1; });
   return a.sort(function (e1, e2) { return e1 - e2; });
@@ -150,6 +125,31 @@ module.exports.array_reverse = function (a) {
 
 module.exports.array_sum = function (a) {
   return (a.reduce(function (m, e) { return m + e; }, 0));
+};
+
+module.exports.array_times_int = function (a, n) {
+  var p = a.slice();
+  var carry = 0;
+  var start = a.length - 1;
+  for (var i = start; i >= 0; i--) {
+    p[i] *= n;
+    if (carry !== 0) {
+      p[i] += carry;
+      carry = 0;
+    }
+    if (p[i] > 9) {
+      if (i === 0) {
+        while (p[0] >= 10) {
+          p.unshift(Math.floor(p[0] / 10));
+          p[1] %= 10;
+        }
+      } else {
+        carry = Math.floor(p[i] / 10);
+        p[i] %= 10;
+      }
+    }
+  }
+  return p;
 };
 
 module.exports.array_trunc = function (a, digits) {
