@@ -5,8 +5,6 @@
 
 const pm = require('./pm');
 
-const gon = 5;
-
 const is_magic = a => {
   var sum;
   for (var i = 0; i < gon; i++) {
@@ -48,7 +46,9 @@ const update_max = a => {
   }
 };
 
-var a = pm.range(1, 10);
+const gon = 5;
+const max_digit = gon * 2;
+const a = pm.range(1, max_digit);
 
 var max = 0;
 
