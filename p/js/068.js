@@ -6,17 +6,8 @@
 const pm = require('./pm');
 
 const is_magic = a => {
-  for (var offset = 0; offset < gon * 3; offset += 3) {
-    var line_sum = 0;
-    for (var i = offset; i < offset + 3; i++) {
-      line_sum += a[i];
-      if (line_sum > line_max) return false;
-    }
-    if (offset === 0) {
-      var sum = line_sum;
-    } else {
-      if (line_sum !== sum) return false;
-    }
+  for (var idx = 0; idx < gon * 3; idx += 3) {
+    if (pm.array_sum(a.slice(idx, idx + 3)) !== line_max) return false;
   }
   return true;
 };
@@ -40,7 +31,7 @@ const update_max = a => {
   ];
   if (is_magic(b)) {
     const idx = b.indexOf(6);
-    const s = pm.a2s(b.slice(idx).concat(b.slice(0, idx)));
+    const s = b.slice(idx).concat(b.slice(0, idx)).join('');
     const n = parseInt(s);
     if (n > max) max = n;
   }
