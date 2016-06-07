@@ -35,8 +35,8 @@ const rotate = a => {
 const update_max = a => {
   const b = [
     a[0], a[1], a[2],
-    a[4], a[2], a[3],
-    a[5], a[3], a[1]
+    a[3], a[2], a[4],
+    a[5], a[4], a[1]
   ];
   if (is_magic(b)) {
     const s = pm.a2s(rotate(b));
@@ -45,7 +45,7 @@ const update_max = a => {
   }
 };
 
-var a = [1, 2, 3, 4, 5, 6];
+var a = pm.range(1, 6);
 
 var max = 0;
 
