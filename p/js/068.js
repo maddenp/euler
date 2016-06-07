@@ -22,15 +22,8 @@ const is_magic = a => {
 };
 
 const rotate = a => {
-  var idx_of_lowest = a.length;
-  var val_of_lowest = Number.MAX_SAFE_INTEGER;
-  for (var offset = 0; offset < gon * 3; offset += 3) {
-    if (a[offset] < val_of_lowest) {
-      idx_of_lowest = offset;
-      val_of_lowest = a[offset];
-    }
-  }
-  return a.slice(idx_of_lowest).concat(a.slice(0, idx_of_lowest));
+  const idx = a.indexOf(6);
+  return a.slice(idx).concat(a.slice(0, idx));
 };
 
 const update_max = a => {
