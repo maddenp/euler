@@ -6,8 +6,8 @@
 const pm = require('./pm');
 
 const is_magic = a => {
-  for (var idx = 0; idx < gon * 3; idx += 3) {
-    if (pm.array_sum(a.slice(idx, idx + 3)) !== line_max) return false;
+  for (var i = 0; i < 5 * 3; i += 3) {
+    if (pm.array_sum(a.slice(i, i + 3)) !== required_sum) return false;
   }
   return true;
 };
@@ -31,21 +31,18 @@ const update_max = a => {
   ];
   if (is_magic(b)) {
     const idx = b.indexOf(6);
-    const s = b.slice(idx).concat(b.slice(0, idx)).join('');
-    const n = parseInt(s);
+    const n = parseInt(b.slice(idx).concat(b.slice(0, idx)).join(''));
     if (n > max) max = n;
   }
 };
 
-const gon = 5;
-const max_digit = gon * 2;
-const a = pm.range(1, max_digit);
+const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // Since the numbers < 6 must form the inner ring, each of them will be counted
 // twice in the total line sum. And the max sum for a line is 1/5 of this total
 // line sum.
 
-const line_max = ((1 + 2 + 3 + 4 + 5) * 2 + 6 + 7 + 8 + 9 + 10) / gon;
+const required_sum = ((1 + 2 + 3 + 4 + 5) * 2 + 6 + 7 + 8 + 9 + 10) / 5;
 
 var max = 0;
 
