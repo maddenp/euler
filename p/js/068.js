@@ -6,16 +6,17 @@
 const pm = require('./pm');
 
 const is_magic = a => {
-  var sum;
-  for (var i = 0; i < gon; i++) {
-    var offset = i * 3;
+  for (var offset = 0; offset < gon * 3; offset += 3) {
     var line_sum = 0;
-    for (var j = offset; j < offset + 3; j++) {
-      line_sum += a[j];
+    for (var i = offset; i < offset + 3; i++) {
+      line_sum += a[i];
       if (line_sum > line_max) return false;
     }
-    if (i === 0) sum = line_sum;
-    if (line_sum !== sum) return false;
+    if (offset === 0) {
+      var sum = line_sum;
+    } else {
+      if (line_sum !== sum) return false;
+    }
   }
   return true;
 };
@@ -23,8 +24,7 @@ const is_magic = a => {
 const rotate = a => {
   var idx_of_lowest = a.length;
   var val_of_lowest = Number.MAX_SAFE_INTEGER;
-  for (var i = 0; i < gon; i++) {
-    var offset = i * 3;
+  for (var offset = 0; offset < gon * 3; offset += 3) {
     if (a[offset] < val_of_lowest) {
       idx_of_lowest = offset;
       val_of_lowest = a[offset];
