@@ -5,7 +5,7 @@
 
 const pm = require('./pm');
 
-const gon = 3;
+const gon = 5;
 
 const is_magic = a => {
   var sum;
@@ -36,16 +36,20 @@ const update_max = a => {
   const b = [
     a[0], a[1], a[2],
     a[3], a[2], a[4],
-    a[5], a[4], a[1]
+    a[5], a[4], a[6],
+    a[7], a[6], a[8],
+    a[9], a[8], a[1]
   ];
   if (is_magic(b)) {
     const s = pm.a2s(rotate(b));
-    const n = parseInt(s);
-    if (n > max) max = n;
+    if (s.length === 16) {
+      const n = parseInt(s);
+      if (n > max) max = n;
+    }
   }
 };
 
-var a = pm.range(1, 6);
+var a = pm.range(1, 10);
 
 var max = 0;
 
