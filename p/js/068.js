@@ -11,8 +11,8 @@ const is_magic = a => {
   var sum;
   for (var i = 0; i < gon; i++) {
     var offset = i * 3;
-    var b = a.slice(offset, offset + 3);
-    var line_sum = pm.array_sum(b);
+    var line_sum = 0;
+    for (var j = offset; j < offset + 3; j++) line_sum += a[j];
     if (i === 0) sum = line_sum;
     if (line_sum !== sum) return false;
   }
