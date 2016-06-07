@@ -39,7 +39,8 @@ const update_max = a => {
     a[5], a[3], a[1]
   ];
   if (is_magic(b)) {
-    const n = pm.a2n(rotate(b));
+    const s = pm.a2s(rotate(b));
+    const n = parseInt(s);
     if (n > max) max = n;
   }
 };
