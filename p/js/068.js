@@ -21,11 +21,6 @@ const is_magic = a => {
   return true;
 };
 
-const rotate = a => {
-  const idx = a.indexOf(6);
-  return a.slice(idx).concat(a.slice(0, idx));
-};
-
 const update_max = a => {
 
   // If a number < 6 appears on the periphery, its line will be selected as the
@@ -44,7 +39,8 @@ const update_max = a => {
     a[9], a[8], a[1]
   ];
   if (is_magic(b)) {
-    const s = pm.a2s(rotate(b));
+    const idx = b.indexOf(6);
+    const s = pm.a2s(b.slice(idx).concat(b.slice(0, idx)));
     const n = parseInt(s);
     if (n > max) max = n;
   }
