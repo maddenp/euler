@@ -33,6 +33,7 @@ const rotate = a => {
 };
 
 const update_max = a => {
+  if ([a[1], a[2], a[4], a[6], a[8]].some(n => n === 10)) return;
   const b = [
     a[0], a[1], a[2],
     a[3], a[2], a[4],
@@ -42,10 +43,8 @@ const update_max = a => {
   ];
   if (is_magic(b)) {
     const s = pm.a2s(rotate(b));
-    if (s.length === 16) {
-      const n = parseInt(s);
-      if (n > max) max = n;
-    }
+    const n = parseInt(s);
+    if (n > max) max = n;
   }
 };
 
