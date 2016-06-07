@@ -31,7 +31,13 @@ const rotate = a => {
 };
 
 const update_max = a => {
-  if ([a[1], a[2], a[4], a[6], a[8]].some(n => n === 10)) return;
+  // If a number < 6 appears on the periphery, its line will be selected as the
+  // starting point, so that the solution will start with a number < 6. So, the
+  // best we can do is to assure that 6, 7, 8, 9, and 10 appear on the periphery
+  // so that the least of them, 6, will begin the solution. Note that it could
+  // be the case that no such magic ring exists, so this constraint will either
+  // cause no solution to be found, or speed the discovery of the correct one.
+  if ([a[0], a[3], a[5], a[7], a[9]].some(n => n < 6)) return;
   const b = [
     a[0], a[1], a[2],
     a[3], a[2], a[4],
