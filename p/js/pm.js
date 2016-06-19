@@ -409,12 +409,16 @@ module.exports.permarray = function (a) {
   return p;
 };
 
-module.exports.prime_factorization = function (n, primes_less_than_n) {
+module.exports.prime_factorization = function (n, primes_less_than_n, uniques) {
   var factors = [];
   for (var i = 0; i < primes_less_than_n.length; i++) {
+    var added = false;
     var p = primes_less_than_n[i];
     while (n % p === 0) {
-      factors.push(p);
+      if (!uniques || !added) {
+        factors.push(p);
+        added = true;
+      }
       n /= p;
     }
     if (n === 1) break;
