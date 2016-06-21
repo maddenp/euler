@@ -36,6 +36,14 @@ module.exports.array_add = function (a1, a2) {
   return a3;
 };
 
+module.exports.are_permutations = function (n1, n2) {
+  const a1 = module.exports.n2a(n1);
+  const a2 = module.exports.n2a(n2);
+  const s1 = module.exports.array_n_sort(a1).toString();
+  const s2 = module.exports.array_n_sort(a2).toString();
+  return s1 === s2;
+};
+
 module.exports.array_equal = function (a1, a2) {
   if (a1.length !== a2.length) return false;
   for (var i = 0; i < a1.length; i++) {

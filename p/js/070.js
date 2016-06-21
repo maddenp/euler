@@ -5,11 +5,11 @@
 
 const pm = require('./pm');
 
-const limit = 1000000;
+const limit = 10000000;
 const primes = pm.primes(2, limit);
 const totient = [];
 
-for (var n = 2; n <= limit; n++) {
+for (var n = 2; n < limit; n++) {
   totient[n] = n;
 }
 
@@ -22,13 +22,15 @@ for (var i = 0; i < primes.length; i++) {
 }
 
 var the_n;
-var max_ratio = 0;
+var min_ratio = Number.MAX_SAFE_INTEGER;
 
-for (var n = 2; n <= limit; n++) {
-  var ratio = n / totient[n];
-  if (ratio > max_ratio) {
-    max_ratio = ratio;
-    the_n = n;
+for (var n = 2; n < limit; n++) {
+  if (pm.are_permutations(n, totient[n])) {
+    var ratio = n / totient[n];
+    if (ratio < min_ratio) {
+      min_ratio = ratio;
+      the_n = n;
+    }
   }
 }
 
