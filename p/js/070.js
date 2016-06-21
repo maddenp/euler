@@ -25,12 +25,10 @@ var the_n;
 var min_ratio = Number.MAX_SAFE_INTEGER;
 
 for (var n = 2; n < limit; n++) {
-  if (pm.are_permutations(n, totient[n])) {
-    var ratio = n / totient[n];
-    if (ratio < min_ratio) {
-      min_ratio = ratio;
-      the_n = n;
-    }
+  var ratio = n / totient[n];
+  if (ratio < min_ratio && pm.are_permutations(n, totient[n])) {
+    min_ratio = ratio;
+    the_n = n;
   }
 }
 
