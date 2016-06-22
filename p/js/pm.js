@@ -37,11 +37,20 @@ module.exports.array_add = function (a1, a2) {
 };
 
 module.exports.are_permutations = function (n1, n2) {
-  const a1 = module.exports.n2a(n1);
-  const a2 = module.exports.n2a(n2);
-  const s1 = module.exports.array_n_sort(a1).toString();
-  const s2 = module.exports.array_n_sort(a2).toString();
-  return s1 === s2;
+  if ((n1 - n2) % 9 !== 0) return false;
+  const c = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  while (n1) {
+    c[n1 % 10]++;
+    n1 = Math.floor(n1 / 10);
+  }
+  while (n2) {
+    c[n2 % 10]--;
+    n2 = Math.floor(n2 / 10);
+  }
+  for (var i = 0; i < 10; i++) {
+    if (c[i] !== 0) return false;
+  }
+  return true;
 };
 
 module.exports.array_equal = function (a1, a2) {
