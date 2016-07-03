@@ -7,25 +7,30 @@ const pm = require('./pm');
 
 const limit = 1000000;
 
+const right = 3 / 7;
+
 var left_n = 0;
 var left_d = 1;
 var left = left_n / left_d;
 
-const right = 3 / 7;
+var n = left_n;
+var d = left_d;
 
-for (var n = 1; n <= limit - 1; n++) {
-  for (var d = n * 2; d <= limit; d++) {
-    var r = n / d;
-    if (r < left) continue;
-    if (r < right && r > left) {
+while (true) {
+  if (d > limit) break;
+  var r = n / d;
+  if (r >= right) {
+    d++;
+  } else {
+    if (r > left) {
       left_n = n;
       left_d = d;
       left = r;
-      continue;
+      n++;
+    } else {
+      n++;
     }
   }
 }
 
-console.log(left_n + '/' + left_d + ' = ' + left);
-
-    
+console.log(left_n);
