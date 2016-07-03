@@ -3,8 +3,6 @@
 
 "use strict";
 
-const pm = require('./pm');
-
 const limit = 1000000;
 
 const right = 3 / 7;
@@ -19,17 +17,15 @@ var d = left_d;
 while (true) {
   if (d > limit) break;
   var r = n / d;
-  if (r >= right) {
-    d++;
-  } else {
+  if (r < right) {
     if (r > left) {
       left_n = n;
       left_d = d;
       left = r;
-      n++;
-    } else {
-      n++;
     }
+    n++;
+  } else {
+    d++;
   }
 }
 
