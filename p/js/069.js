@@ -16,7 +16,6 @@ for (var n = 2; n <= limit; n++) {
 for (var i = 0; i < primes.length; i++) {
   var p = primes[i];
   for (var j = p; j <= limit; j += p) {
-    if (j > limit) break;
     totient[j] *= (1 - (1/p));
   }
 }
