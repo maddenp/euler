@@ -5,6 +5,8 @@
 
 const n = 12000;
 
+// Algorithm as given by Wikipedia's article on Farey sequences
+
 var a = 0;
 var b = 1;
 var c = 1;
