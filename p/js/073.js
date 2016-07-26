@@ -7,7 +7,7 @@ const n = 12000;
 
 var count = 0;
 
-// Algorithm as given by Wikipedia's article on Farey sequences
+// Algorithm as given by Wikipedia's article on Farey Sequences
 
 var a = 0;
 var b = 1;
@@ -15,6 +15,8 @@ var c = 1;
 var d = n;
 
 while (c <= n) {
+
+  // Next Farey term is a/b.
 
   if (a/b > 1/2 && a/b < 2/3) ++count;
 
