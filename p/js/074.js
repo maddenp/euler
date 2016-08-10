@@ -25,11 +25,12 @@ for (var n = 1; n < 1000000; n++) {
   var count = 1;
   var m = n;
   while (true) {
-    var a = pm.n2a(m);
-    m = 0;
-    for (var i = 0; i < a.length; i++) {
-      m += factorials[a[i]];
+    var sum = 0;
+    while (m > 0) {
+      sum += factorials[m % 10];
+      m = Math.floor(m / 10);
     }
+    m = sum;
     if (seen[m]) break;
     seen[m] = true;
     count += 1;
