@@ -16,7 +16,7 @@ const factorials = {
   7: 5040,
   8: 40320,
   9: 362880
-}
+};
 
 const chain_lengths = {};
 
