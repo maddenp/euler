@@ -6,6 +6,7 @@
 const pm = require('./pm');
 
 const factorials = {
+  0: 1,
   1: 1,
   2: 2,
   3: 6,
@@ -24,13 +25,16 @@ for (var n = 1; n < 1000000; n++) {
   var count = 1;
   var m = n;
   while (true) {
-    m = pm.array_sum(pm.n2a(m).map(pm.factorial));
+    var a = pm.n2a(m);
+    m = 0;
+    for (var i = 0; i < a.length; i++) {
+      m += factorials[a[i]];
+    }
     if (seen[m]) break;
     seen[m] = true;
-    ++count;
+    count += 1;
   }
   if (count == 60) ++sixties;
-
 }
 
 console.log(sixties);
