@@ -3,7 +3,7 @@
 
 "use strict";
 
-const limit = 10;
+const limit = 100;
 
 const gpn = n => {
 
@@ -20,28 +20,27 @@ const gpn = n => {
 const seen = {0: 1};
 
 const p = (n) => {
-  console.log('###',n);
+
+  // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
+
   if (n < 0) return 0;
-  if (seen[n]) {
-    console.log('seen: '+n+'='+seen[n]);
-    return seen[n];
-  }
+  if (seen[n]) return seen[n];
   var sum = p(n - 1);
   var i = 2;
   var coef = 1;
-  console.log('initial: n='+n+' sum='+sum+' i='+i+' coef='+coef);
   while (n - i >= 0) {
-    sum += coef * p(n - gpn(i));
-    coef *= -1;
+    var gpn_i = gpn(i);
+    var factor = p(n - gpn_i);
+    if (factor === 0) break;
+    sum += coef * factor;
+    coef = Math.floor(i / 2) % 2 === 0 ? 1 : -1;
     i++;
-    console.log('n='+n+' sum='+sum+' i='+i+' coef='+coef);
   }
   seen[n] = sum;
-  console.log('seen: '+JSON.stringify(seen));
   return sum;
+
 };
 
-for (var n = 1; n <= limit; n++) {
-  console.log('---',n);
-  console.log('ans: '+p(n));
-}
+for (var n = 1; n <= limit; n++) p(n);
+
+console.log(seen[limit] - 1);
