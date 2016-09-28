@@ -7,12 +7,9 @@ const amount = 200;
 const coins = [1, 2, 5, 10, 20, 50, 100, 200];
 
 const cc = (amount, i) => {
-  const coin = coins[i];
-  if (coin === 1 || amount === 0) return 1;
-  var sum = 0;
-  for (var j = 0; j <= Math.floor(amount / coin); j++) {
-    sum += cc(amount - j * coin, i - 1);
-  }
-  return sum;
+  if (amount === 0 || coins[i] === 1) return 1;
+  if (amount < coins[i]) return cc(amount, i - 1);
+  return cc(amount, i - 1) + cc(amount - coins[i], i);
 }
+
 console.log(cc(amount, coins.length - 1));
