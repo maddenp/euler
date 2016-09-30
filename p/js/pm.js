@@ -398,6 +398,16 @@ module.exports.ordered_insert_in_place = function (a, n) {
   }
 };
 
+module.exports.partitions = function (n, parts, idx) {
+  // See e.g. https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
+  if (n === 0) return 1;
+  if (parts[idx] === parts[0]) return n % parts[0] === 0 ? 1 : 0;
+  if (n < parts[idx]) return module.exports.partitions(n, parts, idx - 1);
+  const s0 = module.exports.partitions(n, parts, idx - 1);
+  const s1 = module.exports.partitions(n - parts[idx], parts, idx);
+  return s0 + s1;
+};
+
 module.exports.permutations_map = function (a, fn, n) {
   // https://en.wikipedia.org/wiki/Heap%27s_algorithm
   n = n || a.length;
