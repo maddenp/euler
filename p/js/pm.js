@@ -402,24 +402,22 @@ module.exports.partitions = (() => {
 
   const memo = {};
 
-  const lookup = function (n, high) {
-    if (memo[n] && memo[n][high]) return memo[n][high];
-    return false;
-  };
-
-  const memoize = function (n, high, count) {
-    memo[n] = memo[n] || {};
-    memo[n][high] = count;
-  };
-
   const count = function (n, parts, idx) {
     // See e.g. https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
-    if (n === 0) return 1;
-    if (parts[idx] === parts[0]) return n % parts[0] === 0 ? 1 : 0;
-    if (n < parts[idx]) return count(n, parts, idx - 1);
-    const s0 = count(n, parts, idx - 1);
-    const s1 = count(n - parts[idx], parts, idx);
-    return s0 + s1;
+    if (memo[n] && memo[n][idx]) {
+      var c = memo[n][idx];
+    } else if (n === 0) {
+      var c = 1;
+    } else if (parts[idx] === parts[0]) {
+      var c = n % parts[0] === 0 ? 1 : 0;
+    } else if (n < parts[idx]) {
+      var c = count(n, parts, idx - 1);
+    } else {
+      var c = count(n, parts, idx - 1) + count(n - parts[idx], parts, idx);
+    }
+    memo[n] = memo[n] || {};
+    memo[n][idx] = c;
+    return c;
   };
 
   return { count };
