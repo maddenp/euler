@@ -415,13 +415,13 @@ module.exports.partitions = (() => {
     if (count_memo[n] && count_memo[n][idx]) {
       var c = count_memo[n][idx];
     } else if (n === 0) {
-      var c = 1;
+      var c = [1];
     } else if (parts[idx] === parts[0]) {
-      var c = n % parts[0] === 0 ? 1 : 0;
+      var c = n % parts[0] === 0 ? [1] : [0];
     } else if (n < parts[idx]) {
       var c = count(n, parts, idx - 1);
     } else {
-      var c = count(n, parts, idx - 1) + count(n - parts[idx], parts, idx);
+      var c = module.exports.array_add(count(n, parts, idx - 1), count(n - parts[idx], parts, idx));
     }
     count_memo[n] = count_memo[n] || {};
     count_memo[n][idx] = c;

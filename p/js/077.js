@@ -7,6 +7,6 @@ const pm = require('./pm');
 
 const primes = pm.primes(1, 61); // experimentally derived range
 
-for (var n = 1; pm.partitions.count(n, primes, primes.length - 1) <= 5000; n++);
+for (var n = 1; pm.a2n(pm.partitions.count(n, primes, primes.length - 1)) <= 5000; n++);
 
 console.log(n);
