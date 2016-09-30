@@ -42,7 +42,7 @@ const cc = (amount, i) => {
   return cc(amount, i - 1) + cc(amount - primes[i], i);
 }
 
-const primes = pm.primes(1, 1000);
+const primes = pm.primes(1, 61); // experimentally derived range
 
 var n = 1;
 
