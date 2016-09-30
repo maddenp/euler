@@ -400,12 +400,14 @@ module.exports.ordered_insert_in_place = function (a, n) {
 
 module.exports.partitions = (() => {
 
-  const memo = {};
+  const count_memo = {};
 
   const count = function (n, parts, idx) {
-    // See e.g. https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
-    if (memo[n] && memo[n][idx]) {
-      var c = memo[n][idx];
+
+    // https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
+
+    if (count_memo[n] && count_memo[n][idx]) {
+      var c = count_memo[n][idx];
     } else if (n === 0) {
       var c = 1;
     } else if (parts[idx] === parts[0]) {
@@ -415,12 +417,48 @@ module.exports.partitions = (() => {
     } else {
       var c = count(n, parts, idx - 1) + count(n - parts[idx], parts, idx);
     }
-    memo[n] = memo[n] || {};
-    memo[n][idx] = c;
+    count_memo[n] = count_memo[n] || {};
+    count_memo[n][idx] = c;
     return c;
   };
 
-  return { count };
+  const gpn = n => {
+
+    // https://en.wikipedia.org/wiki/Pentagonal_number#Generalized_pentagonal_numbers_and_centered_hexagonal_numbers
+
+    if (n % 2 === 0) {
+      n = (n / 2) + 1;
+      return ((1 - n) * (3 * (1 - n) - 1)) / 2;
+    }
+    n = (n + 1) / 2;
+    return (3 * n * n - n) / 2;
+  };
+
+  const p_memo = {0: 1};
+
+  const p = (n) => {
+
+    // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
+
+    if (n < 0) return 0;
+    if (p_memo[n]) return p_memo[n];
+    var sum = p(n - 1);
+    var i = 2;
+    var coef = 1;
+    while (n - i >= 0) {
+      var gpn_i = gpn(i);
+      var factor = p(n - gpn_i);
+      if (factor === 0) break;
+      sum += coef * factor;
+      coef = Math.floor(i / 2) % 2 === 0 ? 1 : -1;
+      i++;
+    }
+    p_memo[n] = sum;
+    return sum;
+
+  };
+
+  return { count, p };
 
 })();
 
