@@ -92,7 +92,9 @@ module.exports.array_exp_trunc = function (b, n, max) {
 };
 
 module.exports.array_inc = function (a, base) {
+
   // NOTE: This function mutates array 'a'.
+
   base = base || 10;
   var changed = 0;
   var n = 1;
@@ -306,7 +308,9 @@ module.exports.log10 = function (n) {
 };
 
 module.exports.miller_rabin = function (n) {
+
   // https://goo.gl/ZBJ09T
+
   if (n < 2) return false;
   const limit = 3215031751;
   const witnesses = [2, 3, 5, 7];
@@ -338,7 +342,9 @@ module.exports.miller_rabin = function (n) {
 };
 
 module.exports.modexp = function (b, e, m) {
+
   // https://goo.gl/ldzssx
+
   const limit = Math.floor(Math.sqrt(Number.MAX_SAFE_INTEGER));
   if (m - 1 > limit) throw 'modexp will overflow with modulus ' + m;
   if (m === 1) return 0;
@@ -463,7 +469,9 @@ module.exports.partitions = (() => {
 })();
 
 module.exports.permutations_map = function (a, fn, n) {
+
   // https://en.wikipedia.org/wiki/Heap%27s_algorithm
+
   n = n || a.length;
   if (n === 1) {
     fn(a);
@@ -552,7 +560,9 @@ module.exports.quadratic_roots = function (a, b, c) {
 };
 
 module.exports.random_int_between = function (lo, hi) {
+
   // Note: Bounds are inclusive.
+
   return Math.floor(Math.random() * ((hi + 1) - lo) + lo);
 };
   
