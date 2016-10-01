@@ -430,6 +430,8 @@ module.exports.partitions = (() => {
 
   // 1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42
 
+  const p3memo = [];
+
   const p3 = n => {
     const f = inc => {
       var s = 0;
@@ -442,7 +444,8 @@ module.exports.partitions = (() => {
     };
     if (n < 0) return 0;
     if (n === 0) return 1;
-    return f(+1) + f(-1);
+    var p = f(+1) + f(-1);
+    return p;
   };
 
   const p0memo = {0: [1]};
