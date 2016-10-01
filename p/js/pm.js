@@ -422,7 +422,7 @@ module.exports.partitions = (() => {
 
   const p0memo = {0: 1};
 
-  const p0 = (n) => {
+  const p0 = n => {
 
     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
 
@@ -464,11 +464,12 @@ module.exports.partitions = (() => {
     p1memo[n] = p1memo[n] || {};
     p1memo[n][idx] = c;
     return c;
+
   };
 
   const p2 = function (n, parts) {
 
-    // Described in overview PDF from Problem 31
+    // See overview PDF from Problem 31.
 
     const a = [1];
     for (var i = 0; i < parts.length; i++) {
