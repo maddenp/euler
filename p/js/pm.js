@@ -428,11 +428,9 @@ module.exports.ordered_insert_in_place = function (a, n) {
 
 module.exports.partitions = (() => {
 
-  // 1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42
-
-//   const p3memo = [[1], [1]];
+//   const p0memo = [[1], [1]];
 // 
-//   const p3 = n => {
+//   const p0 = n => {
 // 
 //     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
 // 
@@ -440,21 +438,21 @@ module.exports.partitions = (() => {
 //       var s = [0];
 //       var x = [1];
 //       for (var k = inc; true; k += inc) {
-//         var x = p3(n - k * (3 * k - 1) / 2);
+//         var x = p0(n - k * (3 * k - 1) / 2);
 //         if (x.every(d => d === 0)) break;
 //         s = module.exports[Math.pow(-1, k - 1) > 0 ? 'array_add' : 'array_sub'](s, x);
 //       }
 //       return s;
 //     };
-//     if (p3memo[n]) return p3memo[n];
+//     if (p0memo[n]) return p0memo[n];
 //     if (n < 0) return [0];
-//     return (p3memo[n] = module.exports.array_add(f(+1), f(-1)));
+//     return (p0memo[n] = module.exports.array_add(f(+1), f(-1)));
 // 
 //   };
 
-  const p3memo = [1, 1];
+  const p0memo = [1, 1];
 
-  const p3 = n => {
+  const p0 = n => {
 
     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
 
@@ -462,53 +460,14 @@ module.exports.partitions = (() => {
       var s = 0;
       var x = 1;
       for (var k = inc; x !== 0; k += inc) {
-        var x = (k % 2 === 0 ? -1 : 1) * p3(n - k * (3 * k - 1) / 2);
+        var x = (k % 2 === 0 ? -1 : 1) * p0(n - k * (3 * k - 1) / 2);
         s += x;
       }
       return s;
     };
     if (n < 0) return 0;
-    if (p3memo[n]) return p3memo[n];
-    return p3memo[n] = f(+1) + f(-1);
-  };
-
-  const p0memo = {0: [1]};
- 
-  const p0 = n => {
-
-    const gpn = n => {
-
-      // https://en.wikipedia.org/wiki/Pentagonal_number#Generalized_pentagonal_numbers_and_centered_hexagonal_numbers
-
-      if (n % 2 === 0) {
-        n = (n / 2) + 1;
-        return ((1 - n) * (3 * (1 - n) - 1)) / 2;
-      }
-      n = (n + 1) / 2;
-      return (3 * n * n - n) / 2;
-    };
-
-    // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
-
-    if (n < 0) return [0];
     if (p0memo[n]) return p0memo[n];
-    var sum = p0(n - 1);
-    var i = 2;
-    var op = module.exports.array_add;
-    while (n - i >= 0) {
-      var factor = p0(n - gpn(i));
-      if (factor.every(digit => digit === 0)) break;
-      sum = op(sum, factor);
-      if (Math.floor(i / 2) % 2 === 0) {
-        op = module.exports.array_add;
-      } else {
-        op = module.exports.array_sub;
-      }
-      i++;
-    }
-    p0memo[n] = sum;
-    return sum;
-
+    return p0memo[n] = f(+1) + f(-1);
   };
 
   const p1memo = {};
@@ -549,7 +508,7 @@ module.exports.partitions = (() => {
 
   };
   
-  return { p0, p0memo, p1, p1memo, p2, p3 };
+  return { p0, p0memo, p1, p1memo, p2 };
 
 })();
 
