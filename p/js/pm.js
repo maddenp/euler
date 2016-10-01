@@ -442,10 +442,10 @@ module.exports.partitions = (() => {
       }
       return s;
     };
+    if (p3memo[n]) return p3memo[n];
     if (n < 0) return 0;
     if (n === 0) return 1;
-    var p = f(+1) + f(-1);
-    return p;
+    return (p3memo[n] = f(+1) + f(-1));
   };
 
   const p0memo = {0: [1]};
