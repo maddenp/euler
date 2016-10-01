@@ -5,20 +5,24 @@
 
 const pm = require('./pm');
 
+const p = [1, 1];
+const d = 1000000;
 var n = 1;
-
-const check = (a, zeros) => {
-  for (var i = a.length - 1; i > a.length - 1 - zeros; i--) {
-    if (a[i] !== 0) return false;
-  }
-  return true;
-}
-  
 while (true) {
-  var a = pm.partitions.p3(n);
-  if (check(a, 6)) {
-    console.log(n);
-    break;
-  }
   n++;
+  var i = 0;
+  while (true) {
+    i++;
+    var m1 = n - i * (3 * i - 1) / 2;
+    var m2 = n - i * (3 * i + 1) / 2;
+    var s = 1;
+    if (i % 2 === 0) s = -1;
+    p[n] = p[n] || 0;
+    if (m1 >= 0) p[n] += s * p[m1];
+    if (m2 >= 0) p[n] += s * p[m2];
+    if (m1 < 0 && m2 < 0) break;
+  }
+  p[n] = p[n] % d;
+  if (p[n] === 0) break;
 }
+console.log(n);
