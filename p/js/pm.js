@@ -428,21 +428,48 @@ module.exports.ordered_insert_in_place = function (a, n) {
 
 module.exports.partitions = (() => {
 
-  const gpn = n => {
+  // 1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42
 
-    // https://en.wikipedia.org/wiki/Pentagonal_number#Generalized_pentagonal_numbers_and_centered_hexagonal_numbers
-
-    if (n % 2 === 0) {
-      n = (n / 2) + 1;
-      return ((1 - n) * (3 * (1 - n) - 1)) / 2;
+  const p3 = n => {
+    if (n < 0) return 0;
+    if (n === 0) return 1;
+    var sum = 0;
+    var k = 0;
+    while (true) {
+      k++;
+      var c = Math.pow(-1, k - 1);
+      var p = k * (3 * k - 1) / 2;
+      var s = c * p3(n - p);
+      if (s === 0) break;
+      sum += s;
     }
-    n = (n + 1) / 2;
-    return (3 * n * n - n) / 2;
+    var k = 0;
+    while (true) {
+      k--;
+      var c = Math.pow(-1, k - 1);
+      var p = k * (3 * k - 1) / 2;
+      var s = c * p3(n - p);
+      if (s === 0) break;
+      sum += s;
+    }
+    return sum;
   };
 
   const p0memo = {0: [1]};
-
+ 
   const p0 = n => {
+
+    const gpn = n => {
+
+      // https://en.wikipedia.org/wiki/Pentagonal_number#Generalized_pentagonal_numbers_and_centered_hexagonal_numbers
+
+      if (n % 2 === 0) {
+        n = (n / 2) + 1;
+        return ((1 - n) * (3 * (1 - n) - 1)) / 2;
+      }
+      n = (n + 1) / 2;
+      return (3 * n * n - n) / 2;
+    };
 
     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
 
@@ -505,7 +532,7 @@ module.exports.partitions = (() => {
 
   };
   
-  return { p0, p1, p2 };
+  return { p0, p0memo, p1, p1memo, p2, p3 };
 
 })();
 
