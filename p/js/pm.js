@@ -453,13 +453,13 @@ module.exports.partitions = (() => {
     if (p1memo[n] && p1memo[n][idx]) {
       var c = p1memo[n][idx];
     } else if (n === 0) {
-      var c = [1];
+      var c = 1;
     } else if (parts[idx] === parts[0]) {
-      var c = n % parts[0] === 0 ? [1] : [0];
+      var c = n % parts[0] === 0 ? 1 : 0;
     } else if (n < parts[idx]) {
       var c = p1(n, parts, idx - 1);
     } else {
-      var c = module.exports.array_add(p1(n, parts, idx - 1), p1(n - parts[idx], parts, idx));
+      var c = p1(n, parts, idx - 1) + p1(n - parts[idx], parts, idx);
     }
     p1memo[n] = p1memo[n] || {};
     p1memo[n][idx] = c;
@@ -471,11 +471,11 @@ module.exports.partitions = (() => {
 
     // See overview PDF from Problem 31.
 
-    const a = [[1]];
+    const a = [1];
     for (var i = 0; i < parts.length; i++) {
       var p = parts[i];
       for (var t = p; t <= n; t++) {
-        a[t] = module.exports.array_add((a[t] || [0]), a[t - p]);
+        a[t] = (a[t] || 0) + a[t - p];
       }
     }
     return a[n];
