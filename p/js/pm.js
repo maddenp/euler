@@ -440,23 +440,26 @@ module.exports.partitions = (() => {
     return (3 * n * n - n) / 2;
   };
 
-  const p0memo = {0: 1};
+  const p0memo = {0: [1]};
 
   const p0 = n => {
 
     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
 
-    if (n < 0) return 0;
+    if (n < 0) return [0];
     if (p0memo[n]) return p0memo[n];
     var sum = p0(n - 1);
     var i = 2;
-    var coef = 1;
+    var op = module.exports.array_add;
     while (n - i >= 0) {
-      var gpn_i = gpn(i);
-      var factor = p0(n - gpn_i);
-      if (factor === 0) break;
-      sum += coef * factor;
-      coef = Math.floor(i / 2) % 2 === 0 ? 1 : -1;
+      var factor = p0(n - gpn(i));
+      if (factor.every(digit => digit === 0)) break;
+      sum = op(sum, factor);
+      if (Math.floor(i / 2) % 2 === 0) {
+        op = module.exports.array_add;
+      } else {
+        op = module.exports.array_sub;
+      }
       i++;
     }
     p0memo[n] = sum;

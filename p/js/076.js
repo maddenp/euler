@@ -9,4 +9,4 @@ for (var n = 1; n <= 100; n++) {
   var x = pm.partitions.p0(n);
 }
 
-console.log(x - 1);
+console.log(pm.a2n(x) - 1);
