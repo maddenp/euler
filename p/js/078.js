@@ -15,7 +15,7 @@ const check = (a, zeros) => {
 }
   
 while (true) {
-  var a = pm.partitions.p0(n);
+  var a = pm.partitions.p3(n);
   if (check(a, 6)) {
     console.log(n);
     break;

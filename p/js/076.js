@@ -5,4 +5,4 @@
 
 const pm = require('./pm');
 
-console.log(pm.a2n(pm.partitions.p3(100)) - 1);
+console.log(pm.partitions.p3(100) - 1);
