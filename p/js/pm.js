@@ -13,29 +13,6 @@ module.exports.a2s = function (a) {
   return a.join('');
 };
 
-module.exports.array_add = function (a1, a2) {
-  var zero_pad = function (a, n) {
-    for (var i = 0; i < n; i++) {
-      a.unshift(0);
-    }
-  };
-  var a3, carry, i;
-  zero_pad((a1.length > a2.length ? a2 : a1), Math.abs(a1.length - a2.length));
-  for (a3 = [], carry = false, i = a1.length - 1; i >= 0; i--) {
-    a3[i] = a1[i] + a2[i];
-    if (carry) {
-      a3[i]++;
-      carry = false;
-    }
-    if (a3[i] >= 10) {
-      a3[i] -= 10;
-      carry = true;
-    }
-    if (i === 0 && carry) a3.unshift(1);
-  }
-  return a3;
-};
-
 module.exports.are_permutations = function (n1, n2) {
   if ((n1 - n2) % 9 !== 0) return false;
   const c = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -51,6 +28,26 @@ module.exports.are_permutations = function (n1, n2) {
     if (c[i] !== 0) return false;
   }
   return true;
+};
+
+module.exports.array_add = function (a1, a2) {
+  var a3 = [];
+  const padding = Math.abs(a1.length - a2.length);
+  module.exports.zero_pad((a1.length > a2.length ? a2 : a1), padding);
+  var carry = false;
+  for (var i = a1.length - 1; i >= 0; i--) {
+    a3[i] = a1[i] + a2[i];
+    if (carry) {
+      a3[i]++;
+      carry = false;
+    }
+    if (a3[i] >= 10) {
+      a3[i] -= 10;
+      carry = true;
+    }
+    if (i === 0 && carry) a3.unshift(1);
+  }
+  return a3;
 };
 
 module.exports.array_equal = function (a1, a2) {
@@ -626,4 +623,10 @@ module.exports.word_sum = function (name) {
 
 module.exports.writefile = function (f, data) {
   require('fs').writeFileSync(f, JSON.stringify(data), 'utf8');
+};
+
+module.exports.zero_pad = function (a, n) {
+  for (var i = 0; i < n; i++) {
+    a.unshift(0);
+  }
 };
