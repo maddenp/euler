@@ -431,28 +431,18 @@ module.exports.partitions = (() => {
   // 1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42
 
   const p3 = n => {
+    const f = inc => {
+      var s = 0;
+      var x = 1;
+      for (var k = inc; x > 0; k += inc) {
+        var x = Math.pow(-1, k - 1) * p3(n - k * (3 * k - 1) / 2);
+        s += x;
+      }
+      return s;
+    };
     if (n < 0) return 0;
     if (n === 0) return 1;
-    var sum = 0;
-    var k = 0;
-    while (true) {
-      k++;
-      var c = Math.pow(-1, k - 1);
-      var p = k * (3 * k - 1) / 2;
-      var s = c * p3(n - p);
-      if (s === 0) break;
-      sum += s;
-    }
-    var k = 0;
-    while (true) {
-      k--;
-      var c = Math.pow(-1, k - 1);
-      var p = k * (3 * k - 1) / 2;
-      var s = c * p3(n - p);
-      if (s === 0) break;
-      sum += s;
-    }
-    return sum;
+    return f(+1) + f(-1);
   };
 
   const p0memo = {0: [1]};
