@@ -471,14 +471,15 @@ module.exports.partitions = (() => {
 
     // See overview PDF from Problem 31.
 
-    const a = [1];
+    const a = [[1]];
     for (var i = 0; i < parts.length; i++) {
       var p = parts[i];
       for (var t = p; t <= n; t++) {
-        a[t] = (a[t] || 0) + a[t - p];
+        a[t] = module.exports.array_add((a[t] || [0]), a[t - p]);
       }
     }
     return a[n];
+
   };
   
   return { p0, p1, p2 };
