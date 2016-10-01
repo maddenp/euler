@@ -433,10 +433,13 @@ module.exports.partitions = (() => {
   const p3memo = [];
 
   const p3 = n => {
+
+    // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
+
     const f = inc => {
       var s = 0;
       var x = 1;
-      for (var k = inc; x > 0; k += inc) {
+      for (var k = inc; x !== 0; k += inc) {
         var x = Math.pow(-1, k - 1) * p3(n - k * (3 * k - 1) / 2);
         s += x;
       }
