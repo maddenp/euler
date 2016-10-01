@@ -406,28 +406,6 @@ module.exports.ordered_insert_in_place = function (a, n) {
 
 module.exports.partitions = (() => {
 
-  const count_memo = {};
-
-  const count = function (n, parts, idx) {
-
-    // https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
-
-    if (count_memo[n] && count_memo[n][idx]) {
-      var c = count_memo[n][idx];
-    } else if (n === 0) {
-      var c = [1];
-    } else if (parts[idx] === parts[0]) {
-      var c = n % parts[0] === 0 ? [1] : [0];
-    } else if (n < parts[idx]) {
-      var c = count(n, parts, idx - 1);
-    } else {
-      var c = module.exports.array_add(count(n, parts, idx - 1), count(n - parts[idx], parts, idx));
-    }
-    count_memo[n] = count_memo[n] || {};
-    count_memo[n][idx] = c;
-    return c;
-  };
-
   const gpn = n => {
 
     // https://en.wikipedia.org/wiki/Pentagonal_number#Generalized_pentagonal_numbers_and_centered_hexagonal_numbers
@@ -464,7 +442,43 @@ module.exports.partitions = (() => {
 
   };
 
-  return { count, p };
+  const p1memo = {};
+
+  const p1 = function (n, parts, idx) {
+
+    // https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
+
+    if (p1memo[n] && p1memo[n][idx]) {
+      var c = p1memo[n][idx];
+    } else if (n === 0) {
+      var c = [1];
+    } else if (parts[idx] === parts[0]) {
+      var c = n % parts[0] === 0 ? [1] : [0];
+    } else if (n < parts[idx]) {
+      var c = p1(n, parts, idx - 1);
+    } else {
+      var c = module.exports.array_add(p1(n, parts, idx - 1), p1(n - parts[idx], parts, idx));
+    }
+    p1memo[n] = p1memo[n] || {};
+    p1memo[n][idx] = c;
+    return c;
+  };
+
+  const p2 = function (n, parts) {
+
+    // Described in overview PDF from Problem 31
+
+    const a = [1];
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      for (var t = p; t <= n; t++) {
+        a[t] = (a[t] || 0) + a[t - p];
+      }
+    }
+    return a[n];
+  };
+  
+  return { p, p1, p2 };
 
 })();
 
