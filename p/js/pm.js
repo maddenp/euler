@@ -130,6 +130,29 @@ module.exports.array_reverse = function (a) {
   return b;
 };
 
+module.exports.array_sub = function (a1, a2) {
+  var a3 = [];
+  const padding = a1.length - a2.length;
+  module.exports.zero_pad(a2, padding);
+  var debt = false;
+  for (var i = a1.length - 1; i >= 0; i--) {
+    if (debt) {
+      if (a1[i] > a2[i]) {
+        a1[i]--;
+        debt = false;
+      } else {
+        a1[i] += 9;
+      }
+    }
+    if (a1[i] < a2[i]) {
+      a1[i] += 10;
+      debt = true;
+    }
+    a3[i] = a1[i] - a2[i];
+  }
+  return a3;
+};
+
 module.exports.array_sum = function (a) {
   return (a.reduce(function (m, e) { return m + e; }, 0));
 };
