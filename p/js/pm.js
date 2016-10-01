@@ -437,18 +437,20 @@ module.exports.partitions = (() => {
     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
 
     const f = inc => {
-      var s = 0;
-      var x = 1;
-      for (var k = inc; x !== 0; k += inc) {
-        var x = Math.pow(-1, k - 1) * p3(n - k * (3 * k - 1) / 2);
-        s += x;
+      var s = [0];
+      var x = [1];
+      for (var k = inc; true; k += inc) {
+        var x = p3(n - k * (3 * k - 1) / 2);
+        if (x.every(d => d === 0)) break;
+        s = module.exports[Math.pow(-1, k - 1) > 0 ? 'array_add' : 'array_sub'](s, x);
       }
       return s;
     };
     if (p3memo[n]) return p3memo[n];
-    if (n < 0) return 0;
-    if (n === 0) return 1;
-    return (p3memo[n] = f(+1) + f(-1));
+    if (n < 0) return [0];
+    if (n === 0) return [1];
+    
+    return (p3memo[n] = module.exports.array_add(f(+1), f(-1)));
   };
 
   const p0memo = {0: [1]};
