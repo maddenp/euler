@@ -460,14 +460,14 @@ module.exports.partitions = (() => {
       var s = 0;
       var x = 1;
       for (var k = inc; x !== 0; k += inc) {
-        var x = (k % 2 === 0 ? -1 : 1) * p0(n - k * (3 * k - 1) / 2);
+        x = (k % 2 === 0 ? -1 : 1) * p0(n - k * (3 * k - 1) / 2);
         s += x;
       }
       return s;
     };
     if (n < 0) return 0;
     if (p0memo[n]) return p0memo[n];
-    return p0memo[n] = f(+1) + f(-1);
+    return (p0memo[n] = f(+1) + f(-1));
   };
 
   const p1memo = {};
@@ -476,16 +476,18 @@ module.exports.partitions = (() => {
 
     // https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
 
+    var c;
+
     if (p1memo[n] && p1memo[n][idx]) {
-      var c = p1memo[n][idx];
+      c = p1memo[n][idx];
     } else if (n === 0) {
-      var c = 1;
+      c = 1;
     } else if (parts[idx] === parts[0]) {
-      var c = n % parts[0] === 0 ? 1 : 0;
+      c = n % parts[0] === 0 ? 1 : 0;
     } else if (n < parts[idx]) {
-      var c = p1(n, parts, idx - 1);
+      c = p1(n, parts, idx - 1);
     } else {
-      var c = p1(n, parts, idx - 1) + p1(n - parts[idx], parts, idx);
+      c = p1(n, parts, idx - 1) + p1(n - parts[idx], parts, idx);
     }
     p1memo[n] = p1memo[n] || {};
     p1memo[n][idx] = c;
