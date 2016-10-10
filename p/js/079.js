@@ -5,3 +5,6 @@
 
 const pm = require('./pm');
 
+var a = pm.readfile('079.dat').split(',').map(s => s.split('').map(d => parseInt(d)));
+
+console.log(a);
