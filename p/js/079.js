@@ -20,8 +20,7 @@ var sol = Object.keys(follows);
 
 const shift = (a, i, j) => {
   const x = a[i];
-  for (var k = 0; k < a.length; k++) {
-    if (k < i || k > j) continue;
+  for (var k = i; k <= j; k++) {
     if (k == j) {
       a[k] = x;
     } else {
