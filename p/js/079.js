@@ -5,18 +5,18 @@
 
 const pm = require('./pm');
 
-var a = pm.readfile('079.dat').split(',').map(s => s.split('').map(d => parseInt(d)));
+var codes = pm.readfile('079.dat').split(',').map(s => s.split('').map(d => parseInt(d)));
 
 var follows = {};
 
-a.forEach(n => n.forEach(d => follows[d] = {}));
+codes.forEach(n => n.forEach(d => follows[d] = {}));
 
-a.forEach(n => {
+codes.forEach(n => {
   follows[n[1]][n[0]] = true;
   follows[n[2]][n[1]] = true;
 });
 
-var sol = Object.keys(follows);
+var a = Object.keys(follows);
 
 const shift = (a, i, j) => {
   const x = a[i];
@@ -31,10 +31,10 @@ const shift = (a, i, j) => {
 
 Object.keys(follows).forEach(d => {
   Object.keys(follows[d]).forEach(e => {
-    var id = sol.indexOf(d);
-    var ie = sol.indexOf(e);
-    if (ie > id) shift(sol, id, ie);
+    var id = a.indexOf(d);
+    var ie = a.indexOf(e);
+    if (ie > id) shift(a, id, ie);
   });
 });
 
-console.log(pm.a2n(sol));
+console.log(pm.a2n(a));
