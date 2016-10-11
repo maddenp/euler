@@ -21,12 +21,11 @@ var sol = Object.keys(follows);
 const shift = (a, i, j) => {
   const x = a[i];
   for (var k = 0; k < a.length; k++) {
-    if (k < i || k > j) {
-      a[k] = a[k];
-    } else if (k < j) {
-      a[k] = a[k + 1];
-    } else {
+    if (k < i || k > j) continue;
+    if (k == j) {
       a[k] = x;
+    } else {
+      a[k] = a[k + 1];
     }
   }
 };
