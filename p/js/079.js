@@ -19,25 +19,23 @@ a.forEach(n => {
 var sol = Object.keys(follows);
 
 const shift = (a, i, j) => {
-  const b = [];
-  const tmp = a[i];
+  const x = a[i];
   for (var k = 0; k < a.length; k++) {
     if (k < i || k > j) {
-      b[k] = a[k];
+      a[k] = a[k];
     } else if (k < j) {
-      b[k] = a[k + 1];
+      a[k] = a[k + 1];
     } else {
-      b[k] = tmp;
+      a[k] = x;
     }
   }
-  return b;
 };
 
 Object.keys(follows).forEach(d => {
   Object.keys(follows[d]).forEach(e => {
     var id = sol.indexOf(d);
     var ie = sol.indexOf(e);
-    if (ie > id) sol = shift(sol, id, ie);
+    if (ie > id) shift(sol, id, ie);
   });
 });
 
