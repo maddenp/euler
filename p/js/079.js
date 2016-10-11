@@ -21,11 +21,7 @@ var a = Object.keys(follows);
 const shift = (a, i, j) => {
   const x = a[i];
   for (var k = i; k <= j; k++) {
-    if (k == j) {
-      a[k] = x;
-    } else {
-      a[k] = a[k + 1];
-    }
+    a[k] = k === j ? x : a[k + 1];
   }
 };
 
