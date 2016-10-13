@@ -5,8 +5,12 @@
 
 const pm = require('./pm');
 
-// A simplified, n e Z, 0 < n < 100 version of:
-// https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Digit-by-digit_calculation
+/*
+ * A simplified, n e Z, 0 < n < 100 version of:
+ *
+ * https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Digit-by-digit_calculation
+ *
+ */
 
 // for (var i = 1; i < 100; i++) {
 //   var x = Math.sqrt(i);
@@ -14,22 +18,25 @@ const pm = require('./pm');
 //   console.log(i);
 // }
 
-var n = 2;
+const sqrt = (n, decimal_places) => {
+  
+  var c = n;
+  var p = 0;
+  var r = 0;
+  var s = [];
 
-var c = n;
-var p = 0;
-var r = 0;
-var s = [];
+  const f = (p, x) => x * (20 * p + x);
 
-const f = (p, x) => x * (20 * p + x);
+  for (var i = 0; i <= decimal_places; i++) {
+    for (var x = 0; f(p, x + 1) <= c; x++);
+    var y = f(p, x);
+    s.push(x);
+    c = (c - y) * 100;
+    p = p * 10 + x;
+    r = c - y;
+  }
 
-for (var i = 0; i < 10; i++) {
-  for (var x = 0; f(p, x + 1) <= c; x++);
-  var y = f(p, x);
-  s.push(x);
-  c = (c - y) * 100;
-  p = p * 10 + x;
-  r = c - y;
-}
+  return s;
+};
 
-console.log(s);
+console.log(sqrt(2, 4));
