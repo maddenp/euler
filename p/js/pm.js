@@ -50,6 +50,17 @@ module.exports.array_add = function (a1, a2) {
   return a3;
 };
 
+module.exports.array_comp = function (a1, a2) {
+  // a1 < a2 => -1, a1 == a2 => 0, a1 > a2 => 1
+  if (a1.length < a2.length) return -1;
+  if (a1.length > a2.length) return +1;
+  for (var i = 0; i < a1.length; i++) {
+    if (a1[i] < a2[i]) return -1
+    if (a1[i] > a2[i]) return +1;
+  }
+  return 0;
+};
+
 module.exports.array_equal = function (a1, a2) {
   if (a1.length !== a2.length) return false;
   for (var i = 0; i < a1.length; i++) {
@@ -130,7 +141,7 @@ module.exports.array_reverse = function (a) {
   return b;
 };
 
-module.exports.array_sub = function (a1, a2) {
+module.exports.array_sub = function (a1, a2) { // a1 - a2
   var a3 = [];
   const padding = a1.length - a2.length;
   module.exports.zero_pad(a2, padding);

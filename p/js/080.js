@@ -18,21 +18,27 @@ const pm = require('./pm');
 //   console.log(i);
 // }
 
+const f = (p, x) => pm.array_times_int(pm.array_add(pm.array_times_int(p, 20), pm.n2a(x)), x); // must we n2a(x)?
+
 const sqrt = (n, decimal_places) => {
   
-  var c = n;
-  var p = 0;
-  var r = 0;
+  var c = [n];
+  var p = [0];
+  var r = [0];
   var s = [];
 
-  const f = (p, x) => x * (20 * p + x);
+  // TODO common subexpression elimination
 
   for (var i = 0; i <= decimal_places; i++) {
-    for (var x = 0; f(p, x + 1) <= c; x++);
+    for (var x = 0; true; x++) {
+      var f1 = f(p, x + 1);
+      var f2 = pm.array_comp(f1, c);
+      if (f2 > 0) break;
+    }
     var y = f(p, x);
-    c = (c - y) * 100;
-    p = p * 10 + x;
-    r = c - y;
+    c = pm.array_times_int(pm.array_sub(c, y), 100);
+    p = pm.array_add(pm.array_times_int(p, 10), pm.n2a(x));
+    r = pm.array_sub(c, y);
     s.push(x);
   }
 
@@ -40,4 +46,4 @@ const sqrt = (n, decimal_places) => {
 
 };
 
-console.log(sqrt(2, 100));
+console.log(sqrt(2, 20));
