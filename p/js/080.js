@@ -39,6 +39,13 @@ const sqrt = (n, decimal_places) => {
     c = pm.array_times_int(pm.array_sub(c, y), 100);
     p = pm.array_add(pm.array_times_int(p, 10), pm.n2a(x));
     r = pm.array_sub(c, y);
+    console.log('c',pm.a2s(c));
+    console.log('p',pm.a2s(p));
+    console.log('r',pm.a2s(r));
+    if (x > 9) {
+      s[s.length - 1]++;
+      x %= 10;
+    }
     s.push(x);
   }
 
