@@ -141,7 +141,9 @@ module.exports.array_reverse = function (a) {
   return b;
 };
 
-module.exports.array_sub = function (a1, a2) { // a1 - a2
+module.exports.array_sub = function (a1, a2) {
+  // a1 - a2, assuming a1 >= a2
+  var a1 = a1.slice();
   var a3 = [];
   const padding = a1.length - a2.length;
   module.exports.zero_pad(a2, padding);
