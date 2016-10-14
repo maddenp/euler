@@ -12,17 +12,11 @@ const pm = require('./pm');
  *
  */
 
-// for (var i = 1; i < 100; i++) {
-//   var x = Math.sqrt(i);
-//   if (Math.floor(x) === x) continue;
-//   console.log(i);
-// }
-
-const f = (p, x) => pm.array_times_int(pm.array_add(pm.array_times_int(p, 20), pm.n2a(x)), x); // must we n2a(x)?
-
 const sqrt = (n, decimal_places) => {
   
-  var c = [n];
+  const f = (p, x) => pm.array_times_int(pm.array_add(pm.array_times_int(p, 20), pm.n2a(x)), x); // must we n2a(x)?
+
+  var c = pm.n2a(n);
   var p = [0];
   var r = [0];
   var s = [];
@@ -50,4 +44,19 @@ const sqrt = (n, decimal_places) => {
 
 };
 
-console.log(pm.array_sum(sqrt(2, 99)));
+var total = 0;
+
+for (var n = 2; n < 100; n++) { // 1 and 100 are both squares
+  var x = Math.sqrt(n);
+  if (Math.floor(x) === x) continue;
+  var root = sqrt(n, 99);
+  var sum = pm.array_sum(root.slice(0, 100));
+  total += sum;
+}
+
+console.log(total);
+
+// console.log(pm.array_sum('1414213562373095048801688724209698078569671875376948073176679737990732478462107038850387534327641572'.split('').map(x => parseInt(x)))); //  2 => 475
+// console.log(pm.array_sum('1732050807568877293527446341505872366942805253810380628055806979451933016908800037081146186757248575'.split('').map(x => parseInt(x)))); //  3 => 441
+// console.log(pm.array_sum('3162277660168379331998893544432718533719555139325216826857504852792594438639238221344248108379300295'.split('').map(x => parseInt(x)))); // 10 => 459
+// console.log(pm.array_sum('9949874371066199547344798210012060051781265636768060791176046438349453927827131540126530197384871952'.split('').map(x => parseInt(x)))); // 99 => 446
