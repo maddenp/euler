@@ -21,8 +21,6 @@ const sqrt = (n, decimal_places) => {
   var r = [0];
   var s = [];
 
-  // TODO common subexpression elimination
-
   for (var i = 0; i <= decimal_places; i++) {
     for (var x = 0; true; x++) {
       if (pm.array_comp(f(p, x + 1), c) > 0) break;
