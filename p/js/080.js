@@ -14,7 +14,7 @@ const pm = require('./pm');
 
 const sqrt = (n, decimal_places) => {
   
-  const f = (p, x) => pm.array_times_int(pm.array_add(pm.array_times_int(p, 20), pm.n2a(x)), x); // must we n2a(x)?
+  const f = (p, x) => pm.array_times_int(pm.array_add(pm.array_times_int(p, 20), pm.n2a(x)), x);
 
   var c = pm.n2a(n);
   var p = [0];
@@ -25,9 +25,7 @@ const sqrt = (n, decimal_places) => {
 
   for (var i = 0; i <= decimal_places; i++) {
     for (var x = 0; true; x++) {
-      var f1 = f(p, x + 1);
-      var f2 = pm.array_comp(f1, c);
-      if (f2 > 0) break;
+      if (pm.array_comp(f(p, x + 1), c) > 0) break;
     }
     var y = f(p, x);
     c = pm.array_times_int(pm.array_sub(c, y), 100);
@@ -46,12 +44,10 @@ const sqrt = (n, decimal_places) => {
 
 var total = 0;
 
-for (var n = 2; n < 100; n++) { // 1 and 100 are both squares
+for (var n = 1; n <= 100; n++) {
   var x = Math.sqrt(n);
   if (Math.floor(x) === x) continue;
-  var root = sqrt(n, 99);
-  var sum = pm.array_sum(root.slice(0, 100));
-  total += sum;
+  total += pm.array_sum(sqrt(n, 99));
 }
 
 console.log(total);
