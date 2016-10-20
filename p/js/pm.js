@@ -55,7 +55,7 @@ module.exports.array_comp = function (a1, a2) {
   if (a1.length < a2.length) return -1;
   if (a1.length > a2.length) return +1;
   for (var i = 0; i < a1.length; i++) {
-    if (a1[i] < a2[i]) return -1
+    if (a1[i] < a2[i]) return -1;
     if (a1[i] > a2[i]) return +1;
   }
   return 0;
@@ -143,7 +143,7 @@ module.exports.array_reverse = function (a) {
 
 module.exports.array_sub = function (a1, a2) {
   // a1 - a2, assuming a1 >= a2
-  var a1 = a1.slice();
+  a1 = a1.slice();
   var a3 = [];
   const padding = a1.length - a2.length;
   module.exports.zero_pad(a2, padding);
