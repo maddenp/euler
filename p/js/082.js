@@ -3,12 +3,57 @@
 
 "use strict";
 
-// const dist = require('fs').readFileSync('082.dat', 'utf8').trim().split('\n').map(x => x.split(',').map(s => parseInt(s)));
+const MSI = Number.MAX_SAFE_INTEGER;
 
-const dist = [[131, 673, 234, 103,  18],
-              [201,  96, 342, 965, 150],
-              [630, 803, 746, 422, 111],
-              [537, 699, 497, 121, 956],
-              [805, 732, 524,  37, 331]];
+// const matrix = require('fs').readFileSync('082.dat', 'utf8').trim().split('\n').map(x => x.split(',').map(s => parseInt(s)));
 
-// Dijkstra time
+const matrix = [[131, 673, 234, 103,  18],
+                [201,  96, 342, 965, 150],
+                [630, 803, 746, 422, 111],
+                [537, 699, 497, 121, 956],
+                [805, 732, 524,  37, 331]];
+
+const dist = [];
+const prev = [];
+const Q = [];
+
+for (var row = 0; row < matrix.length; row++) {
+  dist[row] = [];
+  prev[row] = [];
+  for (var col = 0; col < matrix[0].length; col++) {
+//     dist[row][col] = MSI;
+//     prev[row][col] = undefined;
+    Q.push({row: row, col: col});
+  }
+}
+
+// dist.forEach(row => console.log(JSON.stringify(row)));
+// prev.forEach(row => console.log(JSON.stringify(row)));
+
+var source = {row: 0, col: 0};
+
+dist[source.row][source.col] = matrix[source.row][source.col];
+
+while (Q.length > 0) {
+  var min_d = MSI;
+  var min_i = undefined;
+  for (var i = 0; i < Q.length; i++) {
+    var d = dist[Q[i].row][Q[i].col]
+    if (d < min_d) {
+      min_d = d;
+      min_i = i;
+    }
+  }
+  var u = Q.splice(min_i, 1)[0];
+  var to_u = dist[u.row][u.col];
+  if (u.row > 0) {
+    var v = {row: u.row + 1, col: u.col};
+    var to_v_now = dist[v.row][v.col] || MSI;
+    var to_v_alt = to_u + matrix[v.row][v.col]);
+    if (alt < current) {
+      dist[v.row][v.col] = alt;
+      prev
+  }
+  if (u.col > 0) {
+  }
+}
