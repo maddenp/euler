@@ -27,7 +27,7 @@ for (var row = 0; row < matrix.length; row++) {
   }
 }
 
-var source = {row: 0, col: 0};
+var source = {row: 1, col: 0};
 
 dist[source.row][source.col] = matrix[source.row][source.col];
 
@@ -46,6 +46,7 @@ while (Q.length > 0) {
   var neighbors = []
   if (u.row < dist.length - 1) neighbors.push({row: u.row + 1, col: u.col});
   if (u.col < dist[u.row].length - 1) neighbors.push({row: u.row, col: u.col + 1});
+  if (u.row > 0) neighbors.push({row: u.row - 1, col: u.col});
   neighbors.forEach(v => {
     var to_v_now = dist[v.row][v.col] || MSI;
     var to_v_alt = to_u + matrix[v.row][v.col];
@@ -56,4 +57,6 @@ while (Q.length > 0) {
   });
 }
 
-console.log(dist[dist.length - 1][dist[0].length - 1]);
+var min = dist.reduce((m, e) => Math.min(m, e[e.length - 1]), MSI);
+
+console.log(min);
