@@ -43,24 +43,17 @@ while (Q.length > 0) {
   }
   var u = Q.splice(min_i, 1)[0];
   var to_u = dist[u.row][u.col];
-  if (u.row < dist.length - 1) {
-    var v = {row: u.row + 1, col: u.col};
+  var neighbors = []
+  if (u.row < dist.length - 1) neighbors.push({row: u.row + 1, col: u.col});
+  if (u.col < dist[u.row].length - 1) neighbors.push({row: u.row, col: u.col + 1});
+  neighbors.forEach(v => {
     var to_v_now = dist[v.row][v.col] || MSI;
     var to_v_alt = to_u + matrix[v.row][v.col];
     if (to_v_alt < to_v_now) {
       dist[v.row][v.col] = to_v_alt;
       prev[v.row][v.col] = u;
     }
-  }
-  if (u.col < dist[u.row].length - 1) {
-    var v = {row: u.row, col: u.col + 1};
-    var to_v_now = dist[v.row][v.col] || MSI;
-    var to_v_alt = to_u + matrix[v.row][v.col];
-    if (to_v_alt < to_v_now) {
-      dist[v.row][v.col] = to_v_alt;
-      prev[v.row][v.col] = u;
-    }
-  }
+  });
 }
 
 console.log(dist[dist.length - 1][dist[0].length - 1]);
