@@ -21,14 +21,11 @@ for (var row = 0; row < matrix.length; row++) {
   dist[row] = [];
   prev[row] = [];
   for (var col = 0; col < matrix[0].length; col++) {
-//     dist[row][col] = MSI;
-//     prev[row][col] = undefined;
+    dist[row][col] = MSI;
+    prev[row][col] = undefined;
     Q.push({row: row, col: col});
   }
 }
-
-// dist.forEach(row => console.log(JSON.stringify(row)));
-// prev.forEach(row => console.log(JSON.stringify(row)));
 
 var source = {row: 0, col: 0};
 
@@ -46,14 +43,24 @@ while (Q.length > 0) {
   }
   var u = Q.splice(min_i, 1)[0];
   var to_u = dist[u.row][u.col];
-  if (u.row > 0) {
+  if (u.row < dist.length - 1) {
     var v = {row: u.row + 1, col: u.col};
     var to_v_now = dist[v.row][v.col] || MSI;
-    var to_v_alt = to_u + matrix[v.row][v.col]);
-    if (alt < current) {
-      dist[v.row][v.col] = alt;
-      prev
+    var to_v_alt = to_u + matrix[v.row][v.col];
+    if (to_v_alt < to_v_now) {
+      dist[v.row][v.col] = to_v_alt;
+      prev[v.row][v.col] = u;
+    }
   }
-  if (u.col > 0) {
+  if (u.col < dist[u.row].length - 1) {
+    var v = {row: u.row, col: u.col + 1};
+    var to_v_now = dist[v.row][v.col] || MSI;
+    var to_v_alt = to_u + matrix[v.row][v.col];
+    if (to_v_alt < to_v_now) {
+      dist[v.row][v.col] = to_v_alt;
+      prev[v.row][v.col] = u;
+    }
   }
 }
+
+console.log(dist[dist.length - 1][dist[0].length - 1]);
