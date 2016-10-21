@@ -13,6 +13,19 @@ const matrix = require('fs').readFileSync('082.dat', 'utf8').trim().split('\n').
 //                 [537, 699, 497, 121, 956],
 //                 [805, 732, 524,  37, 331]];
 
+const findmin = (Q, dist) => {
+  var min_d = MSI;
+  var min_i = undefined;
+  for (var i = 0; i < Q.length; i++) {
+    var d = dist[Q[i].row][Q[i].col]
+    if (d < min_d) {
+      min_d = d;
+      min_i = i;
+    }
+  }
+  return min_i;
+};
+
 const dijkstra = source => {
 
   // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
@@ -35,17 +48,7 @@ const dijkstra = source => {
 
   while (Q.length > 0) {
 
-    var min_d = MSI;
-    var min_i = undefined;
-    for (var i = 0; i < Q.length; i++) {
-      var d = dist[Q[i].row][Q[i].col]
-      if (d < min_d) {
-        min_d = d;
-        min_i = i;
-      }
-    }
-
-    var u = Q.splice(min_i, 1)[0];
+    var u = Q.splice(findmin(Q, dist), 1)[0];
     var to_u = dist[u.row][u.col];
     var neighbors = []
     if (u.row < dist.length - 1) neighbors.push({row: u.row + 1, col: u.col});
