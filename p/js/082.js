@@ -5,15 +5,17 @@
 
 const MSI = Number.MAX_SAFE_INTEGER;
 
-// const matrix = require('fs').readFileSync('082.dat', 'utf8').trim().split('\n').map(x => x.split(',').map(s => parseInt(s)));
+const matrix = require('fs').readFileSync('082.dat', 'utf8').trim().split('\n').map(x => x.split(',').map(s => parseInt(s)));
 
-const matrix = [[131, 673, 234, 103,  18],
-                [201,  96, 342, 965, 150],
-                [630, 803, 746, 422, 111],
-                [537, 699, 497, 121, 956],
-                [805, 732, 524,  37, 331]];
+// const matrix = [[131, 673, 234, 103,  18],
+//                 [201,  96, 342, 965, 150],
+//                 [630, 803, 746, 422, 111],
+//                 [537, 699, 497, 121, 956],
+//                 [805, 732, 524,  37, 331]];
 
 const dijkstra = source => {
+
+  // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
   const dist = [];
   const prev = [];
