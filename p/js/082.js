@@ -65,10 +65,4 @@ const dijkstra = source => {
 
 }
 
-var global_min = MSI;
-for (var row = 0; row < matrix.length; row++) {
-  var local_min = dijkstra({row: row, col: 0});
-  global_min = Math.min(global_min, local_min);
-}
-
-console.log(global_min);
+console.log(matrix.reduce((m, _, i) => Math.min(m, dijkstra({row: i, col:0 })), MSI));
