@@ -34,6 +34,7 @@ const dijkstra = source => {
   dist[source.row][source.col] = matrix[source.row][source.col];
 
   while (Q.length > 0) {
+
     var min_d = MSI;
     var min_i = undefined;
     for (var i = 0; i < Q.length; i++) {
@@ -43,6 +44,7 @@ const dijkstra = source => {
         min_i = i;
       }
     }
+
     var u = Q.splice(min_i, 1)[0];
     var to_u = dist[u.row][u.col];
     var neighbors = []
