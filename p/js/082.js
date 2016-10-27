@@ -17,8 +17,10 @@ const costs = matrix.reduce((m, e) => (m.push(e[0]), m), []);
 
 // Thanks to hbf Project Eueler forum, post at Sat, 30 Jun 2007, 01:01
 
+const f = (m, e) => (m.push(e[col]), m);
+
 for (var col = 1; col < matrix[0].length; col++) {
-  var x = matrix.reduce((m, e) => (m.push(e[col]), m), []);
+  var x = matrix.reduce(f, []);
   for (var row = 0; row < matrix.length; row++) {
     costs[row] += matrix[row][col];
   }
