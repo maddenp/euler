@@ -10,6 +10,7 @@ const next = a => () => {
   while (++n) if (a.indexOf(n = n % 40) !== -1) return n;
 };
 
+const a2g = () => 0;
 const back3 = () => (square + 40 - 3) % 40;
 const c1 = () => 11;
 const cc_squares = {2: true, 17: true, 33: true};
@@ -19,8 +20,7 @@ const die_max = Math.floor(die);
 const die_min = Math.ceil(1);
 const die_scale = die_max - die_min + 1
 const e3 = () => 24;
-const g2j = 30;
-const go = () => 0;
+const g2j = () => 30;
 const h2 = () => 39;
 const histogram = {0: 1};
 const jail = () => 10;
@@ -35,9 +35,25 @@ var ch = Array(6);
 var doubles = 0;
 var square = 0;
 
+// const show_deck = deck => {
+//   a2g.x = 'a2g';
+//   back3.x = 'back3';
+//   c1.x = 'c1';
+//   e3.x = 'e3';
+//   g2j.x = 'g2j';
+//   h2.x = 'h2';
+//   jail.x = 'jail';
+//   nextr.x = 'nextr';
+//   nextu.x = 'nextu';
+//   r1.x = 'r1';
+//   return JSON.stringify(deck.reduce((m, e) => (m.push(e && e.x ? e.x : ''), m), []));
+// };
+
 const draw = deck => {
+//   console.log('before',show_deck(deck));
   const card = deck.pop();
   deck.unshift(card);
+//   console.log(' after',show_deck(deck));
   return card;
 };
 
@@ -50,22 +66,19 @@ const move = () => {
     return jail();
   }
   var next = (square + roll1 + roll2) % 40;
-  if (next === g2j) {
-    return jail();
-  }
+  if (next === g2j()) return jail();
   if (cc_squares[next]) {
     var card = draw(cc);
-    return card ? card() : next;
-  }
-  if (ch_squares[next]) {
-    var card = draw(cc);
-    return card ? card() : next;
+    if (card) return card();
+  } else if (ch_squares[next]) {
+    var card = draw(ch);
+    if (card) return card();
   }
   return next;
 };
 
-cc = pm.array_shuffle(cc.concat([go, jail]));
-ch = pm.array_shuffle(ch.concat([go, jail, c1, e3, h2, r1, nextr, nextr, nextu, back3]));
+cc = pm.array_shuffle(cc.concat([a2g, jail]));
+ch = pm.array_shuffle(ch.concat([a2g, jail, c1, e3, h2, r1, nextr, nextr, nextu, back3]));
 
 for (var i = 1; i < 40; i++) histogram[i] = 0;
 
@@ -74,5 +87,14 @@ for (var i = 0; i < limit; i++) {
   histogram[square] += 1;
 }
 
-Object.keys(histogram).forEach(key => histogram[key] = (histogram[key]/limit*100).toFixed(2));
-console.log(histogram);
+// Object.keys(histogram).forEach(key => histogram[key] = (histogram[key]/limit*100).toFixed(2));
+// console.log(histogram);
+
+var s = '';
+for (var i = 0; i < 3; i++) {
+  var max_key = Object.keys(histogram).reduce((m, e) => histogram[e] > histogram[m] ? e : m);
+  if (max_key < 10) s += '0';
+  s += max_key;
+  histogram[max_key] = 0;
+}
+console.log(s);
