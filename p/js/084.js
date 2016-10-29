@@ -45,10 +45,7 @@ const move = () => {
   const roll1 = roll(die);
   const roll2 = roll(die);
   doubles = roll1 === roll2 ? doubles + 1 : 0;
-  if (doubles === 3) {
-    doubles = 0;
-    return jail();
-  }
+  if (doubles > 2) return jail();
   var next = (square + roll1 + roll2) % 40;
   if (g2j[next]) {
     next = jail();
