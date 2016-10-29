@@ -69,9 +69,6 @@ for (var i = 0; i < limit; i++) {
   histogram[square] += 1;
 }
 
-// Object.keys(histogram).forEach(key => histogram[key] = (histogram[key]/limit*100).toFixed(2));
-// console.log(histogram);
-
 var s = '';
 for (var i = 0; i < 3; i++) {
   var max_key = Object.keys(histogram).reduce((m, e) => histogram[e] > histogram[m] ? e : m);
