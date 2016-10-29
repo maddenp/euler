@@ -20,7 +20,7 @@ const die_max = Math.floor(die);
 const die_min = Math.ceil(1);
 const die_scale = die_max - die_min + 1
 const e3 = () => 24;
-const g2j = () => 30;
+const g2j = {30: true};
 const h2 = () => 39;
 const histogram = {0: 1};
 const jail = () => 10;
@@ -50,13 +50,16 @@ const move = () => {
     return jail();
   }
   var next = (square + roll1 + roll2) % 40;
-  if (next === g2j()) return jail();
+  if (g2j[next]) {
+    next = jail();
+  }
+  if (ch_squares[next]) {
+    var card = draw(ch);
+    if (card) next = card();
+  }
   if (cc_squares[next]) {
     var card = draw(cc);
-    if (card) return card();
-  } else if (ch_squares[next]) {
-    var card = draw(ch);
-    if (card) return card();
+    if (card) next = card();
   }
   return next;
 };
