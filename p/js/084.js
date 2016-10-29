@@ -15,7 +15,7 @@ const back3 = () => (square + 40 - 3) % 40;
 const c1 = () => 11;
 const cc_squares = {2: true, 17: true, 33: true};
 const ch_squares = {7: true, 22: true, 36: true};
-const die = 6;
+const die = 4;
 const die_max = Math.floor(die);
 const die_min = Math.ceil(1);
 const die_scale = die_max - die_min + 1
