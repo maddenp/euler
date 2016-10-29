@@ -22,7 +22,7 @@ const e3 = () => 24;
 const g2j = 30;
 const go = () => 0;
 const h2 = () => 39;
-const histogram = [1];
+const histogram = {0: 1};
 const jail = () => 10;
 const limit = 1000000;
 const nextr = next([5, 15, 25, 35]);
@@ -34,6 +34,12 @@ var cc = Array(14);
 var ch = Array(6);
 var doubles = 0;
 var square = 0;
+
+const draw = deck => {
+  const card = deck.pop();
+  deck.unshift(card);
+  return card;
+};
 
 const move = () => {
   const roll1 = roll(die);
@@ -47,17 +53,26 @@ const move = () => {
   if (next === g2j) {
     return jail();
   }
+  if (cc_squares[next]) {
+    var card = draw(cc);
+    return card ? card() : next;
+  }
+  if (ch_squares[next]) {
+    var card = draw(cc);
+    return card ? card() : next;
+  }
   return next;
 };
 
 cc = pm.array_shuffle(cc.concat([go, jail]));
-ch = pm.array_shuffle(ch.concat([c1, e3, go, h2, jail, r1, nextr, nextr, nextu, back3]));
+ch = pm.array_shuffle(ch.concat([go, jail, c1, e3, h2, r1, nextr, nextr, nextu, back3]));
 
 for (var i = 1; i < 40; i++) histogram[i] = 0;
 
 for (var i = 0; i < limit; i++) {
   square = move(square);
-  histogram[square]++;
+  histogram[square] += 1;
 }
 
-console.log(histogram.map(x => x/limit*100));
+Object.keys(histogram).forEach(key => histogram[key] = (histogram[key]/limit*100).toFixed(2));
+console.log(histogram);
