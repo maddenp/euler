@@ -29,6 +29,7 @@ const nextr = next([5, 15, 25, 35]);
 const nextu = next([12, 28]);
 const r1 = () => 5;
 const roll = () => Math.floor(Math.random() * die_scale) + die_min;
+
 const cc = pm.array_shuffle(Array(14).concat([a2g, jail]));
 const ch = pm.array_shuffle(Array(6).concat([a2g, jail, c1, e3, h2, r1, nextr, nextr, nextu, back3]));
 
