@@ -141,6 +141,17 @@ module.exports.array_reverse = function (a) {
   return b;
 };
 
+module.exports.array_shuffle = function (a) {
+  // Fisher-Yates Shuffle
+  for (var i = a.length -1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
+  }
+  return a;
+};
+
 module.exports.array_sub = function (a1, a2) {
   // a1 - a2, assuming a1 >= a2
   a1 = a1.slice();
