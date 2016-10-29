@@ -29,6 +29,8 @@ const nextr = next([5, 15, 25, 35]);
 const nextu = next([12, 28]);
 const r1 = () => 5;
 const roll = () => Math.floor(Math.random() * die_scale) + die_min;
+const cc = pm.array_shuffle(Array(14).concat([a2g, jail]));
+const ch = pm.array_shuffle(Array(6).concat([a2g, jail, c1, e3, h2, r1, nextr, nextr, nextu, back3]));
 
 var doubles = 0;
 var square = 0;
@@ -58,9 +60,6 @@ const move = () => {
   }
   return next;
 };
-
-const cc = pm.array_shuffle(Array(14).concat([a2g, jail]));
-const ch = pm.array_shuffle(Array(6).concat([a2g, jail, c1, e3, h2, r1, nextr, nextr, nextu, back3]));
 
 for (var i = 1; i < 40; i++) histogram[i] = 0;
 
