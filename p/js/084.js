@@ -35,25 +35,9 @@ var ch = Array(6);
 var doubles = 0;
 var square = 0;
 
-// const show_deck = deck => {
-//   a2g.x = 'a2g';
-//   back3.x = 'back3';
-//   c1.x = 'c1';
-//   e3.x = 'e3';
-//   g2j.x = 'g2j';
-//   h2.x = 'h2';
-//   jail.x = 'jail';
-//   nextr.x = 'nextr';
-//   nextu.x = 'nextu';
-//   r1.x = 'r1';
-//   return JSON.stringify(deck.reduce((m, e) => (m.push(e && e.x ? e.x : ''), m), []));
-// };
-
 const draw = deck => {
-//   console.log('before',show_deck(deck));
   const card = deck.pop();
   deck.unshift(card);
-//   console.log(' after',show_deck(deck));
   return card;
 };
 
