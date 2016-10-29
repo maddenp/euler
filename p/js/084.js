@@ -44,7 +44,7 @@ const draw = deck => {
 const move = () => {
   const roll1 = roll(die);
   const roll2 = roll(die);
-  if (roll1 === roll2) doubles++;
+  doubles = roll1 === roll2 ? doubles + 1 : 0;
   if (doubles === 3) {
     doubles = 0;
     return jail();
