@@ -3,6 +3,8 @@
 
 "use strict";
 
+// Awful problem. So stupid.
+
 const pm = require('./pm');
 
 const next = a => () => {
@@ -42,11 +44,23 @@ const draw = deck => {
   return card;
 };
 
+// The doubles handling assumes that you don't count the square first visited
+// when you roll doubles, but immeidately roll again and only count the square
+// you visit when breaking out of the run of doubles -- which may be jail.
+
 const move = () => {
   const roll1 = roll(die);
   const roll2 = roll(die);
-  doubles = roll1 === roll2 ? doubles + 1 : 0;
-  if (doubles > 2) return jail();
+  if (roll1 === roll2) {
+    doubles++;
+    return move();
+  } else {
+    doubles = 0;
+  }
+  if (doubles > 2) {
+    doubles = 0;
+    return jail();
+  }
   var next = (square + roll1 + roll2) % 40;
   if (g2j[next]) {
     next = jail();
