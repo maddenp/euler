@@ -3,31 +3,21 @@
 
 "use strict";
 
-var max = 77;
+const s = n => (n * (n + 1)) / 2;
 
-var min_cols;
-var min_rows;
+var area;
 var min_diff = Number.MAX_SAFE_INTEGER;
 
-for (var cols = 1; cols <= max; cols++) {
-  for (var rows = 1; rows <= cols; rows++) {
-    var sum = 0;
-    for (var col_left = 0; col_left < cols; col_left++) {
-      for (var row_top = 0; row_top < rows; row_top ++) {
-        for (var row_bottom = row_top; row_bottom < rows; row_bottom++) {
-          for (var col_right = col_left; col_right < cols; col_right++) {
-            sum++
-          }
-        }
-      }
-    }
-    var diff = Math.abs(2000000 - sum);
+for (var rows = 1; rows <= 100; rows++) {
+  for (var cols = 1; cols <= rows; cols++) {
+//     var rectangles = (rows * (rows + 1) / 2) * (cols * (cols + 1) / 2);
+    var rectangles = s(rows) * s(cols);
+    var diff = Math.abs(2000000 - rectangles);
     if (diff < min_diff) {
-      min_cols = cols;
-      min_rows = rows;
       min_diff = diff;
+      area = rows * cols;
     }
   }
 }
 
-console.log(min_cols * min_rows);
+console.log(area);
