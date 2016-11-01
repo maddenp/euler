@@ -20,7 +20,7 @@ const ch_squares = {7: true, 22: true, 36: true};
 const die = 4;
 const die_max = Math.floor(die);
 const die_min = Math.ceil(1);
-const die_scale = die_max - die_min + 1
+const die_scale = die_max - die_min + 1;
 const e3 = () => 24;
 const g2j = {30: true};
 const h2 = () => 39;
@@ -49,6 +49,7 @@ const draw = deck => {
 // you visit when breaking out of the run of doubles -- which may be jail.
 
 const move = () => {
+  var card;
   const roll1 = roll(die);
   const roll2 = roll(die);
   if (roll1 === roll2) {
@@ -66,11 +67,11 @@ const move = () => {
     next = jail();
   }
   if (ch_squares[next]) {
-    var card = draw(ch);
+    card = draw(ch);
     if (card) next = card();
   }
   if (cc_squares[next]) {
-    var card = draw(cc);
+    card = draw(cc);
     if (card) next = card();
   }
   return next;
@@ -83,9 +84,11 @@ for (var i = 0; i < limit; i++) {
   histogram[square] += 1;
 }
 
+const f = (m, e) => histogram[e] > histogram[m] ? e : m;
+
 var s = '';
 for (var i = 0; i < 3; i++) {
-  var max_key = Object.keys(histogram).reduce((m, e) => histogram[e] > histogram[m] ? e : m);
+  var max_key = Object.keys(histogram).reduce(f);
   if (max_key < 10) s += '0';
   s += max_key;
   histogram[max_key] = 0;
