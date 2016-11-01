@@ -10,7 +10,7 @@ var min_rows;
 var min_diff = Number.MAX_SAFE_INTEGER;
 
 for (var cols = 1; cols <= max; cols++) {
-  for (var rows = 1; rows <= max; rows++) {
+  for (var rows = 1; rows <= cols; rows++) {
     var sum = 0;
     for (var col_left = 0; col_left < cols; col_left++) {
       for (var row_top = 0; row_top < rows; row_top ++) {
