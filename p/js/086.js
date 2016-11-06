@@ -26,13 +26,15 @@ const incr = x => {
   }
 };
 
+var M = 1816;
 var sum = 0;
-const M = 1818;
-const limit = 1000000;
-init(M - 1);
+
+init(++M);
 const lo = sum;
-incr(M - 0);
+incr(++M);
 const hi = sum;
+
+const limit = 1000000;
 
 if (lo < limit && hi >= limit) {
   console.log(M);
