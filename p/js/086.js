@@ -3,39 +3,23 @@
 
 "use strict";
 
-const f = (a, b, c) => {
-  var len1 = Math.sqrt((a + b) * (a + b) + c * c);
-  var len2 = Math.sqrt((a + c) * (a + c) + b * b);
-  var minlen = len1 < len2 ? len1 : len2;
-  if (Math.floor(minlen) === minlen) ++sum;
-};
-
-const init = x => {
-  for (var a = 1; a <= x; a++) {
-    for (var b = a; b <= x; b++) {
-      for (var c = b; c <= x; c++) f(a, b, c);
+const f = M => {
+  var count = 0;
+  for (var x = 1; x <= M; x++) {
+    for (var y = x; y <= M; y++) {
+      for (var z = y; z <= M; z++) {
+        var minlen = Math.sqrt((x + y) * (x + y) + z * z);
+        if (Math.floor(minlen) === minlen) ++count;
+      }
     }
   }
+  return count;
 };
 
-const incr = x => {
-  for (var a = x; a <= x; a++) {
-    for (var b = 1; b <= x; b++) {
-      for (var c = 1; c <= x; c++) f(a, b, c);
-    }
-  }
-};
-
-var M = 1816;
-var sum = 0;
-
-init(++M);
-const lo = sum;
-incr(++M);
-const hi = sum;
+const M1 = 1817;
+const M2 = M1 + 1;
+const count1 = f(M1);
+const count2 = f(M2);
 
 const limit = 1000000;
-
-if (lo < limit && hi >= limit) {
-  console.log(M);
-}
+if (count1 < limit && count2 >= limit) console.log(M2);
