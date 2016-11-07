@@ -3,6 +3,11 @@
 
 "use strict";
 
+// I initially found the solution via a brute-force bisection search. What
+// follows here is essentially a proof of the correct answer: Since the count
+// for 1817 lies just below the limit, and its successor lies just above, the
+// solution is 1818.
+
 const limit = 1000000;
 const m0 = 1817;
 const m1 = m0 + 1;
