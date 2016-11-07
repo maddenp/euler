@@ -3,23 +3,30 @@
 
 "use strict";
 
-const f = M => {
-  var count = 0;
-  for (var x = 1; x <= M; x++) {
-    for (var y = x; y <= M; y++) {
-      for (var z = y; z <= M; z++) {
-        var minlen = Math.sqrt((x + y) * (x + y) + z * z);
-        if (Math.floor(minlen) === minlen) ++count;
-      }
+const limit = 1000000;
+const m0 = 1817;
+const m1 = m0 + 1;
+
+var c = 0;
+
+for (var x = 1; x <= m0; x++) {
+  for (var y = x; y <= m0; y++) {
+    for (var z = y; z <= m0; z++) {
+      var len = Math.sqrt((x + y) * (x + y) + z * z);
+      if (Math.floor(len) === len) c += 1;
     }
   }
-  return count;
-};
+}
 
-const M1 = 1817;
-const M2 = M1 + 1;
-const count1 = f(M1);
-const count2 = f(M2);
+var c0 = c;
 
-const limit = 1000000;
-if (count1 < limit && count2 >= limit) console.log(M2);
+for (var x = 1; x <= m1; x++) {
+  for (var y = x; y <= m1; y++) {
+    var len = Math.sqrt((x + y) * (x + y) + m1 * m1);
+    if (Math.floor(len) === len) c += 1;
+  }
+}
+
+if (c0 < limit && c >= limit) {
+  console.log(m1);
+}
