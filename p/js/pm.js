@@ -456,7 +456,7 @@ module.exports.partitions = (() => {
 // 
 //   const p0 = n => {
 // 
-//     // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
+//     // https://goo.gl/RcSi0J
 // 
 //     const f = inc => {
 //       var s = [0];
@@ -478,7 +478,7 @@ module.exports.partitions = (() => {
 
   const p0 = n => {
 
-    // https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function
+    // https://goo.gl/K9O2vu
 
     const f = inc => {
       var s = 0;
@@ -498,7 +498,7 @@ module.exports.partitions = (() => {
 
   const p1 = function (n, parts, idx) {
 
-    // https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.2
+    // https://goo.gl/OiGvCn
 
     var c;
 
@@ -540,7 +540,7 @@ module.exports.partitions = (() => {
 
 module.exports.permutations_map = function (a, fn, n) {
 
-  // https://en.wikipedia.org/wiki/Heap%27s_algorithm
+  // https://goo.gl/0xptzg
 
   n = n || a.length;
   if (n === 1) {
@@ -621,6 +621,37 @@ module.exports.proper_divisors = function (n) {
     }
   }
   return pds;
+};
+
+module.exports.pythagorean_triples = function (exclude, primitive_only) {
+  // https://goo.gl/MMtCml
+  const queue = [[3, 4, 5]];
+  const triples = [];
+  while (queue.length > 0) {
+    var T = queue.pop();
+    if (exclude(T)) continue;
+    triples.push(T);
+    var a = T[0];
+    var b = T[1];
+    var c = T[2];
+    if (!primitive_only) {
+      // The linear transformations below only produce 'primitive' triples, but
+      // their multiples are also Pythagorian triples, so enumerate and store
+      // the multiples, too.
+      var k = 2;
+      while (true) {
+        T = [a*k, b*k, c*k];
+        if (exclude(T)) break;
+        triples.push(T);
+        k++;
+      }
+    }
+    // These linear transformations produce the next wave of primitive triples.
+    queue.push([ a-2*b+2*c,  2*a-b+2*c,  2*a-2*b+3*c]);
+    queue.push([ a+2*b+2*c,  2*a+b+2*c,  2*a+2*b+3*c]);
+    queue.push([-a+2*b+2*c, -2*a+b+2*c, -2*a+2*b+3*c]);
+  }
+  return triples;
 };
 
 module.exports.quadratic_roots = function (a, b, c) {
