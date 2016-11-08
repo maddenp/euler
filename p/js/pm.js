@@ -625,12 +625,13 @@ module.exports.proper_divisors = function (n) {
 
 module.exports.pythagorean_triples = function (exclude, primitive_only) {
   // https://goo.gl/MMtCml
+  const accept = (T) => triples.push(T.sort((a, b) => a - b));
   const queue = [[3, 4, 5]];
   const triples = [];
   while (queue.length > 0) {
     var T = queue.pop();
     if (exclude(T)) continue;
-    triples.push(T);
+    accept(T);
     var a = T[0];
     var b = T[1];
     var c = T[2];
@@ -642,7 +643,7 @@ module.exports.pythagorean_triples = function (exclude, primitive_only) {
       while (true) {
         T = [a*k, b*k, c*k];
         if (exclude(T)) break;
-        triples.push(T);
+        accept(T);
         k++;
       }
     }
