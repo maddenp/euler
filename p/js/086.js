@@ -7,7 +7,7 @@ const pm = require('./pm');
 
 const paths = M => {
   const exclude = T => T[0] > M && T[1] > M;
-  const trips = pm.pythagorean_triples(exclude);
+  const trips = pm.pythagorean_triples(exclude, {sort: true});
   var count = 0;
   for (var i = 0; i < trips.length; i++) {
     var T = trips[i];
