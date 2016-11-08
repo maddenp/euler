@@ -3,35 +3,41 @@
 
 "use strict";
 
-// I initially found the solution via a brute-force bisection search. What
-// follows here is essentially a proof of the correct answer: Since the count
-// for 1817 lies just below the limit, and its successor lies just above, the
-// solution is 1818.
+const pm = require('./pm');
 
-const limit = 1000000;
-const m0 = 1817;
-const m1 = m0 + 1;
-
-var c = 0;
-
-for (var x = 1; x <= m0; x++) {
-  for (var y = x; y <= m0; y++) {
-    for (var z = y; z <= m0; z++) {
-      var len = Math.sqrt((x + y) * (x + y) + z * z);
-      if (Math.floor(len) === len) c += 1;
+const paths = M => {
+  const exclude = T => T[0] > M && T[1] > M;
+  const trips = pm.pythagorean_triples(exclude);
+  var count = 0;
+  for (var i = 0; i < trips.length; i++) {
+    var T = trips[i];
+    var a = T[0];
+    var b = T[1];
+    if (a <= M && b < 2 * a) {
+      count += Math.floor(Math.abs(b/2 - (b-a))) + 1;
+    }
+    if (b <= M && a < 2 * b) {
+      count += Math.floor(a/2);
     }
   }
-}
+  return count;
+};
 
-var c0 = c;
+const limit = 1000000;
+var last = 0;
+var M = 100; // initial guess
 
-for (var x = 1; x <= m1; x++) {
-  for (var y = x; y <= m1; y++) {
-    var len = Math.sqrt((x + y) * (x + y) + m1 * m1);
-    if (Math.floor(len) === len) c += 1;
+while (true) {
+  var p = paths(M);
+  if (p < limit) {
+    last = M;
+    M *= 2;
   }
-}
-
-if (c0 < limit && c >= limit) {
-  console.log(m1);
+  if (p > limit) {
+    if (M - last === 1) {
+      console.log(M);
+      break;
+    }
+    M = Math.floor((M+last) / 2);
+  }
 }
