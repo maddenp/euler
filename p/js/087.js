@@ -6,7 +6,8 @@
 const pm = require('./pm');
 
 const limit = 50000000;
-const ok = {};
+
+const ok = new Set([]);
 
 const squares = pm.primes(2, Math.sqrt(limit)).map(n => n * n);
 const cubes = pm.primes(2, Math.cbrt(limit)).map(n => n * n *n);
@@ -16,9 +17,9 @@ for (var i = 0; i < squares.length; i++) {
   for (var j = 0; j < cubes.length; j++) {
     for (var k = 0; k < quarts.length; k++) {
       var sum = squares[i] + cubes[j] + quarts[k];
-      if (sum < limit) ok[sum] = true;
+      if (sum < limit) ok.add(sum);
     }
   }
 }
 
-console.log(Object.keys(ok).length);
+console.log(ok.size);
