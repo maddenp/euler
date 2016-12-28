@@ -11,7 +11,7 @@ const g = (m, c, x, p, s, candidates) => {
     var p1 = p * y;
     var s1 = s + y - 1;
     if (p1 === s1) candidates.add(p1);
-    if (p1 > c || s1 > c) return false;
+    if (p1 > s1 || p1 > c || s1 > c) return false;
     g(m - 1, c, y, p1, s1, candidates);
   }
 };
@@ -26,7 +26,6 @@ const f = (n) => {
   for (var x = 3; x <= n; x++) {
     g(m - 2, c, x, x, x + n - 1, candidates);
   }
-//   console.log(n,candidates);
   return pm.array_min(Array.from(candidates));
 };
 
@@ -36,7 +35,6 @@ const mpsns = new Set([]); // minimal product-sum numbers
 for (var k = 2; k <= limit; k++) {
   var mpsn = f(k);
   mpsns.add(mpsn);
-//   console.log(`${k},${mpsn}`);
 }
 
 console.log(pm.array_sum(Array.from(mpsns)));
