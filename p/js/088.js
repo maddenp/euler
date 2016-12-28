@@ -5,45 +5,38 @@
 
 const pm = require('./pm');
 
-const g = (ns, n) => {
-  const h = Object.assign({}, ns);
-  h[n]--;
-  if (h[n] === 0) delete h[n];
-  n++;
-  h[n] = h[n] ? h[n] + 1 : 1;
-  return h;
-};
-
-const f = (s0, p0, ns) => {
-  const candidates = [];
-  const q = [];
-  var s1 = s0 + 1;
-  Object.keys(ns).forEach(n0 => {
-    n0 = parseInt(n0);
-    var p1 = p0 / n0 * (n0 + 1);
-    var d = s1 - p1;
-    if (d === 0) candidates.push(s1);
-    if (d > 0) {
-      var z = g(ns, n0);
-      q.push([s1, p1, z]);
-    }
-  });
-  if (candidates.length === 0) {
-    q.forEach(x => {
-      let c = f(x[0], x[1], x[2]);
-      if (c) candidates.push(c);
-    });
+const g = (m, c, x, p, s, candidates) => {
+  if (m < 0) return false;
+  for (var y = 2; y <= x; y++) {
+    var p1 = p * y;
+    var s1 = s + y - 1;
+    if (p1 === s1) candidates.add(p1);
+    if (p1 > c || s1 > c) return false;
+    g(m - 1, c, y, p1, s1, candidates);
   }
-  return pm.array_min(candidates);
 };
 
-const limit = 17;
+const f = (n) => {
+  const candidates = new Set([]);
+  const c = 2 * n;
+  const m = Math.floor(Math.log2(c));
+  var p = Math.pow(2, m);
+  var s = 2 * m + n - m;
+  if (p === s) candidates.add(p);
+  for (var x = 3; x <= n; x++) {
+    g(m - 2, c, x, x, x + n - 1, candidates);
+  }
+//   console.log(n,candidates);
+  return pm.array_min(Array.from(candidates));
+};
+
+const limit = 12000;
 const mpsns = new Set([]); // minimal product-sum numbers
 
 for (var k = 2; k <= limit; k++) {
-  var mpsn = f(k + 1, 2, {1: k - 1, 2: 1});
+  var mpsn = f(k);
   mpsns.add(mpsn);
-  console.log(`${k},${mpsn}`);
+//   console.log(`${k},${mpsn}`);
 }
 
 console.log(pm.array_sum(Array.from(mpsns)));
