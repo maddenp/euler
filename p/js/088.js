@@ -18,11 +18,11 @@ const f = (m, max, x, p, s, c) => {
 const limit = 12000;
 const mpsns = new Set([]); // minimal product-sum numbers
 
-for (var n = 2; n <= limit; n++) {
+for (var k = 2; k <= limit; k++) {
   const c = new Set([]);
-  const max = 2 * n;
+  const max = 2 * k;
   const m = Math.floor(Math.log2(max));
-  for (var x = 2; x <= n; x++) f(m - 2, max, x, x, x + n - 1, c);
+  for (var x = 2; x <= k; x++) f(m - 2, max, x, x, x + k - 1, c);
   mpsns.add(pm.array_min(Array.from(c)));
 }
 
