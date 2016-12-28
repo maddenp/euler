@@ -37,14 +37,13 @@ const f = (s0, p0, ns) => {
   return pm.array_min(candidates);
 };
 
-const limit = 12;
+const limit = 17;
 const mpsns = new Set([]); // minimal product-sum numbers
 
 for (var k = 2; k <= limit; k++) {
   var mpsn = f(k + 1, 2, {1: k - 1, 2: 1});
   mpsns.add(mpsn);
+  console.log(`${k},${mpsn}`);
 }
 
-var sum = 0;
-for (let n of mpsns) sum += n;
-console.log(sum);
+console.log(pm.array_sum(Array.from(mpsns)));
