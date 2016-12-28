@@ -20,10 +20,7 @@ const f = (n) => {
   const candidates = new Set([]);
   const c = 2 * n;
   const m = Math.floor(Math.log2(c));
-  var p = Math.pow(2, m);
-  var s = 2 * m + n - m;
-  if (p === s) candidates.add(p);
-  for (var x = 3; x <= n; x++) {
+  for (var x = 2; x <= n; x++) {
     g(m - 2, c, x, x, x + n - 1, candidates);
   }
   return pm.array_min(Array.from(candidates));
