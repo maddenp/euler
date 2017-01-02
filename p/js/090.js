@@ -7,7 +7,8 @@ const choose = (a, k) => {
   if (k === 1) return a;
   let b = [];
   for (let i = 0; i < a.length; i++) {
-    choose(a.slice(i + 1), k - 1).forEach(x => b.push([a[i]].concat(x)));
+    var sub = choose(a.slice(i + 1), k - 1);
+    for (let j = 0; j < sub.length; j++) b.push([a[i]].concat(sub[j]));
   }
   return b;
 };
@@ -17,12 +18,12 @@ const has = (a, e) => {
     return a.indexOf(6) !== -1 || a.indexOf(9) !== -1;
   }
   return a.indexOf(e) !== -1;
-}
+};
 
 const valid = (a1, a2) => {
   const s1 = [0, 0, 0, 1, 2, 3, 4, 6, 8];
   const s2 = [1, 4, 9, 6, 5, 6, 9, 4, 1];
-  for (var i = 0; i < s1.length; i++) {
+  for (let i = 0; i < s1.length; i++) {
     if ((has(a1, s1[i]) && has(a2, s2[i])) || (has(a1, s2[i]) && has(a2, s1[i]))) continue;
     return false;
   }
@@ -33,8 +34,8 @@ const combos = choose([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 6);
 
 var count = 0;
 
-for (var i = 0; i < combos.length; i++) {
-  for (var j = i + 1; j < combos.length; j++) {
+for (let i = 0; i < combos.length; i++) {
+  for (let j = i + 1; j < combos.length; j++) {
     if (valid(combos[i], combos[j])) count++;
   }
 }
