@@ -19,24 +19,11 @@ const has = (a, e) => {
   return a.indexOf(e) !== -1;
 }
 
-const ok = (a1, a2) => {
+const valid = (a1, a2) => {
   const s1 = [0, 0, 0, 1, 2, 3, 4, 6, 8];
   const s2 = [1, 4, 9, 6, 5, 6, 9, 4, 1];
   for (var i = 0; i < s1.length; i++) {
-    var e1 = s1[i];
-    var e2 = s2[i];
-    var x1 = has(a1, e1);
-    var x2 = has(a2, e2);
-    var c1 = x1 && x2;
-    if (c1) {
-      continue;
-    }
-    var x3 = has(a1, e2);
-    var x4 = has(a2, e1);
-    var c2 = x3 && x4;
-    if (c2) {
-      continue;
-    }
+    if ((has(a1, s1[i]) && has(a2, s2[i])) || (has(a1, s2[i]) && has(a2, s1[i]))) continue;
     return false;
   }
   return true;
@@ -48,9 +35,7 @@ var count = 0;
 
 for (var i = 0; i < combos.length; i++) {
   for (var j = i + 1; j < combos.length; j++) {
-    if (ok(combos[i], combos[j])) {
-      count++;
-    }
+    if (valid(combos[i], combos[j])) count++;
   }
 }
 
