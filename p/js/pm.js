@@ -673,9 +673,7 @@ module.exports.random_int_between = function (lo, hi) {
   
 module.exports.range = function (lo, hi) {
   var a = [];
-  for (var i = lo; i <= hi; i++) {
-    a.push(i);
-  }
+  for (var i = lo; i <= hi; i++) a.push(i);
   return a;
 };
 
