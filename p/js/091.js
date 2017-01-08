@@ -19,7 +19,8 @@ const sqd = (x0, y0, x1, y1) => Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2);
  * so that the reflection yields no new triangles. Rectangles each contain four
  * basic triangles where the triangle vertices coincide with rectangle corners;
  * we always count 3 of these (the fourth has no vertex at (0,0), or 6 for non-
- * squares, again due to symmetry.
+ * squares, again due to symmetry. Working with squared lengths lets us work in
+ * integers, avoiding numerical issues and slower square-root functions.
  *
  */
 
