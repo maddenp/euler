@@ -7,7 +7,21 @@ const limit = 50;
 
 var total = 0;
 
-const sqd = (x0, y0, x1, y1) => (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0);
+const sqd = (x0, y0, x1, y1) => Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2);
+
+/*
+ * Iterate over rectangles (including squares) in the grid. At each iteration,
+ * we only need to consider new rectagles created by the increased width and/or
+ * height dimensions, as all the triangles in the subproblem rectangles have
+ * already been counted. We only consider the tall-and-thin rectangles, and
+ * double our counts for their short-and-fat counterparts: The latter contain
+ * an equal number of triangles due to symmetry, unless the rectangle is square,
+ * so that the reflection yields no new triangles. Rectangles each contain four
+ * basic triangles where the triangle vertices coincide with rectangle corners;
+ * we always count 3 of these (the fourth has no vertex at (0,0), or 6 for non-
+ * squares, again due to symmetry.
+ *
+ */
 
 for (var w = 1; w <= limit; w++) {
   for (var h = w; h <= limit; h++) {
