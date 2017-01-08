@@ -11,7 +11,7 @@ const sqd = (x0, y0, x1, y1) => (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0);
 
 for (var w = 1; w <= limit; w++) {
   for (var h = w; h <= limit; h++) {
-    var count = w === h ? 3 : 6;
+    total += w === h ? 3 : 6;
     var y0 = h;
     var x1 = w;
     for (var x0 = 0; x0 <= w; x0++) {
@@ -34,12 +34,11 @@ for (var w = 1; w <= limit; w++) {
           var csq = sqd3;
         }
         if (asq + bsq === csq) {
-          count += 1;
-          if (w !== h) count += 1;
+          total += 1;
+          if (w !== h) total += 1;
         }
       }
     }
-    total += count;
   }
 }
 
