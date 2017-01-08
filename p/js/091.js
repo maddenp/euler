@@ -33,10 +33,7 @@ for (var w = 1; w <= limit; w++) {
           var bsq = sqd2;
           var csq = sqd3;
         }
-        if (asq + bsq === csq) {
-          total += 1;
-          if (w !== h) total += 1;
-        }
+        if (asq + bsq === csq) total += w === h ? 1 : 2;
       }
     }
   }
