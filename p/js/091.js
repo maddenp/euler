@@ -12,13 +12,11 @@ const sqd = (x0, y0, x1, y1) => (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0);
 for (var w = 1; w <= limit; w++) {
   for (var h = w; h <= limit; h++) {
     total += w === h ? 3 : 6;
-    var y0 = h;
-    var x1 = w;
     for (var x0 = 0; x0 <= w; x0++) {
       for (var y1 = 1; y1 < h; y1++) {
-        var sqd1 = sqd(x0, y0, x1, y1);
-        var sqd2 = sqd(x1, y1,  0,  0);
-        var sqd3 = sqd(x0, y0,  0,  0);
+        var sqd1 = sqd(x0,  h,  w, y1);
+        var sqd2 = sqd( w, y1,  0,  0);
+        var sqd3 = sqd(x0,  h,  0,  0);
         var maxd = Math.max(sqd1, sqd2, sqd3);
         if (maxd === sqd1) {
           var asq = sqd2;
