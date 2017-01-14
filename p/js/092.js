@@ -5,24 +5,45 @@
 
 const pm = require('./pm');
 
-const limit = 10000000;
-const seen = {};
+const a = [];
+const f = [0, 1, 2, 3, 4, 5, 6 ,7].reduce((m, e) => (m[e] = pm.factorial(e), m), {});
+
+const g = a => {
+  var c = 1;
+  var t = 1;
+  for (var i = 1; i < a.length; i++) {
+    if (a[i] === a[i - 1]) {
+      c++;
+    } else {
+      t *= f[c];
+      c = 1;
+    }
+  }
+  t *= f[c];
+  return t;
+};
 
 var count = 0;
 
-for (var n = 2; n < limit; n++) {
-  if (seen[n]) continue;
-  var q = [n];
-  var m = n;
-  while (true) {
-    m = pm.array_sum(pm.n2a(m).map(d => d * d));
-    if (seen[m] || m === 1 || m === 89) {
-      var s = seen[m] || m;
-      count += (s === 89 ? 1 : 0) * q.length;
-      q.forEach(x => seen[x] = s);
-      break;
+for (a[0] = 0; a[0] <= 9; a[0]++) {
+  for (a[1] = 0; a[1] <= a[0]; a[1]++) {
+    for (a[2] = 0; a[2] <= a[1]; a[2]++) {
+      for (a[3] = 0; a[3] <= a[2]; a[3]++) {
+        for (a[4] = 0; a[4] <= a[3]; a[4]++) {
+          for (a[5] = 0; a[5] <= a[4]; a[5]++) {
+            for (a[6] = 0; a[6] <= a[5]; a[6]++) {
+              var b = a.slice();
+              while (true) {
+                var n = pm.array_sum(b.map(d => d * d));
+                if (n === 89) count += f[7] / g(a);
+                if (n === 89 || n < 2) break;
+                b = pm.n2a(n);
+              }
+            }
+          }
+        }
+      }
     }
-    q.push(m);
   }
 }
 
