@@ -8,19 +8,17 @@ const pm = require('./pm');
 const a = [];
 const f = [0, 1, 2, 3, 4, 5, 6 ,7].reduce((m, e) => (m[e] = pm.factorial(e), m), {});
 
-const g = a => {
+const unique_permutations_of = a => {
   var c = 1;
   var t = 1;
   for (var i = 1; i < a.length; i++) {
-    if (a[i] === a[i - 1]) {
-      c++;
-    } else {
+    if (a[i] !== a[i - 1]) {
       t *= f[c];
-      c = 1;
+      c = 0;
     }
+    c++;
   }
-  t *= f[c];
-  return t;
+  return f[7] / (t * f[c]);
 };
 
 var count = 0;
@@ -35,7 +33,7 @@ for (a[0] = 0; a[0] <= 9; a[0]++) {
               var b = a.slice();
               while (true) {
                 var n = pm.array_sum(b.map(d => d * d));
-                if (n === 89) count += f[7] / g(a);
+                if (n === 89) count += unique_permutations_of(a);
                 if (n === 89 || n < 2) break;
                 b = pm.n2a(n);
               }
