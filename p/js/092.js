@@ -3,6 +3,19 @@
 
 "use strict";
 
+/*
+ * Thanks to cyph1e in the forums for this algorithm.
+ *
+ * By iterating over digit arrays [0,0,0,0,0,0,0] through [9,9,9,9,9,9,9], where
+ * each digit is <= to the digit to its left, we produce representations of all
+ * numbers < 10,000,000 that are unique w.r.t. permutation. This reduces the
+ * search space from 10,000,000 to 11,440. We test each of these representative
+ * arrays for {1,89} termination, then increment our count with the number of
+ * permutations represented by the unique array under consideration, since each
+ * of these permutations terminates at the same {1,89} as the representative.
+ *
+ */
+
 const pm = require('./pm');
 
 const a = [];
