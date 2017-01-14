@@ -12,18 +12,17 @@ var count = 0;
 
 for (var n = 2; n < limit; n++) {
   var m = n;
-  var q = [m];
+  var q = [];
   while (true) {
-    var a = pm.n2a(m);
-    var b = a.map(d => d * d);
-    m = pm.array_sum(b);
+    var a = pm.n2a(m).map(d => d * d);
+    m = pm.array_sum(a);
     if (seen[m] || m === 1 || m === 89) {
       seen[n] = seen[m] || m;
-      q.forEach(x => seen[x] = seen[n]);
       if (seen[n] === 89) count++;
+      q.forEach(x => seen[x] = seen[n]);
       break;
     }
-    q.push[m];
+    q.push(m);
   }
 }
 
