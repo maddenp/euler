@@ -11,15 +11,15 @@ const seen = {};
 var count = 0;
 
 for (var n = 2; n < limit; n++) {
+  if (seen[n]) continue;
+  var q = [n];
   var m = n;
-  var q = [];
   while (true) {
-    var a = pm.n2a(m).map(d => d * d);
-    m = pm.array_sum(a);
+    m = pm.array_sum(pm.n2a(m).map(d => d * d));
     if (seen[m] || m === 1 || m === 89) {
-      seen[n] = seen[m] || m;
-      if (seen[n] === 89) count++;
-      q.forEach(x => seen[x] = seen[n]);
+      var s = seen[m] || m;
+      count += (s === 89 ? 1 : 0) * q.length;
+      q.forEach(x => seen[x] = s);
       break;
     }
     q.push(m);
