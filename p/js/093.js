@@ -5,9 +5,9 @@
 
 const pm = require('./pm');
 
-const vvv = [];
-
+const exprs = [];
 const op = ['+', '-', '*', '/'];
+
 for (var i0 = 0; i0 < op.length; i0++) {
   for (var i1 = 0; i1 < op.length; i1++) {
     for (var i2 = 0; i2 < op.length; i2++) {
@@ -23,12 +23,12 @@ for (var i0 = 0; i0 < op.length; i0++) {
         `a${op[i0]}(b${op[i1]}c${op[i2]}d)`,
         `a${op[i0]}((b${op[i1]}c)${op[i2]}d)`,
         `a${op[i0]}(b${op[i1]}(c${op[i2]}d))`
-      ].forEach(s => vvv.push(s));
+      ].forEach(s => exprs.push(s));
     }
   }
 }
 
-const g = eval(`(a, b, c, d) => [${vvv.join(',')}]`);
+const g = eval(`(a, b, c, d) => [${exprs.join(',')}]`);
 
 const f = (a, b, c, d, o) => {
   g(a, b, c, d).reduce((m, e) => {
