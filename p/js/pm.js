@@ -538,7 +538,7 @@ module.exports.partitions = (() => {
 
 })();
 
-module.exports.permutations_map = function (a, fn, n) {
+module.exports.permutations_map = function (a, fn, n) { // n optional
 
   // https://goo.gl/0xptzg
 
