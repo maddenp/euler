@@ -1,5 +1,7 @@
-/* jshint node: true */
 /* jshint esversion: 6 */
+/* jshint evil:true */
+/* jshint loopfunc: true */
+/* jshint node: true */
 
 "use strict";
 
