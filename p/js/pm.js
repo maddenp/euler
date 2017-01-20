@@ -251,9 +251,7 @@ module.exports.is_figurate = function (a, b, c) {
   var roots = module.exports.quadratic_roots(a, b, c);
   for (var i = 0; i < 2; i++) {
     var root = roots[i];
-    if (root > 0 && root === Math.floor(root)) {
-      return true;
-    }
+    if (root > 0 && Number.isInteger(root)) return true;
   }
   return false;
 };
@@ -268,10 +266,6 @@ module.exports.is_figurate_5 = function (n) {
 
 module.exports.is_figurate_6 = function (n) {
   return module.exports.is_figurate(2, -1, -n);
-};
-
-module.exports.is_integral = function (n) {
-  return n === Math.floor(n);
 };
 
 module.exports.is_palindrome = function (a) {
@@ -292,10 +286,9 @@ module.exports.is_pandigital = function (x, n) {
   return true;
 };
 
-module.exports.is_power_of = function (n, b) {
-  var x = Math.log(n) / Math.log(b);
-  return x === Math.floor(x);
-};
+module.exports.is_power_of = (n, b) => (
+  Number.isInteger(Math.log(n) / Math.log(b))
+);
 
 module.exports.prime = (() => {
 
@@ -342,10 +335,7 @@ module.exports.prime = (() => {
 
 })();
 
-module.exports.is_square = function (n) {
-  var r = Math.sqrt(n);
-  return r === Math.floor(r);
-};
+module.exports.is_square = (n) => Number.isInteger(Math.sqrt(n));
 
 module.exports.log10 = function (n) {
   return Math.log(n) / Math.log(10);
@@ -365,7 +355,7 @@ module.exports.miller_rabin = function (n) {
   var r = 0;
   while (true) {
     var o = d / 2;
-    if (o !== Math.floor(o)) break;
+    if (!Number.isInteger(o)) break;
     ++r;
     d = o;
   }
