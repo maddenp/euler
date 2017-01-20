@@ -28,14 +28,8 @@ for (var i0 = 0; i0 < op.length; i0++) {
   }
 }
 
-const g = eval(`(a, b, c, d) => [${exprs.join(',')}]`);
-
-const f = (a, b, c, d, o) => {
-  g(a, b, c, d).reduce((m, e) => {
-    if (e > 0 && e === Math.floor(e)) m[e] = true;
-    return m;
-  }, o);
-};
+const ok = (n) => n > 0 && Number.isInteger(n);
+const f = eval(`(a, b, c, d) => [${exprs.join(',')}].reduce((m, e) => ok(e) ? (m[e] = 1, m) : m, o)`);
 
 var max_run = 0;
 var abcd;
