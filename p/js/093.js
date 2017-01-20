@@ -724,9 +724,8 @@ for (var a = 0; a <= 9; a++) {
   for (var b = a + 1; b <= 9; b++) {
     for (var c = b + 1; c <= 9; c++) {
       for (var d = c + 1; d <= 9; d++) {
-        var aa = [a, b, c, d];
-        const o = {};
-        pm.permutations_map(aa, (arr) => f(arr[0], arr[1], arr[2], arr[3], o));
+        var o = {};
+        pm.permutations_map([a, b, c, d], (a) => f(a[0], a[1], a[2], a[3], o));
         for (var i = 1; o[i]; i++);
         i--;
         if (i > max_run) {
