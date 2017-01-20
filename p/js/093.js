@@ -14,15 +14,9 @@ for (var i0 = 0; i0 < op.length; i0++) {
   for (var i1 = 0; i1 < op.length; i1++) {
     for (var i2 = 0; i2 < op.length; i2++) {
       [
-        `a${op[i0]}b${op[i1]}c${op[i2]}d`,
-        `(a${op[i0]}b)${op[i1]}c${op[i2]}d`,
-        `a${op[i0]}(b${op[i1]}c)${op[i2]}d`,
-        `a${op[i0]}b${op[i1]}(c${op[i2]}d)`,
-        `(a${op[i0]}b)${op[i1]}(c${op[i2]}d)`,
-        `(a${op[i0]}b${op[i1]}c)${op[i2]}d`,
         `((a${op[i0]}b)${op[i1]}c)${op[i2]}d`,
         `(a${op[i0]}(b${op[i1]}c))${op[i2]}d`,
-        `a${op[i0]}(b${op[i1]}c${op[i2]}d)`,
+        `(a${op[i0]}b)${op[i1]}(c${op[i2]}d)`,
         `a${op[i0]}((b${op[i1]}c)${op[i2]}d)`,
         `a${op[i0]}(b${op[i1]}(c${op[i2]}d))`
       ].forEach(s => exprs.push(s));
