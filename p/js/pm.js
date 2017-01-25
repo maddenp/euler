@@ -613,14 +613,9 @@ module.exports.proper_divisors = function (n) {
   return pds;
 };
 
-module.exports.pythagorean_triples = function (exclude, opts) {
+module.exports.pythagorean_triples = function (exclude, accept, primitive_only) {
   // https://goo.gl/MMtCml
-  const accept = (T) => {
-    if (opts && opts.sort) T.sort((a, b) => a - b);
-    triples.push(T);
-  };
   const queue = [[3, 4, 5]];
-  const triples = [];
   while (queue.length > 0) {
     var T = queue.pop();
     if (exclude(T)) continue;
@@ -628,7 +623,7 @@ module.exports.pythagorean_triples = function (exclude, opts) {
     var a = T[0];
     var b = T[1];
     var c = T[2];
-    if (!opts || !opts.primitive_only) {
+    if (!primitive_only) {
       // The linear transformations below only produce 'primitive' triples, but
       // their multiples are also Pythagorian triples, so enumerate and store
       // the multiples, too.
@@ -645,7 +640,6 @@ module.exports.pythagorean_triples = function (exclude, opts) {
     queue.push([ a+2*b+2*c,  2*a+b+2*c,  2*a+2*b+3*c]);
     queue.push([-a+2*b+2*c, -2*a+b+2*c, -2*a+2*b+3*c]);
   }
-  return triples;
 };
 
 module.exports.quadratic_roots = function (a, b, c) {

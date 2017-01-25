@@ -5,10 +5,12 @@
 
 const pm = require('./pm');
 
-const paths = M => {
-  const exclude = T => T[0] > M && T[1] > M;
-  const trips = pm.pythagorean_triples(exclude, {sort: true});
+const paths = (M) => {
+  const exclude = (T) => T[0] > M && T[1] > M;
+  const trips = [];
+  const accept = (T) => trips.push(T.sort((a, b) => a - b));
   var count = 0;
+  pm.pythagorean_triples(exclude, accept);
   for (var i = 0; i < trips.length; i++) {
     var T = trips[i];
     var a = T[0];
