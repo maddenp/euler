@@ -627,12 +627,10 @@ module.exports.pythagorean_triples = function (exclude, accept, primitive_only) 
       // The linear transformations below only produce 'primitive' triples, but
       // their multiples are also Pythagorian triples, so enumerate and store
       // the multiples, too.
-      var k = 2;
-      while (true) {
+      for (var k = 2; true; k++) {
         T = [a*k, b*k, c*k];
         if (exclude(T)) break;
         accept(T);
-        k++;
       }
     }
     // These linear transformations produce the next wave of primitive triples.
