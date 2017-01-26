@@ -16,6 +16,6 @@ const accept = (T) => {
   if (Math.abs(a - b) === 1) sum += 2 * a + b;
 }
 
-pm.pythagorean_triples(exclude, accept);
+pm.pythagorean_triples(exclude, accept, true);
 
 console.log(sum);
