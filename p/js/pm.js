@@ -290,6 +290,43 @@ module.exports.is_power_of = (n, b) => (
   Number.isInteger(Math.log(n) / Math.log(b))
 );
 
+module.exports.pell_fundamental_solution = (d) => {
+  
+  // http://goo.gl/uSYJLz re: method for calculating convergent
+
+  const aa = module.exports.array_add;
+  const ae = module.exports.array_equal;
+  const axa = module.exports.array_times_array;
+  const axi = module.exports.array_times_int;
+
+  var a = Math.floor(Math.sqrt(d));
+  var b = 1;
+  var c = -a;
+
+  var conv_num_old = [1];
+  var conv_den_old = [0];
+
+  var conv_num = module.exports.n2a(a);
+  var conv_den = [1];
+
+  while (true) {
+    b = (d - c * c) / b;
+    a = Math.floor((Math.sqrt(d) - c) / b);
+    c = -c - a * b;
+    var tmp_num = conv_num;
+    var tmp_den = conv_den;
+    var arr = module.exports.n2a(a);
+    conv_num = aa(axa(conv_num, arr), conv_num_old);
+    conv_den = aa(axa(conv_den, arr), conv_den_old);
+    conv_num_old = tmp_num;
+    conv_den_old = tmp_den;
+    var lhs = axa(conv_num, conv_num);
+    var rhs = aa(axi(axa(conv_den, conv_den), d), [1]);
+    if (ae(lhs, rhs)) return([conv_num, conv_den]);
+  }
+
+};
+
 module.exports.prime = (() => {
 
   var known = {2: true, 3: true};
