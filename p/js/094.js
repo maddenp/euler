@@ -71,7 +71,7 @@ while (true) {
     if (Number.isInteger(a)) {
       var b = a + i;
       var h = Math.sqrt(a * a - b * b / 4);
-      if (Number.isInteger(0.5 * b * h)) sum += 3 * a + i;
+      if (Number.isInteger(0.5 * b * h)) sum += a + a + b;
     }
   });
 }
