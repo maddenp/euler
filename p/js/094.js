@@ -39,9 +39,10 @@ const pm = require('./pm');
  * So, we obtain the fundamental solution to the Pell Equation, then generate
  * all additional solutions until the perimeter of the a-a-b triangle exceeds
  * the limit. For each solution, we retrieve 'a' from 'x' both ways. If 'a' is
- * an integer...
+ * an integer, then so is 'b', in which case we have an integer perimeter, so
+ * check whether the area is integral, and increment the perimeter sum if so.
  *
- * We skip the fundamental solution because it does not represent a triangle.
+ * We skip the fundamental solution (2,1) because it does not give a triangle.
  *
  * See https://goo.gl/dSgIoI in re: obtaining additional solutions from the
  * fundamental solution.
@@ -66,7 +67,11 @@ while (true) {
   if (x + x + y > limit) break;
   [+1, -1].forEach(i => {
     var a = (2 * x + i) / 3;
-    if (Number.isInteger(a)) sum += 3 * a + i;
+    if (Number.isInteger(a)) {
+      var b = a + i;
+      var h = Math.sqrt(a * a - b * b / 4);
+      if (Number.isInteger(.5 * b * h)) sum += 3 * a + i;
+    }
   });
 }
 
