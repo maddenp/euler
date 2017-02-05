@@ -9,7 +9,7 @@ const f = (n, o) => {
   if (sums[n] === 0) {
     o.len = 0;
   } else if (o.seen[n]) {
-    o.min = Math.min(o.min, n);
+    if (n < o.min) o.min = n;
     if (o.len > maxlen) {
       maxlen = o.len;
       minval = o.min;
