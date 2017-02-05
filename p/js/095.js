@@ -23,14 +23,15 @@ const f = (n, o) => {
   }
 };
 
-const limit = 1000000;
+const limit = 1e6;
+const sopd = [];
 const sums = {1: 0};
 
 var maxlen = 0;
 var minval = 0;
 
-const sopd = [];
-for (var n = 1; n <= limit; n++) sopd[n] = 1;
+for (var n = 2; n <= limit; n++) sopd[n] = 1;
+
 for (var n = 2; n <= limit; n++) {
   for (var m = n + n; m <= limit; m += n) {
     sopd[m] += n;
