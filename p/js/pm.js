@@ -706,7 +706,11 @@ module.exports.readfile = function (f, alt) {
 };
 
 module.exports.sum_of_proper_divisors = function (n) {
-  return module.exports.array_sum(module.exports.proper_divisors(n));
+  var sum = 1;
+  for (var d = 2; d <= Math.sqrt(n); d++) {
+    if (n % d === 0) sum += n / d === d ? d : d + n / d;
+  }
+  return sum;
 };
 
 module.exports.uniques = function (a, sort) {
