@@ -7,7 +7,6 @@ const pm = require('./pm');
 
 const limit = 1000000;
 const sums = {1: 0};
-const top = Number.MAX_SAFE_INTEGER;
 
 for (var n = 2; n <= limit; n++) {
   if (sums[n]) continue;
@@ -19,41 +18,30 @@ for (var n = 2; n <= limit; n++) {
   }
 }
 
-var maxlen = 0;
-var minval = 0;
-var maxchain = [];
-
-const f = (n, sums, stats, seen) => {
+const f = (n, o) => {
   if (sums[n] === 0) {
-    stats.len = 0;
-    return;
-  }
-  if (seen[n]) {
-    stats.min = Math.min(stats.min, n);
-    if (stats.len > maxlen) {
-      maxlen = stats.len;
-      minval = stats.min;
-      maxchain = stats.chain;
+    o.len = 0;
+  } else if (o.seen[n]) {
+    o.min = Math.min(o.min, n);
+    if (o.len > maxlen) {
+      maxlen = o.len;
+      minval = o.min;
     }
-    stats.len = 0;
-    return;
-  }
-  seen[n] = true;
-  stats.len++;
-  stats.chain.push(n);
-  f(sums[n], sums, stats, seen);
-  if (stats.len === 0) {
-    sums[n] = 0;
-    return;
+    o.len = 0;
+  } else {
+    o.seen[n] = true;
+    o.len++;
+    f(sums[n], o);
+    if (o.len === 0) sums[n] = 0;
   }
 };
 
+var maxlen = 0;
+var minval = 0;
+
 for (var n = 2; n <= limit; n++) {
-  if (sums[n] === 0) {
-    continue;
-  }
-  var stats = {min: Number.MAX_SAFE_INTEGER, len: 0, chain: []};
-  f(n, sums, stats, {});
+  if (sums[n] === 0) continue;
+  f(n, {min: Number.MAX_SAFE_INTEGER, len: 0, seen: {}});
 }
 
 console.log(minval);
