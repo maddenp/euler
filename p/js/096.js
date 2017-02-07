@@ -20,3 +20,15 @@ require('fs').readFileSync('096.dat', 'utf8').split('\n').forEach(line => {
   }
   i = (i + 1) % 10;
 });
+
+grid = grids[0];
+
+var work = []
+for (var r = 0; r < 9; r++) {
+  work[r] = [];
+  for (var c = 0; c < 9; c++) {
+    work[r].push([1,2,3,4,5,6,7,8,9]);
+  }
+}
+
+console.log(grid);
