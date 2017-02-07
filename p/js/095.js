@@ -3,8 +3,6 @@
 
 "use strict";
 
-const pm = require('./pm');
-
 const f = (n, o) => {
   if (sums[n] === 0) {
     o.len = 0;
