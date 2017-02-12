@@ -5,14 +5,14 @@
 
 const pm = require('./pm');
 
-const badBoard = (board) => {
+const good = (board) => {
   for (var r = 0; r < 9; r++) {
-    if (pm.array_sum(board[r]) !== 45) return true;
+    if (pm.array_sum(board[r]) !== 45) return false;
   }
   for (var c = 0; c < 9; c++) {
     var sum = 0;
     for (var r = 0; r < 9; r++) sum += board[r][c];
-    if (sum !== 45) return true;
+    if (sum !== 45) return false;
   }
   for (var sq_r = 0; sq_r < 7; sq_r += 3) {
     for (var sq_c = 0; sq_c < 7; sq_c += 3) {
@@ -22,12 +22,13 @@ const badBoard = (board) => {
           sum += board[r][c];
         }
       }
-      if (sum !== 45) return true;
+      if (sum !== 45) return false;
     }
   }
+  return true;
 };
 
-const loadBoards = () => {
+const load = () => {
   const boards = [];
   var i = 0;
   var board = [];
@@ -42,6 +43,12 @@ const loadBoards = () => {
     i = (i + 1) % 10;
   });
   return boards;
+};
+
+const copy = (board) => {
+  const b = [];
+  board.forEach(row => b.push(row.slice()));
+  return b;
 };
 
 const makeWork = () => {
@@ -72,8 +79,8 @@ const printWork = (work) => {
 const solveBoard = (board) => {
   const work = makeWork();
 
-  printWork(work);
-  console.log('---');
+  //   printWork(work);
+  //   console.log('---');
 
   var unsolved = true;
   var unchanged = true;
@@ -88,16 +95,25 @@ const solveBoard = (board) => {
           continue;
         }
         for (var rr = 0; rr < 9; rr++) {
-          if (board[rr][c]) work[r][c].delete(board[rr][c]);
+          if (board[rr][c]) {
+            work[r][c].delete(board[rr][c]);
+            if (work[r][c].size === 0) return false;
+          }
         }
         for (var cc = 0; cc < 9; cc++) {
-          if (board[r][cc]) work[r][c].delete(board[r][cc]);
+          if (board[r][cc]) {
+            work[r][c].delete(board[r][cc]);
+            if (work[r][c].size === 0) return false; 
+          }
         }
         var sq_r = Math.floor(r/3) * 3;
         var sq_c = Math.floor(c/3) * 3;
         for (var rr = sq_r; rr < sq_r + 3; rr++) {
           for (var cc = sq_c; cc < sq_c + 3; cc++) {
-            if (board[rr][cc]) work[r][c].delete(board[rr][cc]);
+            if (board[rr][cc]) {
+              work[r][c].delete(board[rr][cc]);
+              if (work[r][c].size === 0) return false;
+            }
           }
         }
         if (work[r][c].size === 1) {
@@ -107,20 +123,47 @@ const solveBoard = (board) => {
       }
     }
 
-    printBoard(board);
-    printWork(work);
+//     printBoard(board);
+//     printWork(work);
+//     console.log('---');
 
-    if (unchanged) break; // are both unchanged and unsolved necessary?
+    if (unchanged) {
+//       console.log('unchanged');
+      out: for (var r = 0; r < 9; r++) {
+        for (var c = 0; c < 9; c++) {
+          var choices = Array.from(work[r][c]);
+          while (choices.length > 1) {
+//             console.log(`choices at (${r},${c}): ${choices}`);
+            var pick = choices.pop();
+//             console.log(`picked ${pick} (choices remaining: ${JSON.stringify(choices)}`);
+            var b = copy(board);
+            b[r][c] = pick;
+//             console.log('Recursing with board:');
+//             printBoard(b);
+//             console.log('---');
+            var soln = solveBoard(b);
+//             console.log('Back from recursion');
+            if (soln) return soln;
+          }
+        }
+      }
+      break; // are both unchanged and unsolved necessary?
+    }
+
     unchanged = true;
   }
-  return board;
+
+  if (good(board)) return board;
+  return false;
 };
 
-const boards = loadBoards();
+const boards = load();
 var board = boards[1];
-printBoard(board);
-console.log('---');
-
+// printBoard(board);
+// console.log('---');
 var soln = solveBoard(board);
-
-if (badBoard(soln)) console.log('FAIL');
+if (soln) {
+  printBoard(soln);
+} else {
+  console.log('FAIL');
+}
