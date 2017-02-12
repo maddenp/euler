@@ -77,6 +77,7 @@ const solveBoard = (board) => {
 //   console.log('---');
 
   var unsolved = true;
+  var unchanged = true;
   while (unsolved) {
     unsolved = false;
     for (var r = 0; r < 9; r++) {
@@ -102,6 +103,7 @@ const solveBoard = (board) => {
         }
         if (work[r][c].size === 1) {
           board[r][c] = work[r][c].values().next().value;
+          unchanged = false;
         }
       }
     }
@@ -110,6 +112,8 @@ const solveBoard = (board) => {
 //     printWork(work);
 //     count++;
 //     if (count > 1) break;
+    if (unchanged) break; // are both unchanged and unsolved necessary?
+    unchanged = true;
   }
   return board;
 };
