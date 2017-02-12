@@ -5,6 +5,28 @@
 
 const pm = require('./pm');
 
+const badBoard = (board) => {
+  for (var r = 0; r < 9; r++) {
+    if (pm.array_sum(board[r]) !== 45) return true;
+  }
+  for (var c = 0; c < 9; c++) {
+    var sum = 0;
+    for (var r = 0; r < 9; r++) sum += board[r][c];
+    if (sum !== 45) return true;
+  }
+  for (var sq_r = 0; sq_r < 7; sq_r += 3) {
+    for (var sq_c = 0; sq_c < 7; sq_c += 3) {
+      var sum = 0;
+      for (r = sq_r; r < sq_r + 3; r++) {
+        for (c = sq_c; c < sq_c + 3; c++) {
+          sum += board[r][c];
+        }
+      }
+      if (sum !== 45) return true;
+    }
+  }
+};
+
 const loadBoards = () => {
   const boards = [];
   var i = 0;
@@ -48,12 +70,12 @@ const printWork = (work) => {
 };
 
 const solveBoard = (board) => {
-
-  var count = 0;
-
   const work = makeWork();
-  printWork(work);
-  console.log('---');
+
+//   var count = 0;
+//   printWork(work);
+//   console.log('---');
+
   var unsolved = true;
   while (unsolved) {
     unsolved = false;
@@ -84,16 +106,19 @@ const solveBoard = (board) => {
       }
     }
 
-    printBoard(board);
-    printWork(work);
-    count++;
-    if (count > 1) break;
+//     printBoard(board);
+//     printWork(work);
+//     count++;
+//     if (count > 1) break;
   }
   return board;
 };
 
 const boards = loadBoards();
-var board = boards[1];
-printBoard(board);
-console.log('---');
-solveBoard(board);
+var board = boards[0];
+// printBoard(board);
+// console.log('---');
+
+var soln = solveBoard(board);
+
+if (badBoard(soln)) console.log('FAIL');
