@@ -72,9 +72,8 @@ const printWork = (work) => {
 const solveBoard = (board) => {
   const work = makeWork();
 
-//   var count = 0;
-//   printWork(work);
-//   console.log('---');
+  printWork(work);
+  console.log('---');
 
   var unsolved = true;
   var unchanged = true;
@@ -108,10 +107,9 @@ const solveBoard = (board) => {
       }
     }
 
-//     printBoard(board);
-//     printWork(work);
-//     count++;
-//     if (count > 1) break;
+    printBoard(board);
+    printWork(work);
+
     if (unchanged) break; // are both unchanged and unsolved necessary?
     unchanged = true;
   }
@@ -119,9 +117,9 @@ const solveBoard = (board) => {
 };
 
 const boards = loadBoards();
-var board = boards[0];
-// printBoard(board);
-// console.log('---');
+var board = boards[1];
+printBoard(board);
+console.log('---');
 
 var soln = solveBoard(board);
 
