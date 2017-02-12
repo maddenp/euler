@@ -102,15 +102,14 @@ const solve = (board) => {
     if (unchanged) break;
     unchanged = true;
   }
-  if (good(board)) return board;
-  return false;
+  return board;
 };
 
 const boards = load();
-var board = boards[0];
+var board = boards[1];
 printb(board);
 var soln = solve(board);
-if (soln) {
+if (good(soln)) {
   printb(soln);
 } else {
   console.log('FAIL');
