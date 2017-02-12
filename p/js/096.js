@@ -39,15 +39,21 @@ const printBoard = (board) => {
 
 const printWork = (work) => {
   const f = s => {
-    const a = [];
-    for (var n = 1; n <= 9; n++) a.push(s.has(n) ? n : 0);
+    var a = '';
+    for (var n = 1; n <= 9; n++) a = `${a} ${s.has(n) ? n : 0}`;
+    a += ` (${s.size})`;
     return a;
   };
-  work.forEach(row => console.log(JSON.stringify(row.reduce((m, e) => (m.push(f(e)), m), []))));
+  work.forEach(row => console.log(row.reduce((m, e) => m += f(e), '')));
 };
 
 const solveBoard = (board) => {
+
+  var count = 0;
+
   const work = makeWork();
+  printWork(work);
+  console.log('---');
   var unsolved = true;
   while (unsolved) {
     unsolved = false;
@@ -77,10 +83,17 @@ const solveBoard = (board) => {
         }
       }
     }
+
+    printBoard(board);
+    printWork(work);
+    count++;
+    if (count > 1) break;
   }
   return board;
 };
 
 const boards = loadBoards();
-var board = boards[0];
-printBoard(solveBoard(board));
+var board = boards[1];
+printBoard(board);
+console.log('---');
+solveBoard(board);
