@@ -3,30 +3,9 @@
 
 "use strict";
 
-const pm = require('./pm');
-
-const good = (board) => {
-  for (var r = 0; r < 9; r++) {
-    if (pm.array_sum(board[r]) !== 45) return false;
-  }
-  for (var c = 0; c < 9; c++) {
-    var sum = 0;
-    for (var r = 0; r < 9; r++) sum += board[r][c];
-    if (sum !== 45) return false;
-  }
-  for (var srq = 0; srq < 7; srq += 3) {
-    for (var sqc = 0; sqc < 7; sqc += 3) {
-      var sum = 0;
-      for (r = srq; r < srq + 3; r++) {
-        for (c = sqc; c < sqc + 3; c++) {
-          sum += board[r][c];
-        }
-      }
-      if (sum !== 45) return false;
-    }
-  }
-  return true;
-};
+const copy = (board) => (
+  board.reduce((m, e) => (m.push(e.slice()), m), [])
+);
 
 const load = () => {
   const boards = [];
@@ -45,72 +24,39 @@ const load = () => {
   return boards;
 };
 
-const make = () => {
-  const work = [];
-  for (var r = 0; r < 9; r++) {
-    work[r] = [];
-    for (var c = 0; c < 9; c++) {
-      work[r].push(new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]));
-    }
+const print = (board) => (
+  board.forEach(row => console.log(JSON.stringify(row)))
+);
+
+const safe = (n, r, c, board) => {
+  for (var rr = 0; rr < 9; rr++) if (board[rr][c] === n) return false;
+  for (var cc = 0; cc < 9; cc++) if (board[r][cc] === n) return false;
+  var sqr = Math.floor(r/3) * 3;
+  var sqc = Math.floor(c/3) * 3;
+  for (var rr = sqr; rr < sqr + 3; rr++) {
+    for (var cc = sqc; cc < sqc + 3; cc++) if (board[rr][cc] === n) return false;
   }
-  return work;
-};
-
-const printb = (board) => {
-  board.forEach(row => console.log(JSON.stringify(row)));
-};
-
-const printw = (work) => {
-  const f = s => {
-    var a = '';
-    for (var n = 1; n <= 9; n++) a = `${a} ${s.has(n) ? n : 0}`;
-    a += ` (${s.size})`;
-    return a;
-  };
-  work.forEach(row => console.log(row.reduce((m, e) => m += f(e), '')));
+  return true;
 };
 
 const solve = (board) => {
-  const work = make();
-  var unsolved = true;
-  var unchanged = true;
-  while (unsolved) {
-    unsolved = false;
-    for (var r = 0; r < 9; r++) {
-      for (var c = 0; c < 9; c++) {
-        if (work[r][c].size === 1) continue;
-        unsolved = true;
-        if (board[r][c]) {
-          work[r][c] = new Set([board[r][c]]);
-          continue;
+  for (var r = 0; r < 9; r++) {
+    for (var c = 0; c < 9; c++) {
+      if (board[r][c] === 0) {
+        var b = copy(board);
+        for (var n = 1; n <= 9; n++) {
+          if (safe(n, r, c, board)) {
+            b[r][c] = n;
+            if (solve(b)) return true;
+          }
         }
-        for (var rr = 0; rr < 9; rr++) work[r][c].delete(board[rr][c]);
-        for (var cc = 0; cc < 9; cc++) work[r][c].delete(board[r][cc]);
-        var sqr = Math.floor(r/3) * 3;
-        var sqc = Math.floor(c/3) * 3;
-        for (var rr = sqr; rr < sqr + 3; rr++) {
-          for (var cc = sqc; cc < sqc + 3; cc++) work[r][c].delete(board[rr][cc]);
-        }
-        if (work[r][c].size === 1) {
-          board[r][c] = Array.from(work[r][c])[0];
-          unchanged = false;
-        }
+        return false;
       }
     }
-    printw(work);
-    printb(board);
-    if (unchanged) break;
-    unchanged = true;
   }
-  return board;
+  print(board);
 };
 
 const boards = load();
-var board = boards[1];
-printb(board);
-var soln = solve(board);
-if (good(soln)) {
-  printb(soln);
-} else {
-  console.log('FAIL');
-}
+
+solve(boards[0]);
