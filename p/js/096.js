@@ -3,8 +3,6 @@
 
 "use strict";
 
-// Algorithm described here: https://goo.gl/YPLiss
-
 const load = () => {
   const boards = [];
   var i = 0;
@@ -32,6 +30,8 @@ const safe = (n, r, c, board) => {
   }
   return true;
 };
+
+// Algorithm described here: https://goo.gl/YPLiss
 
 const solve = (board, fn) => {
   for (var r = 0; r < 9; r++) {
