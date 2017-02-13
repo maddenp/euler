@@ -3,6 +3,8 @@
 
 "use strict";
 
+// Algorithm described here: https://goo.gl/YPLiss
+
 const load = () => {
   const boards = [];
   var i = 0;
