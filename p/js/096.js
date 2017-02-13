@@ -3,10 +3,6 @@
 
 "use strict";
 
-const copy = (board) => (
-  board.reduce((m, e) => (m.push(e.slice()), m), [])
-);
-
 const load = () => {
   const boards = [];
   var i = 0;
@@ -24,10 +20,6 @@ const load = () => {
   return boards;
 };
 
-const print = (board) => (
-  board.forEach(row => console.log(JSON.stringify(row)))
-);
-
 const safe = (n, r, c, board) => {
   for (var rr = 0; rr < 9; rr++) if (board[rr][c] === n) return false;
   for (var cc = 0; cc < 9; cc++) if (board[r][cc] === n) return false;
@@ -39,24 +31,29 @@ const safe = (n, r, c, board) => {
   return true;
 };
 
-const solve = (board) => {
+const solve = (board, fn) => {
   for (var r = 0; r < 9; r++) {
     for (var c = 0; c < 9; c++) {
       if (board[r][c] === 0) {
-        var b = copy(board);
+        var b = board.reduce((m, e) => (m.push(e.slice()), m), []);
         for (var n = 1; n <= 9; n++) {
           if (safe(n, r, c, board)) {
             b[r][c] = n;
-            if (solve(b)) return true;
+            if (solve(b, fn)) return true;
           }
         }
         return false;
       }
     }
   }
-  print(board);
+  fn(board);
 };
 
-const boards = load();
+var sum = 0;
 
-solve(boards[0]);
+const boards = load();
+const fn = b => sum += b[0][0] * 100 + b[0][1] * 10 + b[0][2];
+
+boards.forEach(board => solve(board, fn));
+
+console.log(sum);
