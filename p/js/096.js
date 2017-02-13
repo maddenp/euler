@@ -25,8 +25,8 @@ const safe = (n, r, c, board) => {
   for (var cc = 0; cc < 9; cc++) if (board[r][cc] === n) return false;
   var sqr = Math.floor(r/3) * 3;
   var sqc = Math.floor(c/3) * 3;
-  for (var rr = sqr; rr < sqr + 3; rr++) {
-    for (var cc = sqc; cc < sqc + 3; cc++) if (board[rr][cc] === n) return false;
+  for (rr = sqr; rr < sqr + 3; rr++) {
+    for (cc = sqc; cc < sqc + 3; cc++) if (board[rr][cc] === n) return false;
   }
   return true;
 };
