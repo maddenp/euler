@@ -69,31 +69,32 @@ module.exports.array_equal = function (a1, a2) {
   return true;
 };
 
-module.exports.array_exp = function (b, n) {
+module.exports.array_exp = function (b, x) {
+  // Computes b^x, where b is an array and x is an integer.
   var a = [1];
-  while (n > 0) {
-    var b_int = module.exports.a2n(b);
-    if ((n & 1) === 0) {
-      b = module.exports.array_times_int(b, b_int);
-      n /= 2;
+  while (x > 0) {
+    if ((x & 1) === 0) {
+      b = module.exports.array_times_array(b, b);
+      x /= 2;
     } else {
-      a = module.exports.array_times_int(a, b_int);
-      n -= 1;
+      a = module.exports.array_times_array(a, b);
+      x -= 1;
     }
   }
   return a;
 };
 
-module.exports.array_exp_trunc = function (b, n, max) {
+module.exports.array_exp_trunc = function (b, x, digits) {
+  // Computes b^x, where b is an array and x is an integer. Retains only the
+  // rightmost 'digits' digits during computation.
   var a = [1];
-  while (n > 0) {
-    var b_int = module.exports.a2n(b);
-    if ((n & 1) === 0) {
-      b = module.exports.array_trunc(module.exports.array_times_int(b, b_int), max);
-      n /= 2;
+  while (x > 0) {
+    if ((x & 1) === 0) {
+      b = module.exports.array_trunc(module.exports.array_times_array(b, b), digits);
+      x /= 2;
     } else {
-      a = module.exports.array_trunc(module.exports.array_times_int(a, b_int), max);
-      n -= 1;
+      a = module.exports.array_trunc(module.exports.array_times_array(a, b), digits);
+      x -= 1;
     }
   }
   return a;
@@ -220,6 +221,7 @@ module.exports.array_times_int = function (a, n) {
 };
 
 module.exports.array_trunc = function (a, digits) {
+  // Keep only the 'digits' rightmost elements of 'a'.
   if (a.length > digits) return a.slice(a.length - digits);
   return a;
 };
