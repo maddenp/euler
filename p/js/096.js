@@ -37,13 +37,13 @@ const solve = (board, fn) => {
   for (var r = 0; r < 9; r++) {
     for (var c = 0; c < 9; c++) {
       if (board[r][c] === 0) {
-        var b = board.reduce((m, e) => (m.push(e.slice()), m), []);
         for (var n = 1; n <= 9; n++) {
           if (safe(n, r, c, board)) {
-            b[r][c] = n;
-            if (solve(b, fn)) return true;
+            board[r][c] = n;
+            if (solve(board, fn)) return true;
           }
         }
+        board[r][c] = 0;
         return false;
       }
     }
