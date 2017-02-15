@@ -15,8 +15,8 @@ module.exports.a2s = function (a) {
 
 module.exports.are_anagrams = function (s1, s2) {
   if (s1.length !== s2.length) return false;
-  const a1 = (s1.constructor === Array ? s1 : s1.split('')).sort();
-  const a2 = (s2.constructor === Array ? s2 : s2.split('')).sort();
+  var a1 = (s1.constructor === Array ? s1.slice('') : s1.split('')).sort();
+  var a2 = (s2.constructor === Array ? s2.slice('') : s2.split('')).sort();
   for (var i = 0; i < a1.length; i++) if (a1[i] !== a2[i]) return false;
   return true;
 };

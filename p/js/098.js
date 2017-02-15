@@ -5,27 +5,6 @@
 
 const pm = require('./pm');
 
-// const words = require('fs').readFileSync('098.dat', 'utf8').split(',').reduce((m, e) => (m[e.replace(/"/g, '')] = true, m), {});
-// 
-// const anagrams = (word) => {
-//   const anagrams = [];
-//   const collect = (perm) => {
-//     const w = perm.join('');
-//     if (words[w] && w !== word) anagrams.push(w);
-//   };
-//   pm.permutations_map(word.split(''), collect);
-//   return anagrams;
-// };
-// 
-// Object.keys(words).forEach(word => {
-//   console.log(word, anagrams(word));
-// });
-
-// console.log(pm.are_anagrams('race', 'care'));
-// console.log(pm.are_anagrams(['r','a','c','e'],['c','a','r','e']));
-// console.log(pm.are_anagrams('race', 'carx'));
-// console.log(pm.are_anagrams(['r','a','c','e'],['c','a','r','x']));
-
 const words = {};
 
 var lenmin = Number.MAX_SAFE_INTEGER;
@@ -37,13 +16,52 @@ require('fs').readFileSync('098.dat', 'utf8').split(',').forEach(s => {
   if (len < lenmin) lenmin = len;
   if (len > lenmax) lenmax = len;
   if (!words[len]) words[len] = [];
-  words[len].push({s: word, a: word.split('')});
+  var a = word.split('').sort();
+  var t = new Set(a);
+  words[len].push({s: word, a, t, k: Array.from(t)});
 });
 
-for (var n = lenmin; n <= lenmax; n++) {
-  console.log(n);
-  words[n].forEach(w => {
-    var anagrams = words[n].filter(x => x !== w && pm.are_anagrams(w.a, x.a));
-    if (anagrams.length !== 0) console.log(n, w.s, anagrams.map(x => x.s));
-  });
+const anagramsp = (a1, a2) => {
+  for (var i = 0; i < a1.length; i++) {
+    if (a1[i] !== a2[i]) return false;
+  }
+  return true;
 };
+
+const squareable = (a) => {
+  console.log(a.t);
+};
+
+// for (var n = lenmin; n <= lenmax; n++) {
+//   words[n].forEach(w => {
+//     var anagrams = words[n].filter(x => x !== w && anagramsp(w.a, x.a));
+//     if (anagrams.length !== 0) {
+//       if (squareable(w)) {
+//         console.log(w.s, anagrams.map(x => x.s));
+//       }
+//     }
+//   });
+// };
+
+const getmaps = (x) => {
+  const a = [];
+  const maps = [];
+  for (var i = 0; i < x.t.size; i++) a.push(0);
+  for (var i = 0; i < Math.pow(10, x.t.size); i++) {
+    var t = new Set(a);
+    if (t.size === a.length) {
+      var keys = Array.from(x.t);
+      var map = {};
+      for (var j = 0; j < keys.length; j++) map[keys[j]] = a[j];
+      var b = x.s.split('').reduce((m, e) => `${m}${map[e]}`, '');
+      if (b[0] !== '0' && pm.is_square(parseInt(b))) {
+        console.log(b);
+        maps.push(map);
+      }
+    }
+    pm.array_inc(a);
+  }
+  return maps;
+};
+
+console.log(getmaps(words[4][8]));
