@@ -28,21 +28,6 @@ const anagramsp = (a1, a2) => {
   return true;
 };
 
-const squareable = (a) => {
-  console.log(a.t);
-};
-
-// for (var n = lenmin; n <= lenmax; n++) {
-//   words[n].forEach(w => {
-//     var anagrams = words[n].filter(x => x !== w && anagramsp(w.a, x.a));
-//     if (anagrams.length !== 0) {
-//       if (squareable(w)) {
-//         console.log(w.s, anagrams.map(x => x.s));
-//       }
-//     }
-//   });
-// };
-
 const getmaps = (x) => {
   const a = [];
   const maps = [];
@@ -54,8 +39,8 @@ const getmaps = (x) => {
       var map = {};
       for (var j = 0; j < keys.length; j++) map[keys[j]] = a[j];
       var b = x.s.split('').reduce((m, e) => `${m}${map[e]}`, '');
-      if (b[0] !== '0' && pm.is_square(parseInt(b))) {
-        console.log(b);
+      var bi = parseInt(b);
+      if (b[0] !== '0' && pm.is_square(bi)) {
         maps.push(map);
       }
     }
@@ -64,4 +49,30 @@ const getmaps = (x) => {
   return maps;
 };
 
-console.log(getmaps(words[4][8]));
+var max = 0;
+
+for (var n = lenmin; n <= lenmax; n++) {
+  words[n].forEach(w => {
+    var anagrams = words[n].filter(x => x !== w && anagramsp(w.a, x.a));
+    if (anagrams.length !== 0) {
+      var maps = getmaps(w);
+      maps.forEach(map => {
+        var a = w.s.split('').reduce((m, e) => `${m}${map[e]}`, '');
+        var ai = parseInt(a);
+        anagrams.forEach(x => {
+          var b = x.s.split('').reduce((m, e) => `${m}${map[e]}`, '');
+          var bi = parseInt(b);
+          if (b[0] !== '0' && pm.is_square(bi)) {
+            var ci = Math.max(ai, bi);
+            if (ci > max) {
+              max = ci;
+//               console.log(max);
+            }
+          }
+        });
+      });
+    }
+  });
+};
+
+console.log(max);
