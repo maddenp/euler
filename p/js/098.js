@@ -27,19 +27,23 @@ const pm = require('./pm');
 // console.log(pm.are_anagrams(['r','a','c','e'],['c','a','r','x']));
 
 const words = {};
+
 var lenmin = Number.MAX_SAFE_INTEGER;
 var lenmax = 0;
+
 require('fs').readFileSync('098.dat', 'utf8').split(',').forEach(s => {
   var word = s.replace(/"/g, '');
   var len = word.length;
   if (len < lenmin) lenmin = len;
   if (len > lenmax) lenmax = len;
   if (!words[len]) words[len] = [];
-  words[len].push({word: word, letters: word.split('')});
+  words[len].push({s: word, a: word.split('')});
 });
 
-words[4].forEach(w => {
-  var anagrams = words[4].filter(x => x !== w && pm.are_anagrams(w.letters, x.letters));
-  if (anagrams.length !== 0) console.log(w.word, anagrams.map(x => x.word));
-});
-
+for (var n = lenmin; n <= lenmax; n++) {
+  console.log(n);
+  words[n].forEach(w => {
+    var anagrams = words[n].filter(x => x !== w && pm.are_anagrams(w.a, x.a));
+    if (anagrams.length !== 0) console.log(n, w.s, anagrams.map(x => x.s));
+  });
+};
