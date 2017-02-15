@@ -12,6 +12,23 @@ const words = {};
 var lenmin = Number.MAX_SAFE_INTEGER;
 var lenmax = 0;
 
+const check = (pair) => {
+  var max = 0;
+  var len = pair[0].letters.length;
+  Object.keys(squares[len]).forEach(square => {
+    var uniques = Array.from(new Set(pm.n2a(square))); // do this once when creating squares?
+    if (uniques.length === len) {
+      var map = {};
+      for (var i = 0; i < len; i++) {
+        map[pair[0].letters[i]] = uniques[i];
+      }
+      var int = parseInt(pair[1].letters.reduce((m, e) => `${m}${map[e]}`, ''));
+      if (squares[len][int]) max = Math.max(max, square, int);
+    }
+  });
+  return max;
+};
+
 require('fs').readFileSync('098.dat', 'utf8').split(',').forEach(s => {
   var word = s.replace(/"/g, '');
   var len = word.length;
@@ -49,30 +66,6 @@ for (var n = 1; true; n++) {
   if (square > maxsquare) break;
   squares[pm.ndigits(square)][square] = true;
 }
-
-const check = (pair) => {
-  var max = 0;
-  var a = pair[0];
-  var b = pair[1];
-  var len = a.letters.length;
-  var candidates = Object.keys(squares[len]);
-  candidates.forEach(square => {
-    var letters = `${square}`.split(''); // n2a faster?
-    var uniques = Array.from(new Set(letters)); // do this once when creating squares?
-    if (uniques.length === len) {
-      var map = {};
-      for (var i = 0; i < len; i++) {
-        map[a.letters[i]] = uniques[i];
-      }
-      var b_alt = b.letters.reduce((m, e) => `${m}${map[e]}`, '');
-      var b_int = parseInt(b_alt);
-      if (squares[len][b_int]) {
-        max = Math.max(max, square, b_int);
-      }
-    }
-  });
-  return max;
-};
 
 var max = 0;
 pairs.forEach(pair => max = Math.max(max, check(pair)));
