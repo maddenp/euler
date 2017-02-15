@@ -13,6 +13,14 @@ module.exports.a2s = function (a) {
   return a.join('');
 };
 
+module.exports.are_anagrams = function (s1, s2) {
+  if (s1.length !== s2.length) return false;
+  const a1 = (s1.constructor === Array ? s1 : s1.split('')).sort();
+  const a2 = (s2.constructor === Array ? s2 : s2.split('')).sort();
+  for (var i = 0; i < a1.length; i++) if (a1[i] !== a2[i]) return false;
+  return true;
+};
+
 module.exports.are_permutations = function (n1, n2) {
   if ((n1 - n2) % 9 !== 0) return false;
   const c = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -567,7 +575,9 @@ module.exports.partitions = (() => {
 
 })();
 
-module.exports.permutations_map = function (a, fn, n) { // n optional
+module.exports.permutations_map = function (a, fn, n) {
+
+  // Argument 'n' is for recursive calls only.
 
   // https://goo.gl/0xptzg
 
@@ -705,6 +715,12 @@ module.exports.readfile = function (f, alt) {
   } catch (err) {
     return alt;
   }
+};
+
+module.exports.seteq = function (set1, set2) {
+  if (set1.size !== set2.size) return false;
+  for (var e of set1) if (!set2.has(e)) return false;
+  return true;
 };
 
 module.exports.sum_of_proper_divisors = function (n) {
