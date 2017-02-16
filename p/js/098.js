@@ -70,7 +70,7 @@ for (var n = lenmin; n <= lenmax; n++) {
       }
     }
   }
-};
+}
 
 // Collect a list of squares of appropriate size to test later for membership
 // against.
