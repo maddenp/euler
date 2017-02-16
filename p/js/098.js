@@ -13,10 +13,19 @@ var lenmin = Number.MAX_SAFE_INTEGER;
 var lenmax = 0;
 
 const check = (pair) => {
+
+  // Select the first member of the pair and loop over the known squares with
+  // the same number of digits as letters in this word. Create a map from
+  // letters to numbers that could have been used to transform this word into
+  // the square in question. Then, apply that map the other pair and see if it
+  // creates another square. If so, record the max of the two squares. Return
+  // the largest square that was part of such a pair-of-words-map-to-squares
+  // scheme.
+
   var max = 0;
   var len = pair[0].letters.length;
   Object.keys(squares[len]).forEach(square => {
-    var uniques = Array.from(new Set(pm.n2a(square))); // do this once when creating squares?
+    var uniques = Array.from(new Set(pm.n2a(square)));
     if (uniques.length === len) {
       var map = {};
       for (var i = 0; i < len; i++) {
@@ -29,6 +38,8 @@ const check = (pair) => {
   return max;
 };
 
+// Read in words and record, along with them, array and sorted array versions.
+
 require('fs').readFileSync('098.dat', 'utf8').split(',').forEach(s => {
   var word = s.replace(/"/g, '');
   var len = word.length;
@@ -39,6 +50,10 @@ require('fs').readFileSync('098.dat', 'utf8').split(',').forEach(s => {
   var letters_sorted = letters.slice().sort();
   words[len].push({word, letters, letters_sorted});
 });
+
+// Loop over words and, for each, find palindromes. Record palindrome pairs.
+// Mark members of the pair as seen so that duplicate (reversed) pairs are not
+// recorded. Track the lengths of pair members.
 
 for (var n = lenmin; n <= lenmax; n++) {
   for (let w of words[n]) {
@@ -57,6 +72,9 @@ for (var n = lenmin; n <= lenmax; n++) {
   }
 };
 
+// Collect a list of squares of appropriate size to test later for membership
+// against.
+
 lenmax = pm.array_max(Array.from(lengths));
 const maxsquare = Math.pow(10, lenmax) - 1;
 const squares = {};
@@ -67,6 +85,9 @@ for (var n = 1; true; n++) {
   squares[pm.ndigits(square)][square] = true;
 }
 
+// Loop over pairs and potentially update 'max' with a new max-square value.
+
 var max = 0;
 pairs.forEach(pair => max = Math.max(max, check(pair)));
+
 console.log(max);
