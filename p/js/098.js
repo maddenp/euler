@@ -12,7 +12,7 @@ const words = {};
 var lenmin = Number.MAX_SAFE_INTEGER;
 var lenmax = 0;
 
-const check = (pair) => {
+const check = (pair, squares) => {
 
   // Select the first member of the pair and loop over the known squares with
   // the same number of digits as letters in this word. Create a map from
@@ -88,6 +88,6 @@ for (var n = 1; true; n++) {
 // Loop over pairs and potentially update 'max' with a new max-square value.
 
 var max = 0;
-pairs.forEach(pair => max = Math.max(max, check(pair)));
+pairs.forEach(pair => max = Math.max(max, check(pair, squares)));
 
 console.log(max);
