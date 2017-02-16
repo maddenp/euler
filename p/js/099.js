@@ -3,8 +3,6 @@
 
 "use strict";
 
-const pm = require('./pm');
-
 const pairs = require('fs').readFileSync('099.dat', 'utf8').split('\n').reduce((m, e) => {
   var p = e.split(',').map(x => parseInt(x));
   m.push({base: p[0], exp: p[1]});
