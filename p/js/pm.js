@@ -77,19 +77,19 @@ module.exports.array_equal = function (a1, a2) {
   return true;
 };
 
-module.exports.array_exp = function (b, x) {
-  // Computes b^x, where b is an array and x is an integer.
-  var a = [1];
+module.exports.array_exp = function (a, x) {
+  // Computes a^x, where a is an array and x is an integer.
+  var b = [1];
   while (x > 0) {
     if ((x & 1) === 0) {
-      b = module.exports.array_times_array(b, b);
+      a = module.exports.array_times_array(a, a);
       x /= 2;
     } else {
-      a = module.exports.array_times_array(a, b);
+      b = module.exports.array_times_array(b, a);
       x -= 1;
     }
   }
-  return a;
+  return b;
 };
 
 module.exports.array_exp_trunc = function (b, x, digits) {
