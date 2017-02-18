@@ -164,6 +164,7 @@ module.exports.array_shuffle = function (a) {
 module.exports.array_sub = function (a1, a2) {
   // a1 - a2, assuming a1 >= a2
   a1 = a1.slice();
+  a2 = a2.slice();
   var a3 = [];
   const padding = a1.length - a2.length;
   module.exports.zero_pad(a2, padding);
@@ -715,6 +716,10 @@ module.exports.readfile = function (f, alt) {
   } catch (err) {
     return alt;
   }
+};
+
+module.exports.s2a = function(s) {
+  return s.split('').map(x => parseInt(x));
 };
 
 module.exports.seteq = function (set1, set2) {
